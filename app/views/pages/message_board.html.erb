@@ -2,14 +2,7 @@
   <div class="wrap">
     <div class="services">
       <div class="services-sidebar">
-        <h3>類別</h3>
-         <ul>
-            <li>
-              <%= link_to message_board_path do %>
-                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp問題列表
-              <% end %>
-            </li>
-         </ul>
+        <%= render partial: "message_board_sidebar" %>
       </div>            
       <div class="service-content">
         <h3>最新留言</h3>

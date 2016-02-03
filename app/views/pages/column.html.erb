@@ -2,21 +2,7 @@
   <div class="wrap">
     <div class="services">
       <div class="services-sidebar">
-        <h3>類別</h3>
-         <ul>
-            <li>
-              <%= link_to column_path do %>
-                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp全部文章
-              <% end %>
-            </li>
-            <% @categories.each do |c| %> 
-              <li> 
-                <%= link_to category_path(c) do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp<%= c.name %>
-                <% end %>
-              </li>
-            <% end %>
-         </ul>
+        <%= render partial: "column_sidebar" %>
       </div>            
       <div class="service-content">
         <h3>專欄文章</h3>

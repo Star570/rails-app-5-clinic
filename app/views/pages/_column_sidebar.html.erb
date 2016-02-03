@@ -1,0 +1,19 @@
+<h3>類別</h3>
+<ul>
+  <li>
+    <%= link_to column_path do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      &nbsp&nbsp全部文章
+      (<%= @posts.count %>)
+    <% end %>
+  </li>
+  <% @categories.each do |c| %> 
+    <li> 
+      <%= link_to category_path(c) do %>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        &nbsp&nbsp<%= c.name %>
+        (<%= c.posts.count %>)
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
   before_action :find_category, only: [:show, :edit, :update, :destroy]
 
   def show
+    @posts = Post.all.order("created_at DESC")
     @categories = Category.all
   end
 
