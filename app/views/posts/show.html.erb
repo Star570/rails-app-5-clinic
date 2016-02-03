@@ -1,0 +1,49 @@
+<div class="content">
+  <div class="wrap">
+    <div class="services">
+      <div class="services-sidebar">
+        <h3>類別</h3>
+         <ul>
+            <li>
+              <%= link_to column_path do %>
+                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp全部文章
+              <% end %>
+            </li>
+            <% @categories.each do |c| %> 
+              <li> 
+                <%= link_to category_path(c) do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp<%= c.name %>
+                <% end %>
+              </li>
+            <% end %>
+         </ul>
+      </div>            
+      <div class="service-content">
+        <h3>
+          <%= @post.title %>
+          <div class="pull-right">   
+            <%= link_to edit_post_path(@post), class:"btn btn-xs btn-primary" do %>   
+              <big><span class="glyphicon glyphicon-pencil"></span></big>
+            <% end %>
+            &nbsp            
+            <%= link_to post_path(@post), 
+                method: :delete, data: {confirm: "你確定刪除文章嗎?"}, class:"btn btn-xs btn-primary" do %>
+              <big><span class="glyphicon glyphicon-remove"></span></big>
+            <% end %>    
+          </div>  
+        </h3>
+        <h4>
+          <span class="label label-default">
+            <%= @post.created_at.strftime("%Y-%m-%d") %>
+            【<%= @post.category.name %>】
+          </span>
+        </h4>
+        <br>
+        <p class="text-muted"><%= @post.body %></p>
+           
+      </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+</div>  

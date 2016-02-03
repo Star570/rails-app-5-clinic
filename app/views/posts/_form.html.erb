@@ -1,0 +1,22 @@
+<%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
+  <%= f.input :name, label:"新增分類：" do %> 
+    <%= f.input_field :name %>
+    <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+  <% end %>
+<% end %>        
+<hr>        
+      
+<%= simple_form_for @post do |f| %>
+  <div class="form-group">   
+    <%= f.input :category_id, label: '分類：', include_blank: false, 
+                 collection: @categories,
+                 label_method: :name,
+                 value_method: :id %>    
+    <br>      
+    <%= f.input :title, label:"標題", input_html: { class: "form-control"} %>       
+  </div>            
+  <div class="form-group">      
+    <%= f.input :body, label:"內容", input_html: { class: "form-control", rows: "20", width: "80%"} %>
+  </div>
+  <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+<% end %>

@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="wrap">
+    <div class="services">
+      <div class="services-sidebar">
+        <h3>類別</h3>
+         <ul>
+            <li>
+              <%= link_to news_path do %>
+                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp全部公告
+              <% end %>
+            </li>
+         </ul>
+      </div>            
+      <div class="service-content">
+        <h3>最新消息</h3>
+        <% @announcements.each do |a| %>
+          <ul>          
+            <li>
+              <p>
+                <%= link_to announcement_path(a) do %>
+                <span id="archive-date"><%= a.created_at.strftime("%Y-%m-%d") %></span>                    
+                 <%= a.title %>            
+                <% end %>
+              </p>
+            </li>
+            <div class="clear"> </div>
+          </ul>
+        <% end %>
+           
+      </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+</div>  

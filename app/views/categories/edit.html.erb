@@ -1,0 +1,36 @@
+<div class="content">
+  <div class="wrap">
+    <div class="services">
+      <div class="services-sidebar">
+        <h3>類別</h3>
+         <ul>
+            <li>
+              <%= link_to column_path do %>
+                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp全部文章
+              <% end %>
+            </li>
+            <% @categories.each do |c| %> 
+              <li> 
+                <%= link_to category_path(c) do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp<%= c.name %>
+                <% end %>
+              </li>
+            <% end %>
+         </ul>
+      </div>            
+      <div class="service-content">
+        <h3>
+          <%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
+            <%= f.input :name, label:"修改分類名稱：" do %> 
+              <%= f.input_field :name %>
+              <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+            <% end %>
+          <% end %>   
+        </h3>                 
+           
+      </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+</div>  

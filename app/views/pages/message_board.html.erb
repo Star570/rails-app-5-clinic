@@ -1,0 +1,68 @@
+<div class="content">
+  <div class="wrap">
+    <div class="services">
+      <div class="services-sidebar">
+        <h3>類別</h3>
+         <ul>
+            <li>
+              <%= link_to message_board_path do %>
+                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp問題列表
+              <% end %>
+            </li>
+         </ul>
+      </div>            
+      <div class="service-content">
+        <h3>最新留言</h3>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="70%" >問題</th>
+              <th width="10%" style="text-align:center">發問人</th>
+              <th width="13%" style="text-align:center">發問時間</th>
+              <th width="7%" style="text-align:center">已回覆</th>     
+            </tr>
+          </thead>
+          <tbody>
+            <% @messages.each do |m| %>
+              <tr>
+                <td><%= link_to m.title, message_path(m) %></td>
+                <td align="center"><%= m.name %></td>
+                <td align="center"><%= m.created_at.strftime("%Y-%m-%d") %></td>     
+                <td align="center">
+                <% if m.comments.empty? %>
+                  否
+                <% else %>
+                  是
+                <% end %>
+                </td>                               
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <br>
+
+        <h3>我要留言</h3>        
+        <%= simple_form_for @message do |f| %>
+          <div class="form-group">   
+            <%= f.input :name, label:"暱稱", input_html: { class: "form-control"} %>       
+          </div>           
+          <div class="form-group">   
+            <%= f.input :title, label:"標題", input_html: { class: "form-control"} %>       
+          </div>            
+          <div class="form-group">      
+            <%= f.input :body, label:"內容", input_html: { class: "form-control", rows: "20", width: "80%"} %>
+          </div>
+          <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+        <% end %>      
+        <hr>
+
+      </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+</div>  
+
+

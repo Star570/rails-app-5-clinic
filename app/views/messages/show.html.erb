@@ -1,0 +1,88 @@
+<div class="content">
+  <div class="wrap">
+    <div class="services">
+      <div class="services-sidebar">
+        <h3>類別</h3>
+         <ul>
+            <li>
+              <%= link_to message_board_path do %>
+                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp問題列表
+              <% end %>
+            </li>
+         </ul>
+      </div>            
+      <div class="service-content">
+        <h3>最新留言</h3>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="75%">問題</th>
+              <th width="10%">發問人</th>
+              <th width="14%">發問時間</th>      
+              <th width="1%"></th>                                      
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= link_to @message.title, message_path(@message) %></td>
+              <td><%= @message.name %></td>
+              <td><%= @message.created_at.strftime("%Y-%m-%d") %></td>
+              <td>
+                <%= link_to message_path(@message), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
+                  <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
+                <% end %>
+              </td>  
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><%= @message.body %>  </td>      
+              <td></td>              
+              <td></td>
+              <td></td>
+            </tr>              
+          </tfoot>              
+        </table>
+        <hr>
+        <% if @message.comments.empty? %> 
+          <%= simple_form_for [@message, @message.comments.new] do |f| %>       
+            <div class="form-group">      
+              <%= f.input :content, label:"回覆病患內容：", input_html: { class: "form-control", rows: "20", width: "80%"} %>
+            </div>
+            <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary" %>
+          <% end %>        
+        <% else %>         
+          <h3>醫師回覆</h3>
+
+          <table class="table table-hover">
+            <tbody>
+              <% @message.comments.each do |c| %>
+                <tr>
+                  <td><%= c.content %> <small> by 醫生 </small></td>
+                  <td>
+                    <span class="pull-right">
+                      <%= link_to [c.message, c], method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
+                        <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
+                      <% end %>
+                    </span>
+                  </td>                                  
+                </tr>
+              <% end %>              
+            </tbody>
+          </table>
+
+          <%= simple_form_for [@message, @message.comments.new] do |f| %>       
+            <div class="form-group">      
+              <%= f.input :content, label:"補充回覆：", input_html: { class: "form-control", rows: "20", width: "80%"} %>
+            </div>
+            <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary" %>
+          <% end %>      
+
+        <% end %>
+      </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+</div>  
