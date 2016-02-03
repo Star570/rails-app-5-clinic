@@ -1,7 +1,9 @@
 <%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
   <%= f.input :name, label:"新增分類：" do %> 
     <%= f.input_field :name %>
-    <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+    <%= button_tag( :class => "button_green") do %>
+      <span class="glyphicon glyphicon-plus"></span>
+    <% end %>    
   <% end %>
 <% end %>        
 <hr>        
@@ -18,5 +20,5 @@
   <div class="form-group">      
     <%= f.input :body, label:"內容", input_html: { class: "form-control", rows: "20", width: "80%"} %>
   </div>
-  <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+  <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary"%>
 <% end %>

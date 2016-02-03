@@ -1,28 +1,14 @@
 == README
+V1.0 完成最新消息/醫師專欄/留言板
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+To do list:
+1. 加入預約系統
+2. 加入醫師登入機制, 擋掉
+  1. announcement的show裡頭edit/delete
+  2. post的show裡頭edit/delete  
+  3. category的show裡頭edit/delete  
+  4. message的show裡頭delete和病患回覆和comment的delete
+  5. message_board在醫師登入時不需要顯示我要留言
+3. 加入最新消息/醫師專欄的body要至少能使用markdown寫作
+4. 修正Slug
+5. 修改版面
