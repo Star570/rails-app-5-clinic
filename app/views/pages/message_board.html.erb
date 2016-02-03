@@ -10,9 +10,9 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th width="67%" >問題</th>
+              <th width="68%" >問題</th>
               <th width="12%" style="text-align:center">發問人</th>
-              <th width="13%" style="text-align:center">發問時間</th>
+              <th width="12%" style="text-align:center">發問時間</th>
               <th width="8%" style="text-align:center">已回覆</th>     
             </tr>
           </thead>
@@ -21,7 +21,7 @@
               <tr>
                 <td><%= link_to m.title, message_path(m) %></td>
                 <td align="center"><%= m.name %></td>
-                <td align="center"><%= m.created_at.strftime("%Y-%m-%d") %></td>     
+                <td align="center"><%= m.created_at.strftime("%y-%m-%d") %></td>     
                 <td align="center">
                 <% if m.comments.empty? %>
                   否

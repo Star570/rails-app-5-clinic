@@ -2,14 +2,7 @@
   <div class="wrap">
     <div class="services">
       <div class="services-sidebar">
-        <h3>類別</h3>
-         <ul>
-            <li>
-              <%= link_to column_path do %>
-                <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp全部公告
-              <% end %>
-            </li>
-         </ul>
+        <%= render partial: "pages/announcements_sidebar" %>
       </div>            
       <div class="service-content">
         <h3>
