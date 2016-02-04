@@ -18,28 +18,28 @@
               
               <% if morning_count > 0 %>
                 <%= link_to new_reservation_path(:date => date, :slot => "早上") do %>
-                  &nbsp早上 ( <%= morning_count %> )
+                  &nbsp早上 <%= morning_count %>
                 <% end %>       
               <% else %>
-                  &nbsp早上 ( <%= morning_count %> )   
+                  &nbsp早上 <%= morning_count %>
               <% end %>
               <br>
               
               <% if  %>
                 <%= link_to new_reservation_path(:date => date, :slot => "下午") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 ( <%= afternoon_count %> )    
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
                 <% end %>           
               <% else %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 ( <%= afternoon_count %> )    
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
               <% end %>
               <br>
               
               <% if  %>
                 <%= link_to new_reservation_path(:date => date, :slot => "晚上") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 ( <%= evenning_count %> )
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
                 <% end %>             
               <% else %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 ( <%= evenning_count %> )
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
               <% end %>
            
             <% else %>
