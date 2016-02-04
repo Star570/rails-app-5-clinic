@@ -9,12 +9,15 @@
 
           <%= month_calendar do |date| %>
             <%= date.strftime("%d") %>
+            <% b_date = @booking_dates.find_by(:b_date => date) %>
             <% if date < Date.today %>
               不可預約
-            <% elsif @booking_dates.find_by(:b_date => date) && @booking_dates.find_by(:b_date => date).bookable %>
-              <% morning_count = @booking_dates.find_by(:b_date => date).booking_slots.morning.map(&:count).sum  %>
-              <% afternoon_count = @booking_dates.find_by(:b_date => date).booking_slots.afternoon.map(&:count).sum  %>
-              <% evenning_count = @booking_dates.find_by(:b_date => date).booking_slots.evenning.map(&:count).sum  %>                            
+            <% elsif b_date && !b_date.bookable %>
+              休館
+            <% elsif b_date %>
+              <% morning_count = b_date.booking_slots.morning.map(&:count).sum  %>
+              <% afternoon_count = b_date.booking_slots.afternoon.map(&:count).sum  %>
+              <% evenning_count = b_date.booking_slots.evenning.map(&:count).sum  %>                            
               
               <% if morning_count > 0 %>
                 <%= link_to new_reservation_path(:date => date, :slot => "早上") do %>
