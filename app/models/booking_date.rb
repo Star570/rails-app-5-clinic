@@ -1,17 +1,6 @@
 class BookingDate < ActiveRecord::Base
   has_many :booking_slots, dependent: :destroy
 
-  def self.debug
-    BookingDate.all.each do |b|
-      if b.b_date.wday == 0 
-        b.bookable = false
-      else
-        b.bookable = true
-      end
-      b.save
-    end
-  end
-
   def self.update_latest_booking
 
     if BookingDate.all.empty?
