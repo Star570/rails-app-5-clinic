@@ -13,12 +13,13 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    find_booking_date = BookingDate.find_by(:b_date => params[:date])
     if params[:slot] == "早上"
-      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.morning.where("count > 0").order("time_slot ASC")
+      @booking_slots = find_booking_date.booking_slots.morning.where("count > 0").order("time_slot ASC")
     elsif params[:slot] == "下午"
-      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.afternoon.where("count > 0").order("time_slot ASC")         
+      @booking_slots = find_booking_date.booking_slots.afternoon.where("count > 0").order("time_slot ASC")         
     else
-      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.evenning.where("count > 0").order("time_slot ASC")
+      @booking_slots = find_booking_date.booking_slots.evenning.where("count > 0").order("time_slot ASC")
     end
 
   end
@@ -30,6 +31,18 @@ class ReservationsController < ApplicationController
       if @reservation.save
         redirect_to booking_path
       else 
+        find_booking_date = find_booking_slot.booking_date
+        params[:date] = find_booking_date.b_date        
+        if find_booking_slot.time_slot < 24
+          @booking_slots = find_booking_date.booking_slots.morning.where("count > 0").order("time_slot ASC")
+          params[:slot] = "早上"
+        elsif find_booking_slot.time_slot >= 36
+          @booking_slots = find_booking_date.booking_slots.evenning.where("count > 0").order("time_slot ASC")          
+          params[:slot] = "晚上"
+        else
+          @booking_slots = find_booking_date.booking_slots.afternoon.where("count > 0").order("time_slot ASC")         
+          params[:slot] = "下午"
+        end        
         render :new
       end          
     else
@@ -40,7 +53,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])    
     @reservation.destroy
-    redirect_to booking_path
+    redirect_to :back
   end
 
   private
