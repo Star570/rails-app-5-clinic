@@ -15,6 +15,7 @@ class PagesController < ApplicationController
 
   def booking
     BookingDate.update_latest_booking
+    BookingDate.debug    
     @booking_dates = BookingDate.all
   end
 

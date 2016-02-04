@@ -11,7 +11,7 @@
             <%= date.strftime("%d") %>
             <% if date < Date.today %>
               不可預約
-            <% elsif @booking_dates.find_by(:b_date => date) %>
+            <% elsif @booking_dates.find_by(:b_date => date) && @booking_dates.find_by(:b_date => date).bookable %>
               <% morning_count = @booking_dates.find_by(:b_date => date).booking_slots.morning.map(&:count).sum  %>
               <% afternoon_count = @booking_dates.find_by(:b_date => date).booking_slots.afternoon.map(&:count).sum  %>
               <% evenning_count = @booking_dates.find_by(:b_date => date).booking_slots.evenning.map(&:count).sum  %>                            

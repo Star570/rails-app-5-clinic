@@ -1,12 +1,30 @@
 class BookingDate < ActiveRecord::Base
   has_many :booking_slots, dependent: :destroy
 
+  def self.debug
+    BookingDate.all.each do |b|
+      if b.b_date.wday == 0 
+        b.bookable = false
+      else
+        b.bookable = true
+      end
+      b.save
+    end
+  end
+
   def self.update_latest_booking
 
     if BookingDate.all.empty?
-      BookingDate.create(:b_date => Date.today,
-                         :bookable => true)
+      if Date.today.wday == 0
+        BookingDate.create(:b_date => Date.today,
+                           :bookable => false)        
+      else
+        BookingDate.create(:b_date => Date.today,
+                           :bookable => true)              
+      end
+
       latest_booking =  BookingDate.order("b_date DESC").first
+
       BookingSlot.create(:time_slot => 20, :bookable => true, :count => 3, :booking_date => latest_booking)
       BookingSlot.create(:time_slot => 21, :bookable => true, :count => 3, :booking_date => latest_booking)
       BookingSlot.create(:time_slot => 22, :bookable => true, :count => 3, :booking_date => latest_booking)
@@ -30,8 +48,14 @@ class BookingDate < ActiveRecord::Base
     end
 
     while (Date.today + 1.month - 1.day) > BookingDate.all.maximum(:b_date) do
-      BookingDate.create(:b_date => BookingDate.all.maximum(:b_date) + 1,
-                         :bookable => true)
+
+      if (BookingDate.all.maximum(:b_date) + 1).wday == 0
+        BookingDate.create(:b_date => BookingDate.all.maximum(:b_date) + 1,
+                           :bookable => false)
+      else
+        BookingDate.create(:b_date => BookingDate.all.maximum(:b_date) + 1,
+                           :bookable => true)
+      end
       latest_booking =  BookingDate.order("b_date DESC").first
       BookingSlot.create(:time_slot => 20, :bookable => true, :count => 3, :booking_date => latest_booking)
       BookingSlot.create(:time_slot => 21, :bookable => true, :count => 3, :booking_date => latest_booking)
