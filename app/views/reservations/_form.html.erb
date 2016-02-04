@@ -1,0 +1,13 @@
+<br>
+<%= simple_form_for @reservation do |f| %>   
+  <%= f.input :name, label:"您的姓名：" %>    
+  <br>
+  <div class="form-group">   
+    <%= f.input :booking_slot_id, label: '選擇時段：', include_blank: false, 
+                 collection: @booking_slots,
+                 label_method: lambda { |booking_slot| 
+                  "#{booking_slot.time_slot/2}：#{booking_slot.time_slot%2*3}0 尚餘名額（#{booking_slot.count}）" },
+                 value_method: :id %>                 
+  </div>              
+  <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary"%>
+<% end %>

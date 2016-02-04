@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203062609) do
+ActiveRecord::Schema.define(version: 20160204093739) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,24 @@ ActiveRecord::Schema.define(version: 20160203062609) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "booking_dates", force: :cascade do |t|
+    t.date     "b_date"
+    t.boolean  "bookable"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "booking_slots", force: :cascade do |t|
+    t.integer  "time_slot"
+    t.boolean  "bookable"
+    t.integer  "count"
+    t.integer  "booking_date_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "booking_slots", ["booking_date_id"], name: "index_booking_slots_on_booking_date_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -52,5 +70,14 @@ ActiveRecord::Schema.define(version: 20160203062609) do
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
+
+  create_table "reservations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "booking_slot_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "reservations", ["booking_slot_id"], name: "index_reservations_on_booking_slot_id"
 
 end

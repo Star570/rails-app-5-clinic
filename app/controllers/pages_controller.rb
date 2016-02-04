@@ -14,7 +14,8 @@ class PagesController < ApplicationController
   end
 
   def booking
-    
+    BookingDate.update_latest_booking
+    @booking_dates = BookingDate.all
   end
 
 end

@@ -10,7 +10,10 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to message_board_path
     else 
-      render :new
+      # Possible Bug
+      #redirect_to message_board_path
+      @messages = Message.all.order("created_at DESC")    
+      render 'pages/message_board'
     end
   end
 

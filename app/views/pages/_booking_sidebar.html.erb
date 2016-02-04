@@ -1,18 +1,13 @@
 <h3>類別</h3>
 <ul>
   <li>
-    <%= link_to "#", :style => font_bold_class(booking_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp病患預約
+    <%= link_to booking_path, :style => font_bold_class(booking_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp新增預約
     <% end %>
   </li>   
   <li>
-    <%= link_to "#", :style => "" do %>
+    <%= link_to find_reservations_path, :style => "" do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp查詢預約
     <% end %>
   </li>          
-  <li>
-    <%= link_to "#", :style => "" do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp看診時間
-    <% end %>
-  </li>
 </ul>

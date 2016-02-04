@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   resources :categories
   resources :posts
   resources :announcements
+  resources :reservations do
+    collection do
+      get :find
+      get :list 
+    end
+  end
+
   resources :messages do
     resources :comments
   end

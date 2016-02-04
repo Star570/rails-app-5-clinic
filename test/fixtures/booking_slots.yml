@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_slot: 1
+  bookable: false
+  count: 1
+  booking_date_id: 
+
+two:
+  time_slot: 1
+  bookable: false
+  count: 1
+  booking_date_id: 

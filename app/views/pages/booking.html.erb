@@ -2,17 +2,54 @@
   <div class="wrap">
     <div class="services">
       <div class="services-sidebar">
-        <%= render partial: "booking_sidebar" %>
+        <%= render partial: "pages/booking_sidebar" %>
       </div>            
       <div class="service-content">
         <h3>預約時間</h3>
 
-
+          <%= month_calendar do |date| %>
+            <%= date.strftime("%d") %>
+            <% if date < Date.today %>
+              不可預約
+            <% elsif @booking_dates.find_by(:b_date => date) %>
+              <% morning_count = @booking_dates.find_by(:b_date => date).booking_slots.morning.map(&:count).sum  %>
+              <% afternoon_count = @booking_dates.find_by(:b_date => date).booking_slots.afternoon.map(&:count).sum  %>
+              <% evenning_count = @booking_dates.find_by(:b_date => date).booking_slots.evenning.map(&:count).sum  %>                            
+              
+              <% if morning_count > 0 %>
+                <%= link_to new_reservation_path(:date => date, :slot => "早上") do %>
+                  &nbsp早上 ( <%= morning_count %> )
+                <% end %>       
+              <% else %>
+                  &nbsp早上 ( <%= morning_count %> )   
+              <% end %>
+              <br>
+              
+              <% if  %>
+                <%= link_to new_reservation_path(:date => date, :slot => "下午") do %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 ( <%= afternoon_count %> )    
+                <% end %>           
+              <% else %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 ( <%= afternoon_count %> )    
+              <% end %>
+              <br>
+              
+              <% if  %>
+                <%= link_to new_reservation_path(:date => date, :slot => "晚上") do %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 ( <%= evenning_count %> )
+                <% end %>             
+              <% else %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 ( <%= evenning_count %> )
+              <% end %>
+           
+            <% else %>
+              未開放<br>&nbsp<br>&nbsp
+            <% end %>
+          <% end %>
+          
       </div>
       <div class="clear"> </div>
     </div>
     <div class="clear"> </div>
   </div>
 </div>  
-
-

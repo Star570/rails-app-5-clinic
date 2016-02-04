@@ -1,0 +1,15 @@
+<div class="content">
+  <div class="wrap">
+    <div class="services">
+      <div class="services-sidebar">
+        <%= render partial: "/pages/booking_sidebar" %>
+      </div>            
+      <div class="service-content">
+        <h3>預約單  (<%= params[:date] %> <%= params[:slot] %>) </h3>
+        <%= render 'form' %>
+      </div>
+      <div class="clear"> </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+</div>  

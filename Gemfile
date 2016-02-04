@@ -12,7 +12,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass'
-gem "simple_form"
+gem 'simple_form'
+gem 'jquery-ui-rails'
+gem 'simple_calendar', "~> 2.0"
+gem 'rails-i18n'
 
 group :development do
   gem 'sqlite3'  

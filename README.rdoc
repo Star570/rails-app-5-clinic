@@ -3,12 +3,22 @@ V1.0 完成最新消息/醫師專欄/留言板
 
 To do list:
 1. 加入預約系統
+  10:00-12:00(2HR)、14:00-18:00(4HR) 19:00-22:00(3HR)
+  週一到週六 每半小時有三個名額 三個月內可預約
+  登入帳號才能預約 一個帳號約一位
+  因為還有打電話預約的 後台同時可以用這個介面紀錄
+  師傅會把不能約的時間勾掉
+  例如像現在預約表排到一個月內 已經排人的時段得先勾掉
+  客人來了之後通常會預約下次，像這樣的情形
+
 2. 加入醫師登入機制, 擋掉
   1. announcement的show裡頭edit/delete
   2. post的show裡頭edit/delete  
   3. category的show裡頭edit/delete  
   4. message的show裡頭delete和病患回覆和comment的delete
   5. message_board在醫師登入時不需要顯示我要留言
-3. 加入最新消息/醫師專欄的body要至少能使用markdown寫作
-4. 修正Slug
-5. 修改版面
+3. 資料驗證
+4. 對文章&留言作分頁  
+5. 加入最新消息/醫師專欄的body要至少能使用markdown寫作
+6. 修正Slug
+7. 修改版面
