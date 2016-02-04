@@ -1,6 +1,6 @@
 class Reservation < ActiveRecord::Base
   belongs_to :booking_slot
-  validates :name, :phone, presence: true   
+  validates :name, :phone, presence: true, length: { maximum: 10 }   
   validates :phone, numericality: true
 
   after_save :update_booking_count
