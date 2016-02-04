@@ -44,15 +44,17 @@
             </tr>              
           </tfoot>              
         </table>
-        <hr>
+
         <% if @message.comments.empty? %> 
+          <br><hr>
           <%= simple_form_for [@message, @message.comments.new] do |f| %>       
             <div class="form-group">      
               <%= f.input :content, label:"回覆病患內容：", input_html: { class: "form-control", rows: "20", width: "80%"} %>
             </div>
             <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary" %>
           <% end %>        
-        <% else %>         
+        <% else %>    
+          <br>     
           <h3>醫師回覆</h3>
 
           <table class="table table-hover">
