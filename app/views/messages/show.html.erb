@@ -56,10 +56,18 @@
           <h3>醫師回覆</h3>
 
           <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="85%">回覆</th>
+              <th width="14%">回覆時間</th>      
+              <th width="1%"></th>                                      
+            </tr>
+          </thead>            
             <tbody>
               <% @message.comments.each do |c| %>
                 <tr>
                   <td><%= c.content %> <small> by 醫生 </small></td>
+                  <td><%= c.created_at.strftime("%Y-%m-%d") %></td>
                   <td>
                     <span class="pull-right">
                       <%= link_to [c.message, c], method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
