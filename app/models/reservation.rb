@@ -1,6 +1,6 @@
 class Reservation < ActiveRecord::Base
   belongs_to :booking_slot
-  validates :name, presence: true, length: { maximum: 10 }   
+  validates :name, presence: true, length: { minimum: 1, maximum: 5 }   
   validates :phone, presence: true, numericality: true, length: { minimum: 10, maximum: 10 }   
 
   validates_each :phone do |record, attr, value|
