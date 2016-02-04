@@ -14,11 +14,11 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     if params[:slot] == "早上"
-      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.morning.where("count > 0")
+      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.morning.where("count > 0").order("time_slot ASC")
     elsif params[:slot] == "下午"
-      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.afternoon.where("count > 0")         
+      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.afternoon.where("count > 0").order("time_slot ASC")         
     else
-      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.evenning.where("count > 0")
+      @booking_slots = BookingDate.find_by(:b_date => params[:date]).booking_slots.evenning.where("count > 0").order("time_slot ASC")
     end
 
   end
