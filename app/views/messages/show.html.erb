@@ -17,17 +17,17 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th width="75%">問題</th>
-              <th width="10%">發問人</th>
-              <th width="14%">發問時間</th>      
+              <th width="69%">問題</th>
+              <th width="10%" style="text-align:center">發問人</th>
+              <th width="20%" style="text-align:center">發問時間</th>      
               <th width="1%"></th>                                      
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><%= link_to @message.title, message_path(@message) %></td>
-              <td><%= @message.name %></td>
-              <td><%= @message.created_at.strftime("%Y-%m-%d") %></td>
+              <td align="center"><%= @message.name %></td>
+              <td align="center"><%= @message.created_at.strftime("%Y-%m-%d") %></td>
               <td>
                 <%= link_to message_path(@message), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
                   <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
