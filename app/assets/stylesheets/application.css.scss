@@ -17,6 +17,50 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  font-family: "Proxima";
+}
+
+#banner {
+  background-color: #666;
+  color: #FFF;
+  font-size: 16px;
+  min-height: 30px;  
+  padding-right: 55px;
+  padding-left: 37px;
+}
+
+#banner a{
+  color: #FFF;
+  font-size: 16px;
+}
+
+#time {
+  float: right;
+}
+
+.navbar-nav > li > a {
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.navbar .container-fluid {
+    padding-top: 5px;
+    padding-bottom: 5px;  
+    padding-right: 40px;
+    padding-left: 37px;
+    background-color: #EEE;
+}
+
+.navbar {
+    min-height: 60px;
+    margin-bottom: 0px; 
+}
+
+.navbar-brand {
+    font-size: 20px;
+}
+
 a:hover { 
   text-decoration: none; 
   font-weight: bold;
