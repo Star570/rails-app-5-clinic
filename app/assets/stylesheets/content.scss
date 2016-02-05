@@ -5,7 +5,7 @@
 }
 
 .service-content h3{
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);
   border-bottom: 1px solid rgba(192, 192, 192, 0.18);
@@ -13,6 +13,25 @@
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+
+.service-content h4{
+  font-size: 1.5em;  
+  padding-top:10px;  
+  padding-bottom:5px;
+}
+
+.service-content p{
+  font-size: 1.1em;
+}
+
+.service-content table{
+  font-size: 1.1em;
+}
+
+.service-content label{
+  font-size: 1.1em;
+}
+
 .service-content ul li{
   display: block;
 }
@@ -20,16 +39,17 @@
   float:right;
   width: 100%;
   display: block;
-  font-size: 1em;
+  font-size: 1.1em;
   color: #777;
   padding: 2px 0px 5px 0px;
   line-height: 1.7em;
 }
 .service-content ul li p a{
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #007DAD;
   display: block;
 }
+
 .service-content{
   float:right;
   width: 73%;
@@ -40,18 +60,13 @@
   padding-bottom:5px;
 }
 
-.service-content h4{
-  padding-top:10px;  
-  padding-bottom:5px;
-}
-
 .services-sidebar{
   float:left;
   width:23%;
   padding-left: 38px; 
 }
 .services-sidebar h3{
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);
   border-bottom: 1px solid rgba(192, 192, 192, 0.18);
@@ -60,7 +75,7 @@
 }
 .services-sidebar ul li a{
   display: block;
-  font-size: 1.1em;
+  font-size: 1.3em;
   color:#007DAD;
   padding: 2px 0px 5px 0px;
   transition: 0.5s ease;
