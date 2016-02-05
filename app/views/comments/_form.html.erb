@@ -2,6 +2,6 @@
   <%= simple_form_for [@message, @message.comments.new] do |f| %>
     <%= f.input :content, label: "內容", input_html: { class: "form-control"} %>    
     <br>
-    <%= f.submit "Submit", class: "btn btn-primary" %>
+    <%= f.submit "送出", class: "btn btn-primary" %>
   <% end %>
 </div>
