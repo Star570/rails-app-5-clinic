@@ -8,45 +8,45 @@
         <h3>請點選預約時段</h3>
 
           <%= month_calendar do |date| %>
-            <%= date.strftime("%d") %>
+            <%= date.strftime("%d") %>              <br>
             <% b_date = @booking_dates.find_by(:b_date => date) %>
             <% if date < Date.today %>
-              不可預約
+              &nbsp&nbsp&nbsp&nbsp&nbsp不可預約
             <% elsif b_date && !b_date.bookable %>
-              休館
+              &nbsp&nbsp&nbsp&nbsp&nbsp休館
             <% elsif b_date %>
               <% morning_count = b_date.booking_slots.morning.map(&:count).sum  %>
               <% afternoon_count = b_date.booking_slots.afternoon.map(&:count).sum  %>
               <% evenning_count = b_date.booking_slots.evenning.map(&:count).sum  %>                            
-              
+
               <% if morning_count > 0 %>
                 <%= link_to new_reservation_path(:date => date, :slot => "早上") do %>
-                  &nbsp早上 <%= morning_count %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp早上 <%= morning_count %>
                 <% end %>       
               <% else %>
-                  &nbsp早上 <%= morning_count %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp早上 <%= morning_count %>
               <% end %>
               <br>
               
               <% if  %>
                 <%= link_to new_reservation_path(:date => date, :slot => "下午") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
                 <% end %>           
               <% else %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
               <% end %>
               <br>
               
               <% if  %>
                 <%= link_to new_reservation_path(:date => date, :slot => "晚上") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
                 <% end %>             
               <% else %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
               <% end %>
            
             <% else %>
-              未開放<br>&nbsp<br>&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp未開放<br>&nbsp<br>&nbsp
             <% end %>
           <% end %>
           
