@@ -29,7 +29,7 @@
                     <td align="center"><%= r.created_at.in_time_zone("Taipei").strftime("%Y/%m/%d %H:%m:%S") %></td>                    
                     <td>
                       <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
-                        <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
+                        <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
                       <% end %>
                     </td>                                    
                   </tr>

@@ -3,7 +3,7 @@
   <h3>
   <% if start_date.month > Date.today.month %>
     <%= link_to start_date: date_range.first - 1.day do %>
-      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="glyphicon glyphicon-chevron-left", style="top: 3px"></span>
     <% end %>    
   <% else %>
       &nbsp&nbsp&nbsp&nbsp
@@ -13,7 +13,7 @@
 
   <% if start_date.month < Date.today.month + 6 %>
     <%= link_to start_date: date_range.last + 1.day do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="glyphicon glyphicon-chevron-right", style="top: 3px"></span>
     <% end %>
   <% else %>
       &nbsp&nbsp&nbsp&nbsp
