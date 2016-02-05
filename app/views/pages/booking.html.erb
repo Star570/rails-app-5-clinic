@@ -11,7 +11,7 @@
             <%= date.strftime("%d") %>              <br>
             <% b_date = @booking_dates.find_by(:b_date => date) %>
             <% if date < Date.today %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp不可預約
+              &nbsp&nbsp&nbsp&nbsp&nbspN/A
             <% elsif b_date && !b_date.bookable %>
               &nbsp&nbsp&nbsp&nbsp&nbsp休館
             <% elsif b_date %>
