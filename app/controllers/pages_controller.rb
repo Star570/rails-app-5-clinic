@@ -1,23 +1,19 @@
 class PagesController < ApplicationController
-  def announcements
-    flash[:notice] = "Hello"       
+  def announcements   
     @announcements = Announcement.all.order("created_at DESC")    
   end
 
-  def column
-    flash[:notice] = "Hello"        
+  def column       
     @posts = Post.all.order("created_at DESC")
     @categories = Category.all.order("created_at ASC")
   end
 
-  def message_board
-    flash[:notice] = "Hello"        
+  def message_board     
     @messages = Message.all.order("created_at DESC")    
     @message = Message.new    
   end
 
-  def booking
-    flash[:notice] = "Hello"        
+  def booking    
     BookingDate.update_latest_booking
     @booking_dates = BookingDate.all
   end
