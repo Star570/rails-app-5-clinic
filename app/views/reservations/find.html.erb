@@ -9,7 +9,10 @@
         <%= form_tag(list_reservations_path, method: "get") do %>
           <%= label_tag(:q, "輸入您的姓名：") %>
           <%= text_field_tag(:q) %>
-          <%= submit_tag("尋找") %>
+          &nbsp
+          <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+            <span class="glyphicon glyphicon-search"></span> 
+          <% end %>          
         <% end %>    
       </div>
       <div class="clear"> </div>
