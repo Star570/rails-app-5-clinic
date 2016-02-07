@@ -1,12 +1,12 @@
 class ReservationsController < ApplicationController
 
   def index
-    @reservations = Reservation.all.joins(:booking_slot).order("time_slot ASC")
-  end
-
-  def select
     BookingDate.update_latest_booking
     @booking_dates = BookingDate.all    
+  end
+
+  def overall
+    @reservations = Reservation.all.joins(:booking_slot).order("time_slot ASC")
   end
 
   def find
@@ -34,7 +34,7 @@ class ReservationsController < ApplicationController
     if find_booking_slot.count > 0
       @reservation = Reservation.create(reservation_params)
       if @reservation.save
-        redirect_to select_reservations_path
+        redirect_to reservations_path
       else 
         find_booking_date = find_booking_slot.booking_date
         params[:date] = find_booking_date.b_date        
@@ -51,7 +51,7 @@ class ReservationsController < ApplicationController
         render :new
       end          
     else
-      redirect_to select_reservations_path
+      redirect_to reservations_path
     end
   end
 

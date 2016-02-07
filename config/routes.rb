@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :announcements
   resources :reservations, except: [:show, :edit, :update] do
     collection do
-      get :select
+      get :overall
       get :find
       get :list 
     end

@@ -14,10 +14,10 @@
       <ul class="nav navbar-nav navbar-left">             
       </ul>      
       <ul class="nav navbar-nav navbar-right">
-        <li> <%= link_to "最新消息", announcements_path,       :style => font_bold_class(announcements_path) %> </li>                
-        <li> <%= link_to "醫師專欄", categories_path,          :style => font_bold_class(categories_path) %> </li>             
-        <li> <%= link_to "診療預約", select_reservations_path, :style => font_bold_class(select_reservations_path) %> </li>
-        <li> <%= link_to "留言討論", messages_path,            :style => font_bold_class(messages_path) %> </li>                
+        <li> <%= link_to "最新消息", announcements_path, :style => font_bold_class(announcements_path) %> </li>                
+        <li> <%= link_to "醫師專欄", categories_path,    :style => font_bold_class(categories_path) %> </li>             
+        <li> <%= link_to "診療預約", reservations_path,  :style => font_bold_class(reservations_path) %> </li>
+        <li> <%= link_to "留言討論", messages_path,      :style => font_bold_class(messages_path) %> </li>                
         <li class="dropdown">
           <%= link_to "#" , :class => "dropdown-toggle", :data => {:toggle => "dropdown"} do %>
             後台 <b class="caret"></b>
@@ -27,7 +27,7 @@
             <li class="divider"></li>        
             <li><%= link_to "發表專欄", new_post_path     %></li>          
             <li class="divider"></li>                
-            <li><%= link_to "預約管理", reservations_path  %></li>
+            <li><%= link_to "預約管理", overall_reservations_path  %></li>
           </ul>
         </li> 
       </ul>
