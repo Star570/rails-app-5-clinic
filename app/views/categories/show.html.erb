@@ -2,15 +2,14 @@
   <div class="wrap">
     <div class="services">
       <div class="services-sidebar">
-        <%= render partial: "pages/column_sidebar" %>
+        <%= render partial: "category_sidebar" %>
       </div>            
       <div class="service-content">
         <h3><%= @category.name %>
           <div class="pull-right">   
             <%= link_to edit_category_path(@category), class:"btn btn-xs btn-primary" do %>   
               <big><span class="glyphicon glyphicon-pencil"></span></big>
-            <% end %>
-            &nbsp            
+            <% end %>        
             <%= link_to category_path(@category), 
                 method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"}, 
                 class:"btn btn-xs btn-primary" do %>

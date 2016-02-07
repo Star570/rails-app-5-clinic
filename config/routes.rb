@@ -2,21 +2,17 @@ Rails.application.routes.draw do
   resources :categories
   resources :posts
   resources :announcements
-  resources :reservations do
+  resources :reservations, except: [:show, :edit, :update] do
     collection do
+      get :select
       get :find
       get :list 
     end
   end
 
-  resources :messages do
+  resources :messages, except: [:edit, :update] do
     resources :comments
   end
 
-  get '/news',          to: 'pages#announcements'
-  get '/column',        to: 'pages#column'
-  get '/message_board', to: 'pages#message_board'
-  get '/booking',       to: 'pages#booking' 
-
-  root 'pages#announcements'
+  root 'announcements#index'
 end

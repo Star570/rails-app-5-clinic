@@ -2,16 +2,15 @@
   <div class="wrap">
     <div class="services">
       <div class="services-sidebar">
-        <%= render partial: "pages/column_sidebar" %>
+        <%= render partial: "categories/category_sidebar" %>
       </div>            
       <div class="service-content">
         <h3>
           <%= @post.title %>
           <div class="pull-right">   
             <%= link_to edit_post_path(@post), class:"btn btn-xs btn-primary" do %>   
-              <big><span class="glyphicon glyphicon-pencil", style="top: 3px"></span></big>
-            <% end %>
-            &nbsp            
+              <big><span class="glyphicon glyphicon-pencil"></span></big>
+            <% end %> 
             <%= link_to post_path(@post), 
                 method: :delete, data: {confirm: "你確定刪除文章嗎?"}, class:"btn btn-xs btn-primary" do %>
               <big><span class="glyphicon glyphicon-remove", style="top: 3px"></span></big>

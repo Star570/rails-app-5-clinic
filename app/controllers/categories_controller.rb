@@ -1,6 +1,11 @@
 class CategoriesController < ApplicationController
   before_action :find_category, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @posts = Post.all.order("created_at DESC")
+    @categories = Category.all.order("created_at ASC")
+  end
+
   def show
     @posts = Post.all.order("created_at DESC")
     @categories = Category.all
@@ -29,7 +34,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to column_path
+    redirect_to categories_path
   end
     
   private

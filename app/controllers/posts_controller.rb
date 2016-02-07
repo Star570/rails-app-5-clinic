@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.create(post_params)
     if @post.save
-      redirect_to column_path
+      redirect_to categories_path
     else 
       render :new
     end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to column_path
+      redirect_to categories_path
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to column_path
+    redirect_to categories_path
   end
 
   private

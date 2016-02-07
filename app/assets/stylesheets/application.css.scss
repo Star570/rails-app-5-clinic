@@ -18,7 +18,7 @@
 @import "bootstrap";
 
 body {
-  font-family: "Helvetica Neue";
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
 }
 
 .alert {
@@ -80,6 +80,7 @@ body {
 
 .navbar-brand {
     font-size: 26px;
+    font-weight: bold;
 }
 
 a:hover { 

@@ -2,8 +2,8 @@
 <%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
   <%= f.input :name, label:"新增分類：" do %> 
     <%= f.input_field :name %>
-    <%= button_tag( :class => "button_green") do %>
-      <span class="glyphicon glyphicon-plus", style="top: 3px"></span>
+    <%= button_tag( :class => "button_green btn btn-primary") do %>
+      <span class="glyphicon glyphicon-plus"></span>
     <% end %>    
   <% end %>
 <% end %>        
