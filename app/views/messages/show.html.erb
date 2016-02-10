@@ -80,7 +80,7 @@
         <tbody>
           <% @message.comments.each do |c| %>
             <tr>
-              <td style="text-align:left"><%= simple_format c.content %> <small> by 管理員 </small></td>
+              <td style="text-align:left"><%= simple_format (c.content + "by 管理員") %> </td>
               <td><%= show_date(c.created_at) %></td>
               <td>
                 <% if logged_in_as_admin? %>  
