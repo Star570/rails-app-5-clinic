@@ -4,7 +4,6 @@ class CreateBookingSlots < ActiveRecord::Migration
       t.integer :time_slot
       t.boolean :bookable
       t.integer :count
-      t.references :booking_date, index: true, foreign_key: true
 
       t.timestamps null: false
     end
