@@ -23,10 +23,18 @@
 }
 
 .service-content p{
-  font-size: 1.1em;
+  font-size: 1.0em;
 }
 
 .service-content table{
+  font-size: 1.1em;
+}
+
+.service-content table > thead > tr > th {
+  font-size: 1.1em;
+}
+
+.service-content table > tbody > tr > td {
   font-size: 1.1em;
 }
 
