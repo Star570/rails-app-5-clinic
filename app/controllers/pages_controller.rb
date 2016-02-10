@@ -39,16 +39,20 @@ class PagesController < ApplicationController
   end 
 
   def modify_bookable
-    @booking_slot = BookingSlot.find(params[:booking_slot].to_i)
-    if params[:bookable] == "false"
-      @booking_slot.update(bookable: false)
+    @booking_slot = BookingSlot.find(params[:booking_slot].to_i)   
+    if (params[:bookable] == "false") && (@booking_slot.is_booked)
+      flash[:alert] = "此時段剛被註冊"    
+      redirect_back_or_to backstage_reservation_list_path(date: Date.today) 
     else
-      @booking_slot.update(bookable: true)
+      if params[:bookable] == "false"
+        @booking_slot.update(bookable: false)
+      else
+        @booking_slot.update(bookable: true)
+      end
+      respond_to do |format|
+        format.js
+      end
     end
-    respond_to do |format|
-      format.js
-    end
-
     #redirect_back_or_to root_path
   end
 
