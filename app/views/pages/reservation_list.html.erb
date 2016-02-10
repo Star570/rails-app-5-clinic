@@ -33,7 +33,7 @@
             <% end %>
           <% end %>
           <% @booking_dates.each do |date| %>
-            <% if date == Date.today %>
+            <% if date == Date.parse(params[:date]) %>
               <% background = "background-color:#ddd" %>
             <% else %>
               <% background = "" %>
@@ -81,7 +81,7 @@
               <% end %>
             <% end %>               
             <% @booking_dates.each do |date| %>
-            <% if date == Date.today %>
+            <% if date == Date.parse(params[:date]) %>
               <% background = "background-color:#ddd" %>
             <% else %>
               <% background = "" %>

@@ -1,15 +1,15 @@
 <h3>後台管理</h3>
 <ul>
   <li>
-    <%= link_to backstage_reservation_all_path, :style => font_bold_class(backstage_reservation_all_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約管理
-    <% end %>
-  </li> 
-  <li>
-    <%= link_to backstage_reservation_list_path(date: Date.today - 2), :style => font_bold_class(backstage_reservation_list_path) do %>
+    <%= link_to backstage_reservation_list_path(date: Date.today), :style => font_bold_class(backstage_reservation_list_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約列表
     <% end %>
   </li>             
+  <li>
+    <%= link_to backstage_reservation_all_path, :style => font_bold_class(backstage_reservation_all_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約月曆
+    <% end %>
+  </li>   
   <li>
     <%= link_to backstage_user_all_path, :style => font_bold_class(backstage_user_all_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp會員總覽
