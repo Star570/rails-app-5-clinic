@@ -4,10 +4,14 @@
     <%= link_to reservations_path, :style => font_bold_class(reservations_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp新增預約
     <% end %>
-  </li>   
-  <li>
-    <%= link_to find_reservations_path, :style => font_bold_class(find_reservations_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp查詢預約
-    <% end %>
-  </li>          
+  </li>     
+
+  <% if logged_in_as_user? %>
+    <li>
+      <%= link_to show_user_reservations_path, :style => font_bold_class(show_user_reservations_path) do %>
+        <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp查詢預約
+      <% end %>
+    </li>             
+  <% end %>
+  
 </ul>

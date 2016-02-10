@@ -1,70 +1,74 @@
 class ReservationsController < ApplicationController
+  before_action :require_user, except: [:index, :find, :destroy]
+  before_action :require_user_or_admin, only: [:destroy]  
+  before_action :require_admin, only: [:find]
 
   def index
-    BookingDate.update_latest_booking
-    @booking_dates = BookingDate.all    
+    @booking_slots = BookingSlot.all    
   end
-
-  def overall
-    @reservations = Reservation.all.joins(:booking_slot).order("time_slot ASC")
-  end
-
-  def find
-  end
-
-  def list
-    @reservations = Reservation.where(:name => params[:q])
-  end  
-
+  
   def new
     @reservation = Reservation.new
-    find_booking_date = BookingDate.find_by(:b_date => params[:date])
-    if params[:slot] == "早上"
-      @booking_slots = find_booking_date.booking_slots.morning.where("count > 0").order("time_slot ASC")
+    if params[:slot] == "上午"
+      @booking_slots = BookingSlot.where("booking_date = ? and bookable = ? and is_booked = ?", params[:date], true, false).morning.group_by{|b| b.time_slot}
     elsif params[:slot] == "下午"
-      @booking_slots = find_booking_date.booking_slots.afternoon.where("count > 0").order("time_slot ASC")         
+      @booking_slots = BookingSlot.where("booking_date = ? and bookable = ? and is_booked = ?", params[:date], true, false).afternoon.group_by{|b| b.time_slot}      
     else
-      @booking_slots = find_booking_date.booking_slots.evenning.where("count > 0").order("time_slot ASC")
+      @booking_slots = BookingSlot.where("booking_date = ? and bookable = ? and is_booked = ?", params[:date], true, false).evenning.group_by{|b| b.time_slot}
     end
-
   end
 
   def create
     find_booking_slot = BookingSlot.find(params[:reservation][:booking_slot_id])
-    if find_booking_slot.count > 0
-      @reservation = Reservation.create(reservation_params)
-      if @reservation.save
-        redirect_to reservations_path
-      else 
-        find_booking_date = find_booking_slot.booking_date
-        params[:date] = find_booking_date.b_date        
-        if find_booking_slot.time_slot < 24
-          @booking_slots = find_booking_date.booking_slots.morning.where("count > 0").order("time_slot ASC")
-          params[:slot] = "早上"
-        elsif find_booking_slot.time_slot >= 36
-          @booking_slots = find_booking_date.booking_slots.evenning.where("count > 0").order("time_slot ASC")          
-          params[:slot] = "晚上"
-        else
-          @booking_slots = find_booking_date.booking_slots.afternoon.where("count > 0").order("time_slot ASC")         
-          params[:slot] = "下午"
-        end        
-        render :new
-      end          
+
+    book_less_than_three_day = current_user.reservations.any? do |r|
+      (find_booking_slot.booking_date - r.booking_slot.booking_date).to_i.abs <= 3
+    end      
+
+    if find_booking_slot.is_booked
+      flash[:alert] = "此名額剛已被預約, 請重選"
+      redirect_to reservations_path            
     else
-      redirect_to reservations_path
+      if !book_less_than_three_day
+        @reservation = Reservation.create(reservation_params)
+        @reservation.user = current_user
+
+        if @reservation.save
+          find_booking_slot.update(is_booked: true)
+          @reservation.send_add_reservation_mail(current_user)
+          flash[:notice] = "已新增預約"
+          redirect_to finish_reservations_path(:date => find_booking_slot.booking_date, :slot => find_booking_slot.time_slot)
+        else 
+          # possible problem/bug here
+          render :new
+        end          
+      else 
+        flash[:alert] = "三天內不可重複預約"
+        redirect_to reservations_path      
+      end
     end
   end
 
   def destroy
-    @reservation = Reservation.find(params[:id])    
+    @reservation = Reservation.find(params[:id]) 
+    find_booking_slot = @reservation.booking_slot
+    @reservation.send_cancel_reservation_mail(current_user)    
     @reservation.destroy
-    redirect_to :back
+    find_booking_slot.update(is_booked: false) 
+    flash[:notice] = "已刪除預約"
+    redirect_back_or_to root_path
+  end
+
+  def show_user   
+  end
+
+  def finish  
   end
 
   private
 
   def reservation_params
-    params.require(:reservation).permit(:name, :phone, :booking_slot_id)
+    params.require(:reservation).permit(:booking_slot_id)
   end
 
 end

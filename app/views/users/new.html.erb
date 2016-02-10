@@ -1,0 +1,59 @@
+<div class="services">         
+  <div class="service-form">
+    <div class="container">
+      <div class="row bs-wizard" style="border-bottom:0;">
+        <div class="col-xs-2 bs-wizard-step complete">
+          <div class="text-center bs-wizard-stepnum">輸入資料</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+        </div>
+        
+        <div class="col-xs-2 bs-wizard-step active"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">確認郵箱</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+        </div>
+        
+        <div class="col-xs-2 bs-wizard-step disabled"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">完成註冊</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+          <span class="bs-wizard-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <div> 
+      <h3>請輸入您的個人資料：</h3> 
+
+      <%= simple_form_for @user do |f| %>
+        <div class="form-group">      
+          <%= f.input :name, label:"中文姓名", input_html: { class: "form-control"} %>       
+        </div>            
+        <div class="form-group">      
+          <%= f.input :email, label:"電子信箱", input_html: { class: "form-control"} %>       
+        </div>          
+        <div class="form-group">      
+          <%= f.input :phone, label:"手機號碼", input_html: { class: "form-control"} %>       
+        </div>    
+        <div class="form-group">      
+          <%= f.input :password, label:"密碼", input_html: { class: "form-control"} %>       
+        </div>    
+        <div class="form-group">      
+          <%= f.input :password_confirmation, label:"請再填一次密碼確認", input_html: { class: "form-control"} %>       
+        </div>           
+        <div class="form-group", style="margin-left: 20px;">      
+          <%= f.input :be_admin, label:"開發模式：成為管理者", as: :boolean, input_html: {checked: false} %>       
+        </div>              
+        <br>                 
+        <%= f.submit "傳送電子郵件驗證碼", disable_with: 'Submitting...', class: "btn btn-primary"%>
+      <% end %>          
+      <br><br><br>
+    </div>
+
+
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+

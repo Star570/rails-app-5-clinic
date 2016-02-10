@@ -1,18 +1,26 @@
 class Reservation < ActiveRecord::Base
-  belongs_to :booking_slot
-  validates :name, presence: true, length: { minimum: 1, maximum: 5 }   
-  validates :phone, presence: true, numericality: true, length: { minimum: 10, maximum: 10 }   
+  belongs_to :user    
+  belongs_to :booking_slot  
 
-  validates_each :phone do |record, attr, value|
-    record.errors.add(attr, '此非手機號碼') if value[0] != "0" || value[1] != "9"
+  default_scope {joins(:booking_slot).order('booking_date ASC, time_slot ASC')}
+  scope :to_be_served, -> { joins(:booking_slot).where("booking_date >= ?", Date.today) }
+
+  after_save :update_is_booked
+  after_destroy :delete_is_booked     
+
+  def send_add_reservation_mail(user)    
+    UserMailer.notify_add_reservation(user, self).deliver_now if (user.email && !user.email.include?("example"))
+  end  
+
+  def send_cancel_reservation_mail(user)
+    UserMailer.notify_cancel_reservation(user, self).deliver_now if (user.email && !user.email.include?("example"))
+  end    
+
+  def update_is_booked
+    booking_slot.update(is_booked: true)
   end
 
-  after_save :update_booking_count
-  after_destroy :update_booking_count  
-
-  def update_booking_count
-    find_booking_slot = self.booking_slot
-    find_booking_slot.count = 3 - self.booking_slot.reservations.count
-    find_booking_slot.save
-  end
+  def delete_is_booked
+    booking_slot.update(is_booked: false)
+  end  
 end

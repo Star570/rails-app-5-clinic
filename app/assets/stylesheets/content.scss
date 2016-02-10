@@ -52,7 +52,7 @@
 }
 
 .service-content ul li p a{
-  font-size: 1.1em;
+  font-size: 1.2em;
   color: #007DAD;
   display: block;
 }
@@ -67,12 +67,12 @@
   padding-bottom:5px;
 }
 
-.services-sidebar{
+.service-sidebar{
   float:left;
   width:23%;
   padding-left: 38px; 
 }
-.services-sidebar h3{
+.service-sidebar h3{
   font-size: 1.7em;
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);
@@ -80,7 +80,7 @@
   padding: 15px 0px 10px 0px;
   margin-bottom: 10px;
 }
-.services-sidebar ul li a{
+.service-sidebar ul li a{
   display: block;
   font-size: 1.3em;
   color:#007DAD;
@@ -89,25 +89,39 @@
   -o-transition: 0.5s ease;
   -webkit-transition: 0.5s ease;
 }
-.services-sidebar ul li a:hover{
+.service-sidebar ul li a:hover{
   color: #777;
 }
-.services-sidebar ul{
+.service-sidebar ul{
   padding-left: 0px;
 }
-.services-sidebar ul li {
+.service-sidebar ul li {
   padding: 9px 10px 8px 18px;
   list-style-type:none;
 }
-.services-sidebar ul li:hover{
+.service-sidebar ul li:hover{
 }
 
-.services-form{
+.service-form{
   float:left;
   width:50%;
   padding-left: 38px; 
 }
-.services-form h3{
+.service-form h3{
+  font-size: 1.7em;
+  font-weight: bold;
+  color: rgba(31, 31, 31, 0.99);
+  border-bottom: 1px solid rgba(192, 192, 192, 0.18);
+  padding: 15px 0px 10px 0px;
+  margin-bottom: 10px;
+}
+
+.service-display{
+  float:left;
+  width:70%;
+  padding-left: 38px; 
+}
+.service-display h3{
   font-size: 1.7em;
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);

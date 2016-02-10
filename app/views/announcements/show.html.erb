@@ -1,34 +1,31 @@
-<div class="content">
-  <div class="wrap">
-    <div class="services">
-      <div class="services-sidebar">
-        <%= render partial: "announcement_sidebar" %>
-      </div>            
-      <div class="service-content">
-        <h3>
-          <%= @announcement.title %>
-          <div class="pull-right">   
-            <%= link_to edit_announcement_path(@announcement), class:"btn btn-xs btn-primary" do %>   
-              <big><span class="glyphicon glyphicon-pencil"></span></big>
-            <% end %>
-            &nbsp            
-            <%= link_to announcement_path(@announcement), 
-                method: :delete, data: {confirm: "你確定刪除公告嗎?"}, class:"btn btn-xs btn-primary" do %>
-              <big><span class="glyphicon glyphicon-remove"></span></big>
-            <% end %>    
-          </div>  
-        </h3>
-        <h4>
-          <span class="label label-default">
-            <%= @announcement.created_at.strftime("%Y-%m-%d") %>
-          </span>
-        </h4>
-        <br>
-        <p class="text-muted"><%= @announcement.body %></p>
-           
-      </div>
-      <div class="clear"> </div>
-    </div>
-    <div class="clear"> </div>
+<div class="services">
+  <div class="service-sidebar">
+    <%= render partial: "announcement_sidebar" %>
+  </div>            
+  <div class="service-content">
+    <h3>
+      <%= @announcement.title %>
+      <% if logged_in_as_admin? %>
+        <div class="pull-right">   
+          <%= link_to edit_announcement_path(@announcement), class:"btn btn-xs btn-primary" do %>   
+            <big><span class="glyphicon glyphicon-pencil"></span></big>
+          <% end %>          
+          <%= link_to announcement_path(@announcement), 
+              method: :delete, data: {confirm: "你確定刪除公告嗎?"}, class:"btn btn-xs btn-primary" do %>
+            <big><span class="glyphicon glyphicon-remove"></span></big>
+          <% end %>    
+        </div>                      
+      <% end %>
+    </h3>
+    <h4>
+      <span class="label label-default">
+        <%= show_date(@announcement.created_at) %>
+      </span>
+    </h4>
+    <br>
+    <p class="text-muted"><%= markdown @announcement.body %></p>
+       
   </div>
-</div>  
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

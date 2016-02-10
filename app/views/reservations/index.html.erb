@@ -1,58 +1,74 @@
-<div class="content">
-  <div class="wrap">
-    <div class="services">
-      <div class="services-sidebar">
-        <%= render partial: "reservation_sidebar" %>
-      </div>            
-      <div class="service-content">
-        <h3>請點選預約時段</h3>
-
-          <%= month_calendar do |date| %>
-            <%= date.strftime("%d") %>              <br>
-            <% b_date = @booking_dates.find_by(:b_date => date) %>
-            <% if date < Date.today %>
-              &nbsp&nbsp&nbsp&nbsp&nbspN/A
-            <% elsif b_date && !b_date.bookable %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp休館
-            <% elsif b_date %>
-              <% morning_count = b_date.booking_slots.morning.map(&:count).sum  %>
-              <% afternoon_count = b_date.booking_slots.afternoon.map(&:count).sum  %>
-              <% evenning_count = b_date.booking_slots.evenning.map(&:count).sum  %>                            
-
-              <% if morning_count > 0 %>
-                <%= link_to new_reservation_path(:date => date, :slot => "早上") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp早上 <%= morning_count %>
-                <% end %>       
-              <% else %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp早上 <%= morning_count %>
-              <% end %>
-              <br>
-              
-              <% if  %>
-                <%= link_to new_reservation_path(:date => date, :slot => "下午") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
-                <% end %>           
-              <% else %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
-              <% end %>
-              <br>
-              
-              <% if  %>
-                <%= link_to new_reservation_path(:date => date, :slot => "晚上") do %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
-                <% end %>             
-              <% else %>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
-              <% end %>
-           
-            <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp未開放<br>&nbsp<br>&nbsp
-            <% end %>
-          <% end %>
-          
+<div class="services">
+  <div class="service-sidebar">
+    <%= render partial: "reservation_sidebar" %>
+  </div>            
+  <div class="service-content">
+    <div class="row">
+      <div class="bs-wizard" style="border-bottom:0;">
+        <div class=" step-long bs-wizard-step complete">
+          <div class="text-center bs-wizard-stepnum">點選預約日期</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+        </div>
+        
+        <div class="step-long bs-wizard-step active"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">點選預約時段</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+        </div>
+        
+        <div class="step-long bs-wizard-step disabled"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">完成預約</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+          <span class="bs-wizard-dot"></span>
+        </div>
       </div>
-      <div class="clear"> </div>
     </div>
-    <div class="clear"> </div>
+
+    <br>
+    <%= month_calendar do |date| %>
+      <%= date.strftime("%d") %>              <br>
+      <% booking_slots = @booking_slots.where("booking_date = ? and bookable = ? and is_booked = ?", date, true, false) %>
+      <% if date < Date.today %>
+        &nbsp&nbsp&nbsp&nbsp&nbspN/A
+      <% elsif booking_slots.count > 0 %>
+        <% morning_count = booking_slots.morning.count %>
+        <% afternoon_count = booking_slots.afternoon.count %>
+        <% evenning_count = booking_slots.evenning.count %>                            
+
+        <% if morning_count > 0 %>
+          <%= link_to new_reservation_path(:date => date, :slot => "上午") do %>
+            &nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_count %>
+          <% end %>       
+        <% else %>
+            &nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_count %>
+        <% end %>
+        <br>
+        
+        <% if afternoon_count > 0 %>
+          <%= link_to new_reservation_path(:date => date, :slot => "下午") do %>
+            &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
+          <% end %>           
+        <% else %>
+            &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_count %>
+        <% end %>
+        <br>
+        
+        <% if evenning_count > 0 %>
+          <%= link_to new_reservation_path(:date => date, :slot => "晚上") do %>
+            &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
+          <% end %>             
+        <% else %>
+            &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_count %>
+        <% end %>
+     
+      <% else %>
+        &nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
+      <% end %>
+    <% end %>
+      
   </div>
-</div>  
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

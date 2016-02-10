@@ -1,0 +1,36 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "backstage_sidebar" %>
+  </div>        
+  <div class="service-content">
+    <h3>新增會員</h3>
+    <br>
+    <div class="row">
+      <div class="col-md-8">
+        <%= simple_form_for @user, :url => backstage_add_user_path, :method => :post do |f| %>
+          <div class="form-group">      
+            <%= f.input :name, label:"會員姓名", input_html: { class: "form-control"} %>       
+          </div>            
+          <div class="form-group">      
+            <%= f.input :email, label:"電子信箱", hint: '（預設 example@gmail.com）', input_html: { class: "form-control", value: 'example@gmail.com'} %>       
+          </div>             
+          <div class="form-group">      
+            <%= f.input :phone, label:"會員手機", input_html: { class: "form-control"} %>       
+          </div>    
+          <div class="form-group">      
+            <%= f.input :password, label:"密碼", hint: '（預設 12345）',  input_html: { class: "form-control", value: '12345'} %>       
+          </div>    
+          <div class="form-group">      
+            <%= f.input :password_confirmation, label:"密碼確認", hint: '（預設 12345）', input_html: { class: "form-control", value: '12345'} %>
+          </div>    
+          <br>                      
+          <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary"%>
+        <% end %>          
+        <br><br><br>
+      </div>
+    </div>
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+

@@ -1,0 +1,7 @@
+<h3>您的預約記錄已取消</h3>
+
+<p>
+  取消的時段 <%= @reservation.booking_slot.booking_date %> <%= show_time_slot(@reservation.booking_slot.time_slot) %>
+  <br><br>
+  請到<%= link_to "此網址", url_for(show_user_reservations_url) %>確認預約記錄
+</p>

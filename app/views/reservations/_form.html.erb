@@ -1,15 +1,19 @@
+<!-- Also have same form in add_reservation_s2.html.erb -->
 <br>
 <%= simple_form_for @reservation do |f| %>   
-  <%= f.input :name, label:"中文姓名：" %> 
-  <br>    
-  <%= f.input :phone, label:"您的電話：" %>     
+  <h4><%= current_user.name %>您好！
+      <br><br>
+      您想要預約的日期是&nbsp<%= params[:date] %>&nbsp<%= params[:slot] %>時段
+  </h4>      
   <br>
+
   <div class="form-group">   
-    <%= f.input :booking_slot_id, label: '選擇時段：', include_blank: false, 
-                 collection: @booking_slots,
-                 label_method: lambda { |booking_slot| 
-                  "#{booking_slot.time_slot/2}：#{booking_slot.time_slot%2*3}0 尚餘名額（#{booking_slot.count}）" },
+    <%= f.input :booking_slot_id, label: '選擇預約時段：', include_blank: false, 
+                 collection: @booking_slots.map{|k,v| v.first},
+                 label_method: lambda { |b| 
+                  "#{show_time_slot(b.time_slot)} 尚餘名額（#{@booking_slots[b.time_slot].count}）" },
                  value_method: :id %>                 
-  </div>              
-  <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary"%>
+  </div>          
+  <br>    
+  <%= f.submit "完成預約", disable_with: 'Submitting...', class: "btn btn-primary"%>
 <% end %>

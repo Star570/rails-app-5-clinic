@@ -1,0 +1,50 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "backstage_sidebar" %>
+  </div>        
+  <div class="service-content">
+    <h3>預約總覽</h3>
+    <br>
+    <%= month_calendar do |date| %>
+      <%= date.strftime("%d") %>              <br>
+      <% booking_slots = @booking_slots.where("booking_date = ?", date) %>
+
+      <% if booking_slots.count > 0 %>
+        <% morning_booked_count = booking_slots.morning.where(is_booked: true).count %>
+        <% afternoon_booked_count = booking_slots.afternoon.where(is_booked: true).count %>
+        <% evenning_booked_count = booking_slots.evenning.where(is_booked: true).count %>                            
+
+        <% morning_not_bookable_and_not_booked_count = booking_slots.morning.where("bookable = ? and is_booked = ?", false, false).count %>
+        <% afternoon_not_bookable_and_not_booked_count = booking_slots.afternoon.where("bookable = ? and is_booked = ?", false, false).count %>
+        <% evenning_not_bookable_and_not_booked_count = booking_slots.evenning.where("bookable = ? and is_booked = ?", false, false).count %>        
+        <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
+          &nbsp上午 
+          <% if morning_booked_count < 10 %>&nbsp<% end %>
+          <%= morning_booked_count %>
+          &nbsp(R<%= morning_not_bookable_and_not_booked_count %>)<br> 
+        <% end %>       
+
+        <%= link_to backstage_reservation_list_path(date: date, anchor: "afternoon") do %>
+          &nbsp下午 
+          <% if afternoon_booked_count < 10 %>&nbsp<% end %>
+          <%= afternoon_booked_count %>
+          &nbsp(R<%= afternoon_not_bookable_and_not_booked_count %>)<br>
+        <% end %>       
+
+        <%= link_to backstage_reservation_list_path(date: date, anchor: "evening") do %>
+          &nbsp晚上 
+          <% if evenning_booked_count < 10 %>&nbsp<% end %>
+          <%= evenning_booked_count %>
+          &nbsp(R<%= evenning_not_bookable_and_not_booked_count %>)<br>
+        <% end %>               
+        <br>
+     
+      <% else %>
+        &nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

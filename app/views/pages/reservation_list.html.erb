@@ -1,0 +1,119 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "backstage_sidebar" %>
+  </div>        
+  <div class="service-content">
+    <h3>預約列表</h3>
+    <br>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="9%" style="vertical-align: middle;">
+            <h4>
+              <% if @booking_dates_pre.count > 0 %>
+                <%= link_to backstage_reservation_list_path(date: @date-7) do %>
+                  <span class="glyphicon glyphicon-chevron-left" style="top: 3px"></span>    
+                <% end %>          
+              <% else %>      
+                <span class="glyphicon glyphicon-chevron-left" style="top: 3px"></span>                  
+              <% end %>
+
+              <% if @booking_dates_nxt.count > 0 %>
+                <%= link_to backstage_reservation_list_path(date: @date+7) do %>
+                    <span class="glyphicon glyphicon-chevron-right" style="top: 3px"></span>    
+                <% end %>                
+              <% else %>
+                <span class="glyphicon glyphicon-chevron-right" style="top: 3px"></span>    
+              <% end %>
+            </h4>                
+          </th>
+          <% if @booking_dates.count < 7 && @date < Date.today %>
+            <% (7-@booking_dates.count).times do %>
+              <th></th>
+            <% end %>
+          <% end %>
+          <% @booking_dates.each do |date| %>
+            <% if date == Date.today %>
+              <% background = "background-color:#ddd" %>
+            <% else %>
+              <% background = "" %>
+            <% end %>
+            <th width="13%" style=<%= background %> >
+              <%= date.strftime("%m/%d") %> <br>
+              <%= @dayOfWeek[date.strftime("%w").to_i] %>
+            </th>
+          <% end %>
+          <% if @booking_dates.count < 7 && @date > Date.today %>
+            <% (7-@booking_dates.count).times do %>
+              <th></th>
+            <% end %>
+          <% end %>          
+        </tr>
+      </thead>
+      <tbody>
+        <% BookingSlot.available_slot.each do |time_slot| %>
+          <% if time_slot == 20 %> 
+            <tr id="morning" style="background-color: grey"> 
+              <% 8.times do %>
+                <td></td>
+              <% end %>
+            </tr> 
+          <% end %>        
+          <% if time_slot == 28 %> 
+            <tr id="afternoon" style="background-color: grey"> 
+              <% 8.times do %>
+                <td></td>
+              <% end %>
+            </tr> 
+          <% end %>
+          <% if time_slot == 38 %> 
+            <tr id="evening" style="background-color: grey"> 
+              <% 8.times do %>
+                <td></td>
+              <% end %>
+            </tr> 
+          <% end %>          
+          <tr>         
+            <td style="vertical-align: middle;"><%= show_time_slot(time_slot) %></td>
+            <% if @booking_dates.count < 7 && @date < Date.today %>
+              <% (7-@booking_dates.count).times do %>
+                <td></td>
+              <% end %>
+            <% end %>               
+            <% @booking_dates.each do |date| %>
+            <% if date == Date.today %>
+              <% background = "background-color:#ddd" %>
+            <% else %>
+              <% background = "" %>
+            <% end %>            
+              <td style=<%= background %>>            
+                <% @booking_slots.where("booking_date = ? and time_slot = ?", date, time_slot).each do |b| %>
+                  <% if b.is_booked %>
+                    <%= link_to b.reservations.first.user.name, backstage_user_show_path(user_id: b.reservations.first.user.id) %><br>
+                  <% elsif b.bookable %>
+                    <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: false) do %>
+                      <span class="glyphicon glyphicon-ok"></span><br>
+                    <% end %>
+                  <% else %>
+                    <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: true) do %>
+                      <span class="glyphicon glyphicon-remove"></span><br>
+                    <% end %>
+                  <% end %>                    
+                <% end %>
+              </td>              
+            <% end %>
+            <% if @booking_dates.count < 7 && @date > Date.today %>
+              <% (7-@booking_dates.count).times do %>
+                <td></td>
+              <% end %>
+            <% end %>               
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

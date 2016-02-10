@@ -1,28 +1,24 @@
-<div class="content">
-  <div class="wrap">
-    <div class="services">
-      <div class="services-sidebar">
-        <%= render partial: "announcement_sidebar" %>
-      </div>            
-      <div class="service-content">
-        <h3>最新消息</h3>
-        <% @announcements.each do |a| %>
-          <ul>          
-            <li>
-              <p>
-                <%= link_to announcement_path(a) do %>
-                <span id="archive-date"><%= a.created_at.strftime("%Y-%m-%d") %></span>                    
-                 <%= a.title %>            
-                <% end %>
-              </p>
-            </li>
-            <div class="clear"> </div>
-          </ul>
-        <% end %>
-           
-      </div>
-      <div class="clear"> </div>
-    </div>
-    <div class="clear"> </div>
+<div class="services">
+  <div class="service-sidebar">
+    <%= render partial: "announcement_sidebar" %>
+  </div>            
+  <div class="service-content">
+    <h3>最新消息</h3>
+    <% @announcements.each do |a| %>
+      <ul>          
+        <li>
+          <p>
+            <%= link_to announcement_path(a) do %>
+            <span id="archive-date"><%= show_date(a.created_at) %></span>                    
+             <%= a.title %>            
+            <% end %>
+          </p>
+        </li>
+        <div class="clear"> </div>
+      </ul>
+    <% end %>
   </div>
-</div>  
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+

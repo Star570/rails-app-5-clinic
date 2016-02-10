@@ -1,0 +1,58 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "backstage_sidebar" %>
+  </div>        
+  <div class="service-content">
+    <h3>搜尋會員</h3>
+    <br>
+    <%= form_tag(backstage_search_user_path, method: :get, class: 'navbar-form navbar-left', style: 'padding-left: 0px') do %>
+      <%= search_field_tag 'search', nil, class: 'form-control', placeholder: '搜尋會員資料'  %>
+      <%= button_tag class: 'btn btn-default', :name => nil do %>
+        <span class="glyphicon glyphicon-search"></span>
+      <% end %>
+      <h5>&nbsp(可填寫姓名或手機或Email的關鍵字)</h5>
+    <% end %>
+    <br><br><br>
+    <% if @users %>
+      <div class="row">
+        <div class="col-xs-9">
+          <table class="table table-hover">
+            <thead>
+              <tr>        
+                <th width="5%"></th>
+                <th width="15%">名稱</th>
+                <th width="30%">電郵</th>          
+                <th width="30%">手機</th>                                   
+                <th width="20%"></th>    
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |u| %>
+                <tr>       
+                  <td style="vertical-align: middle;">
+                    <%= link_to backstage_user_show_path(user_id: u.id) do %>
+                      <span class="glyphicon glyphicon-search", style="top: 3px"></span>
+                    <% end %>
+                  </td>            
+                  <td style="vertical-align: middle;"><%= u.name %></td>
+                  <td style="vertical-align: middle;"><%= u.email %></td>              
+                  <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>               
+                  <td style="vertical-align: middle;">
+                    <% if u.admin %>
+                      管理者  
+                    <% else %>
+                      <%= link_to "前往預約", backstage_add_reservation_s1_path(user: u), class: "btn btn-primary" %>
+                    <% end %>
+                  </td>                                               
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>        
+      </div>
+    <% end %>
+
+  <div class="clear"> </div>
+  </div>
+<div class="clear"> </div>
+</div>

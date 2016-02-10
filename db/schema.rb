@@ -11,32 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204144959) do
+ActiveRecord::Schema.define(version: 20160210054638) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
-  create_table "booking_dates", force: :cascade do |t|
-    t.date     "b_date"
-    t.boolean  "bookable"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "announcements", ["user_id"], name: "index_announcements_on_user_id"
 
   create_table "booking_slots", force: :cascade do |t|
     t.integer  "time_slot"
     t.boolean  "bookable"
-    t.integer  "count"
-    t.integer  "booking_date_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.date     "booking_date"
+    t.boolean  "is_booked",    default: false
   end
-
-  add_index "booking_slots", ["booking_date_id"], name: "index_booking_slots_on_booking_date_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -49,17 +43,22 @@ ActiveRecord::Schema.define(version: 20160204144959) do
     t.integer  "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   add_index "comments", ["message_id"], name: "index_comments_on_message_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "messages", force: :cascade do |t|
-    t.string   "name"
     t.string   "title"
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.boolean  "anonymous"
   end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -67,18 +66,32 @@ ActiveRecord::Schema.define(version: 20160204144959) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "reservations", force: :cascade do |t|
-    t.string   "name"
     t.integer  "booking_slot_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "phone"
+    t.integer  "user_id"
   end
 
   add_index "reservations", ["booking_slot_id"], name: "index_reservations_on_booking_slot_id"
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "password_digest"
+    t.boolean  "admin"
+    t.boolean  "verified"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "pin"
+    t.string   "email"
+  end
 
 end

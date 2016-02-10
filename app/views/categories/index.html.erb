@@ -1,30 +1,26 @@
-<div class="content">
-  <div class="wrap">
-    <div class="services">
-      <div class="services-sidebar">
-        <%= render partial: "category_sidebar" %>
-      </div>            
-      <div class="service-content">
-        <h3>專欄文章</h3>
-        <% @posts.each do |p| %>
-          <ul>          
-            <li>
-              <p>
-                <%= link_to post_path(p) do %>
-                <span id="archive-date"><%= p.created_at.strftime("%Y-%m-%d") %></span>                    
-                 <%= p.title %>
-                 &nbsp
-                 <span class="label label-default pull-right"><%= p.category.name %></span>                 
-                <% end %>
-              </p>
-            </li>
-            <div class="clear"> </div>
-          </ul>
-        <% end %>
-           
-      </div>
-      <div class="clear"> </div>
-    </div>
-    <div class="clear"> </div>
+<div class="services">
+  <div class="service-sidebar">
+    <%= render partial: "category_sidebar" %>
+  </div>            
+  <div class="service-content">
+    <h3>專欄文章</h3>
+    <% @posts.each do |p| %>
+      <ul>          
+        <li>
+          <p>
+            <%= link_to post_path(p) do %>
+            <span id="archive-date"><%= show_date(p.created_at) %></span>                    
+             <%= p.title %>
+             &nbsp
+             <span class="label label-default pull-right"><%= p.category.name %></span>                 
+            <% end %>
+          </p>
+        </li>
+        <div class="clear"> </div>
+      </ul>
+    <% end %>
+       
   </div>
-</div>  
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

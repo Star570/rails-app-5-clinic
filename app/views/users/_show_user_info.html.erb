@@ -1,0 +1,132 @@
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" data-toggle="tab"><h4>個人資料</h4></a>
+        </li>
+        <% if logged_in_as_user? || (logged_in_as_admin? && current_user.id.to_s != params[:id])%>
+          <li>
+              <a href="#reservation_later" data-toggle="tab"><h4>待診療</h4></a>
+          </li>        
+          <li>
+              <a href="#reservation_all" data-toggle="tab"><h4>預約記錄</h4></a>
+          </li>
+          <li>
+              <a href="#message" data-toggle="tab"><h4>留言一覽</h4></a>
+          </li>     
+        <% end %>         
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">
+          <div class="container">
+            <% if logged_in_as_admin? && current_user.id.to_s != params[:id]%>
+              <br>
+              <h4>管理者您好！
+                  您正在觀覽會員[<%= @user.name %>]的記錄
+              </h4>                
+            <% end %>
+            <br>
+            <h4>中文姓名： <%= @user.name %> </h4>
+            <br>
+            <h4>電子信箱： <%= @user.email %> </h4>                
+            <br>
+            <h4>手機號碼： <%= show_phone(@user.phone ) %> </h4>
+            <br>
+            <h4>
+              <%= link_to "修改個人資料", edit_user_path(@user), class:"btn btn-primary"  %>
+              <%= link_to "返回前頁", :back, class:"btn btn-primary"  %>              
+            </h4> 
+          </div>
+        </div>
+
+        <% if logged_in_as_user? || (logged_in_as_admin? && current_user.id.to_s != params[:id])%>
+          <div role="tabpanel" class="tab-pane" id="reservation_later">
+            <div class="container-fluid">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th width="15%" >姓名</th>
+                    <th width="20%" >預約時間</th>
+                    <th width="15%" >預約時段</th>
+                    <th width="45%" >系統建立時間</th>       
+                    <th width="5%"></th>                        
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user.reservations.to_be_served.each do |r| %>
+                  <tr>
+                    <td><%= @user.name %></td>
+                    <td><%= r.booking_slot.booking_date %></td>
+                    <td><%= show_time_slot(r.booking_slot.time_slot) %></td>
+                    <td><%= show_datetime(r.created_at) %></td>
+                    <td>
+                      <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
+                        <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+                      <% end %>
+                    </td>                              
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>                  
+          </div>        
+          <div role="tabpanel" class="tab-pane" id="reservation_all">
+            <div class="container-fluid">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th width="15%" >姓名</th>
+                    <th width="20%" >預約時間</th>
+                    <th width="15%" >預約時段</th>
+                    <th width="45%" >系統建立時間</th>       
+                    <th width="5%"></th>                        
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user.reservations.each do |r| %>
+                  <tr>
+                    <td><%= @user.name %></td>
+                    <td><%= r.booking_slot.booking_date %></td>
+                    <td><%= show_time_slot(r.booking_slot.time_slot) %></td>
+                    <td><%= show_datetime(r.created_at) %></td>
+                    <td></td>                              
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>                  
+          </div>
+          <div role="message"  class="tab-pane" id="message">
+            <div class="container-fluid">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th width="70%" style="text-align:left">留言標題</th>
+                    <th width="10%">匿名</th>
+                    <th width="20%">留言時間</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user.messages.each do |m| %>
+                  <tr>
+                    <td style="text-align:left"><%= link_to m.title, message_path(m) %></td>
+                    <td>
+                      <% if m.anonymous %>
+                        是
+                      <% else %>
+                        否
+                      <% end %>
+                    </td> 
+                    <td><%= show_date(m.created_at) %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>                    
+          </div>       
+        <% end %>       
+    </div>
+    <br><br><br>                 
+</div>

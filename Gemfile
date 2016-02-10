@@ -16,8 +16,13 @@ gem 'simple_form'
 gem 'jquery-ui-rails'
 gem 'simple_calendar', "~> 2.0"
 gem 'rails-i18n'
+gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'ransack', '1.6.6'
+gem 'redcarpet', '~> 3.2.2'
+# gem 'twilio-ruby', '~> 4.1.0'
 
 group :development do
+  gem "letter_opener"
   gem 'sqlite3'  
   gem 'pry'  
 end

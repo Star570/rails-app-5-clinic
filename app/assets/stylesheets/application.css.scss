@@ -18,7 +18,7 @@
 @import "bootstrap";
 
 body {
-  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+  font-family: 'Helvetica Neue', Helvetica, Arial, STHeiti, 'Microsoft JhengHei', 微軟正黑體, sans-serif;
 }
 
 .alert {
@@ -27,6 +27,13 @@ body {
   margin-right: 50px;
   font-size: 18px;  
 }
+
+.simple-calendar table thead tr th {text-align:left; font-weight: bold;}
+.simple-calendar table tbody tr td {text-align:left}
+
+thead tr th {text-align:center}
+tbody tr td {text-align:center; vertical-align: middle;}
+table tbody tr td {vertical-align: middle;}
 
 #banner {
   background-color: #666;
@@ -89,7 +96,7 @@ a:hover {
 }
 
 #archive-date {
-  font-size: 0.9em;
+  font-size: 1.0em;
   width: 6em;
   display: inline-block;
 }

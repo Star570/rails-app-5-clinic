@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, except: [:show]
 
   def show
     @posts = Post.all
@@ -14,7 +15,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(post_params)
+    @post.user = current_user    
     if @post.save
+      flash[:notice] = "您已發佈一篇新專欄"      
       redirect_to categories_path
     else 
       render :new
@@ -28,6 +31,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      flash[:notice] = "您已修改專欄"           
       redirect_to categories_path
     else
       render :edit
@@ -36,6 +40,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+    flash[:notice] = "您已刪除專欄"       
     redirect_to categories_path
   end
 

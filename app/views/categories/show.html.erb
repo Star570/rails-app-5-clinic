@@ -1,41 +1,40 @@
-<div class="content">
-  <div class="wrap">
-    <div class="services">
-      <div class="services-sidebar">
-        <%= render partial: "category_sidebar" %>
-      </div>            
-      <div class="service-content">
-        <h3><%= @category.name %>
-          <div class="pull-right">   
-            <%= link_to edit_category_path(@category), class:"btn btn-xs btn-primary" do %>   
-              <big><span class="glyphicon glyphicon-pencil"></span></big>
-            <% end %>        
-            <%= link_to category_path(@category), 
-                method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"}, 
-                class:"btn btn-xs btn-primary" do %>
-              <big><span class="glyphicon glyphicon-remove"></span></big>
-            <% end %>    
-          </div>   
-        </h3>                 
-        <% @category.posts.each do |p| %>
-          <ul>          
-            <li>
-              <p>
-                <%= link_to post_path(p) do %>
-                <span id="archive-date"><%= p.created_at.strftime("%Y-%m-%d") %></span>                    
-                 <%= p.title %>
-                 &nbsp
-                 <span class="label label-default pull-right"><%= p.category.name %></span>                 
-                <% end %>
-              </p>
-            </li>
-            <div class="clear"> </div>
-          </ul>
-        <% end %>
-           
-      </div>
-      <div class="clear"> </div>
-    </div>
-    <div class="clear"> </div>
+<div class="services">
+  <div class="service-sidebar">
+    <%= render partial: "category_sidebar" %>
+  </div>            
+  <div class="service-content">
+    <h3>
+      <%= @category.name %>
+      <% if logged_in_as_admin? %>               
+        <div class="pull-right">   
+          <%= link_to edit_category_path(@category), class:"btn btn-xs btn-primary" do %>   
+            <big><span class="glyphicon glyphicon-pencil"></span></big>
+          <% end %>        
+          <%= link_to category_path(@category), 
+              method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"}, 
+              class:"btn btn-xs btn-primary" do %>
+            <big><span class="glyphicon glyphicon-remove"></span></big>
+          <% end %>    
+        </div>   
+      <% end %>                 
+    </h3>                 
+    <% @category.posts.each do |p| %>
+      <ul>          
+        <li>
+          <p>
+            <%= link_to post_path(p) do %>
+            <span id="archive-date"><%= show_date(p.created_at) %></span>                    
+             <%= p.title %>
+             &nbsp
+             <span class="label label-default pull-right"><%= p.category.name %></span>                 
+            <% end %>
+          </p>
+        </li>
+        <div class="clear"> </div>
+      </ul>
+    <% end %>
+       
   </div>
-</div>  
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

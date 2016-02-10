@@ -1,0 +1,5 @@
+<h3>您的註冊驗證碼是 <%= @user.pin  %></h3>
+
+<p>
+  請到<%= link_to "此網址", url_for(enter_pin_user_url(@user)) %>填入驗證碼 
+</p>
