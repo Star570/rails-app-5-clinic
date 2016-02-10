@@ -32,7 +32,7 @@ class AnnouncementsController < ApplicationController
   def update
     if @announcement.update(announcement_params)
       flash[:notice] = "您已修改公告"                 
-      redirect_to announcements_path
+      redirect_to announcement_path(@announcement)
     else
       render :edit
     end

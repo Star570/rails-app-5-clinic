@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:notice] = "您已修改專欄"           
-      redirect_to categories_path
+      redirect_to post_path(@post)
     else
       render :edit
     end
