@@ -29,20 +29,20 @@
               <% evenning_booked_count = booking_slots.evenning.where(is_booked: true).count %>                            
       
               <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_booked_count %><br>
               <% end %>               
               <br>
            
             <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
             <% end %>
           <% end %>          
         </div>
@@ -57,20 +57,20 @@
               <% evenning_not_bookable_and_not_booked_count = booking_slots.evenning.where("bookable = ? and is_booked = ?", false, false).count %>   
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_not_bookable_and_not_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_not_bookable_and_not_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_not_bookable_and_not_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_not_bookable_and_not_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_not_bookable_and_not_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_not_bookable_and_not_booked_count %><br>
               <% end %>               
               <br>
            
             <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
             <% end %>
           <% end %>            
 
