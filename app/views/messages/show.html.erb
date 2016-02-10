@@ -27,7 +27,7 @@
           <% if @message.anonymous && !logged_in_as_admin? %> 
             <td>匿名</td>
           <% else %>
-            <% if logged_in_as_admin %>
+            <% if logged_in_as_admin? %>
               <td><%= link_to @message.user.name, backstage_user_show_path(user_id: @message.user.id) %></td>
             <% else %>
               <td><%= @message.user.name %></td>
@@ -80,7 +80,7 @@
         <tbody>
           <% @message.comments.each do |c| %>
             <tr>
-              <td style="text-align:left"><%= simple_format (c.content + "by 管理員") %> </td>
+              <td style="text-align:left"><%= simple_format (c.content + " <small>by 管理員</small>".html_safe) %> </td>
               <td><%= show_date(c.created_at) %></td>
               <td>
                 <% if logged_in_as_admin? %>  
@@ -96,6 +96,7 @@
         </tbody>
       </table>
       <% if logged_in_as_admin? %>  
+        <br><br>
         <%= simple_form_for [@message, @message.comments.new] do |f| %>       
           <div class="form-group">      
             <%= f.input :content, label:"補充回覆：", input_html: { class: "form-control", rows: "20", width: "80%"} %>
