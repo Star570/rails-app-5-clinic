@@ -91,13 +91,17 @@
                   <% if b.is_booked %>
                     <%= link_to b.reservations.first.user.name, backstage_user_show_path(user_id: b.reservations.first.user.id) %><br>
                   <% elsif b.bookable %>
-                    <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: false) do %>
-                      <span class="glyphicon glyphicon-ok"></span><br>
-                    <% end %>
+                    <div id="slot<%= b.id %>">
+                      <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: false), :remote => true do %>
+                        <span class="glyphicon glyphicon-ok"></span><br>
+                      <% end %>
+                    </div>
                   <% else %>
-                    <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: true) do %>
-                      <span class="glyphicon glyphicon-remove"></span><br>
-                    <% end %>
+                    <div id="slot<%= b.id %>">
+                      <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: true), :remote => true do %>
+                        <span class="glyphicon glyphicon-remove"></span><br>
+                      <% end %>
+                    </div>  
                   <% end %>                    
                 <% end %>
               </td>              

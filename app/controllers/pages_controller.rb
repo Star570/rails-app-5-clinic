@@ -39,12 +39,17 @@ class PagesController < ApplicationController
   end 
 
   def modify_bookable
+    @booking_slot = BookingSlot.find(params[:booking_slot].to_i)
     if params[:bookable] == "false"
-      BookingSlot.find(params[:booking_slot].to_i).update(bookable: false)
+      @booking_slot.update(bookable: false)
     else
-      BookingSlot.find(params[:booking_slot].to_i).update(bookable: true)
+      @booking_slot.update(bookable: true)
     end
-    redirect_back_or_to root_path
+    respond_to do |format|
+        format.js
+    end
+
+    #redirect_back_or_to root_path
   end
 
   def create_user
