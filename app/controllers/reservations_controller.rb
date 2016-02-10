@@ -27,7 +27,10 @@ class ReservationsController < ApplicationController
 
     if find_booking_slot.is_booked
       flash[:alert] = "此名額剛已被預約, 請重選"
-      redirect_to reservations_path            
+      redirect_to reservations_path   
+    elsif !find_booking_slot.bookable
+      flash[:alert] = "此名額已被保留, 請重選"
+      redirect_to reservations_path                   
     else
       if !book_less_than_three_day
         @reservation = Reservation.create(reservation_params)

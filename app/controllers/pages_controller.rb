@@ -46,7 +46,7 @@ class PagesController < ApplicationController
       @booking_slot.update(bookable: true)
     end
     respond_to do |format|
-        format.js
+      format.js
     end
 
     #redirect_back_or_to root_path
