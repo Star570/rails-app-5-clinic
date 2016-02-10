@@ -15,15 +15,11 @@
   <tbody>
     <% member.each do |u| %>
       <tr>
-        <% if current_user == u %>
-          <td style="vertical-align: middle;"></td>                        
-        <% else %>
-          <td style="vertical-align: middle;">
-            <%= link_to backstage_user_show_path(user_id: u.id) do %>
-              <span class="glyphicon glyphicon-search", style="top: 3px"></span>
-            <% end %>
-          </td> 
-        <% end %>                          
+        <td style="vertical-align: middle;">
+          <%= link_to backstage_user_show_path(user_id: u.id) do %>
+            <span class="glyphicon glyphicon-search", style="top: 3px"></span>
+          <% end %>
+        </td>                          
         <td style="vertical-align: middle;"><%= u.name %></td>
         <td style="vertical-align: middle;"><%= u.email %></td>              
         <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>     
