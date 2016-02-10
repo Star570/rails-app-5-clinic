@@ -30,15 +30,7 @@
               <li class="divider"></li>        
               <li><%= link_to "發表專欄", new_post_path %></li>          
               <li class="divider"></li>                
-              <li><%= link_to "預約列表", backstage_reservation_list_path(date: Date.today) %></li>              
-              <li class="divider"></li>                
-              <li><%= link_to "預約月曆", backstage_reservation_all_path %></li>              
-              <li class="divider"></li>                                           
-              <li><%= link_to "會員總覽", backstage_user_all_path %></li>
-              <li class="divider"></li>                
-              <li><%= link_to "代客預約", backstage_search_user_path %></li>                         
-              <li class="divider"></li>                
-              <li><%= link_to "新增會員", backstage_add_user_path %></li>   
+              <li><%= link_to "後台管理", backstage_reservation_list_path(date: Date.today) %></li>              
               <li class="divider"></li>                     
               <li><%= link_to "登出", logout_path %></li>               
             </ul>
