@@ -2,17 +2,17 @@
   <div class="service-sidebar">
     <%= render partial: "backstage_sidebar" %>
   </div>        
-  <div class="service-content">
+  <div class="service-display">
     <h3>預約總覽</h3>
     <br>
     <div role="tabpanel">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="active">
-          <a href="#booked" data-toggle="tab">待診人數</a>
+          <a href="#booked" data-toggle="tab"><h4>待診人數</h4></a>
         </li>
         <li>
-          <a href="#bookable" aria-controls="tab" role="tab" data-toggle="tab">保留名額</a>
+          <a href="#bookable" aria-controls="tab" role="tab" data-toggle="tab"><h4>保留名額</h4></a>
         </li>
       </ul>
 
@@ -29,20 +29,20 @@
               <% evenning_booked_count = booking_slots.evenning.where(is_booked: true).count %>                            
       
               <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_booked_count %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_booked_count %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_booked_count %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_booked_count %><br>
               <% end %>               
               <br>
            
             <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
             <% end %>
           <% end %>          
         </div>
@@ -55,22 +55,22 @@
               <% morning_not_bookable_and_not_booked_count = booking_slots.morning.where("bookable = ? and is_booked = ?", false, false).count %>
               <% afternoon_not_bookable_and_not_booked_count = booking_slots.afternoon.where("bookable = ? and is_booked = ?", false, false).count %>
               <% evenning_not_bookable_and_not_booked_count = booking_slots.evenning.where("bookable = ? and is_booked = ?", false, false).count %>   
-                   
+
               <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_not_bookable_and_not_booked_count %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_not_bookable_and_not_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_not_bookable_and_not_booked_count %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_not_bookable_and_not_booked_count %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_not_bookable_and_not_booked_count %>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_not_bookable_and_not_booked_count %><br>
               <% end %>               
               <br>
            
             <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
             <% end %>
           <% end %>            
 
