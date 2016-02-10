@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       if find_user.update(user_params)
         find_user.generate_pin   
         find_user.send_pin  
-        flash[:notice] = "提示：已經發送認證碼至您的電子郵箱"
+        flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{find_user.pin}"
         redirect_to enter_pin_user_path(find_user)    
       else
         render :new
@@ -36,6 +36,7 @@ class UsersController < ApplicationController
       if @user.save
         @user.generate_pin   
         @user.send_pin  
+        flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{@user.pin}"        
         redirect_to enter_pin_user_path(@user)    
       else
         render :new
