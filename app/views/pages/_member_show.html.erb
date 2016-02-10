@@ -30,7 +30,7 @@
         <td style="vertical-align: middle;"><%= num_of_reservation(u) %></td>
         <td style="vertical-align: middle;"><%= num_to_be_served(u) %></td>
         <td style="vertical-align: middle;"><%= show_datetime(u.created_at) %></td>  
-        <% if current_user == u %>
+        <% if u.admin %>
           <td style="vertical-align: middle;"></td>                        
           <td style="vertical-align: middle;"></td>
         <% else %>              
