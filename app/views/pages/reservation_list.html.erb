@@ -12,18 +12,18 @@
             <h4>
               <% if @booking_dates_pre.count > 0 %>
                 <%= link_to backstage_reservation_list_path(date: @date-7) do %>
-                  <span class="glyphicon glyphicon-chevron-left" style="top: 3px"></span>    
+                  <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>    
                 <% end %>          
               <% else %>      
-                <span class="glyphicon glyphicon-chevron-left" style="top: 3px"></span>                  
+                <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>                  
               <% end %>
 
               <% if @booking_dates_nxt.count > 0 %>
                 <%= link_to backstage_reservation_list_path(date: @date+7) do %>
-                    <span class="glyphicon glyphicon-chevron-right" style="top: 3px"></span>    
+                    <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>    
                 <% end %>                
               <% else %>
-                <span class="glyphicon glyphicon-chevron-right" style="top: 3px"></span>    
+                <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>    
               <% end %>
             </h4>                
           </th>
