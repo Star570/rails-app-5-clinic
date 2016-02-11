@@ -52,4 +52,6 @@
     <% end %>
   </tbody>
 </table>
-<h4><%= paginate member %></h4>
+<% if member.any? && member.first.verified && !member.first.admin  %>
+  <h4><%= paginate member %></h4>
+<% end %>
