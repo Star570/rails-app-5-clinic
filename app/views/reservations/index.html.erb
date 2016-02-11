@@ -30,13 +30,13 @@
     <% @calendar_user = current_user %>
     <%= month_calendar do |date| %>
       <%= date.strftime("%d") %>              <br>
-      <% booking_slots = @booking_slots.where("booking_date = ? and bookable = ? and is_booked = ?", date, true, false) %>
+      <% booking_slots = @booking_slots.select{|b| b.booking_date == date and b.bookable == true and b.is_booked == false } %>
       <% if date < Date.today %>
         &nbsp&nbsp&nbsp&nbsp&nbspN/A
       <% elsif booking_slots.count > 0 %>
-        <% morning_count = booking_slots.morning.count %>
-        <% afternoon_count = booking_slots.afternoon.count %>
-        <% evenning_count = booking_slots.evenning.count %>                            
+        <% morning_count = booking_slots.select{|b| b.time_slot < 24}.count %>
+        <% afternoon_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36}.count %>
+        <% evenning_count = booking_slots.select{|b| b.time_slot >= 36}.count %>                            
 
         <% if morning_count > 0 %>
           <%= link_to new_reservation_path(:date => date, :slot => "上午") do %>
