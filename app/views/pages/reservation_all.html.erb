@@ -24,21 +24,18 @@
             <%= date.strftime("%d") %> <br>
             <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
 
-            <% if booking_slots.count > 0 %>
-              <% morning_booked_count = booking_slots.select{|b| b.time_slot < 24 and b.is_booked == true}.count %>
-              <% afternoon_booked_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36 and b.is_booked == true}.count %>
-              <% evenning_booked_count = booking_slots.select{|b| b.time_slot >= 36 and b.is_booked == true}.count %>                            
-      
+            <% if @booking_slots_hash[date] != nil %>                    
+
               <%= link_to backstage_reservation_week_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= @booking_slots_hash[date][0] %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_week_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= @booking_slots_hash[date][1] %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_week_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= @booking_slots_hash[date][2] %><br>
               <% end %>               
               <br>
            
@@ -53,21 +50,18 @@
             <%= date.strftime("%d") %> <br>
             <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
 
-            <% if booking_slots.count > 0 %>                 
-              <% morning_not_bookable_and_not_booked_count = booking_slots.select{|b| b.time_slot < 24 and b.bookable == false and b.is_booked == false}.count %>
-              <% afternoon_not_bookable_and_not_booked_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36 and b.bookable == false and b.is_booked == false}.count %>
-              <% evenning_not_bookable_and_not_booked_count = booking_slots.select{|b| b.time_slot >= 36 and b.bookable == false and b.is_booked == false}.count %>   
-
+            <% if @booking_slots_hash[date] != nil %>                 
+   
               <%= link_to backstage_reservation_week_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_not_bookable_and_not_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= @booking_slots_hash[date][3] %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_week_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= afternoon_not_bookable_and_not_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= @booking_slots_hash[date][4] %><br>
               <% end %>       
 
               <%= link_to backstage_reservation_week_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= evenning_not_bookable_and_not_booked_count %><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= @booking_slots_hash[date][5] %><br>
               <% end %>               
               <br>
            

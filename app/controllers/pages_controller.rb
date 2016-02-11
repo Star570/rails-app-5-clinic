@@ -5,12 +5,34 @@ class PagesController < ApplicationController
     if params[:start_date] == nil
       @booking_slots = BookingSlot.where("booking_date >= ? and booking_date <= ?", 
                                          Date.today.beginning_of_month.beginning_of_week, 
-                                         Date.today.end_of_month.end_of_week)            
+                                         Date.today.end_of_month.end_of_week)                                                 
     else
       @booking_slots = BookingSlot.where("booking_date >= ? and booking_date <= ?", 
                                          Date.parse(params[:start_date]).beginning_of_month.beginning_of_week, 
                                          Date.parse(params[:start_date]).end_of_month.end_of_week)              
     end
+
+    @booking_slots_hash = Hash.new
+    @booking_slots.each do |b|
+      if @booking_slots_hash[b.booking_date] == nil
+        @booking_slots_hash[b.booking_date] = [0,0,0,0,0,0] #is_booked 早中晚 + bookable & !is_booked早中晚          
+      end
+
+      if b.time_slot < 24 && b.is_booked == true
+        @booking_slots_hash[b.booking_date][0] += 1
+      elsif b.time_slot >= 24 and b.time_slot < 36 and b.is_booked == true
+        @booking_slots_hash[b.booking_date][1] += 1
+      elsif b.time_slot >= 36 and b.is_booked == true
+        @booking_slots_hash[b.booking_date][2] += 1
+      elsif b.time_slot < 24 and b.bookable == false and b.is_booked == false
+        @booking_slots_hash[b.booking_date][3] += 1
+      elsif b.time_slot >= 24 and b.time_slot < 36 and b.bookable == false and b.is_booked == false
+        @booking_slots_hash[b.booking_date][4] += 1
+      elsif b.time_slot >= 36 and b.bookable == false and b.is_booked == false
+        @booking_slots_hash[b.booking_date][5] += 1
+      end                              
+    end
+
   end
 
   def reservation_list    
