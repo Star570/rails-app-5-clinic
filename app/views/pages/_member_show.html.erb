@@ -3,11 +3,16 @@
     <tr>
       <th width="5%"></th>            
       <th width="8%">名稱</th>
-      <th width="18%">電郵</th>          
-      <th width="15%">手機</th>       
-      <th width="8%">總預約</th>
-      <th width="8%">待診療</th>          
-      <th width="20%">會員建立</th>    
+      <th width="17%">電郵</th>          
+      <th width="13%">手機</th>       
+      <th width="7%">總預約</th>
+      <th width="7%">待診療</th>  
+      <% if member.any? && member.first.admin %>
+        <th width="7%">回覆數</th>
+      <% else %>
+        <th width="7%">留言數</th>
+      <% end %>            
+      <th width="18%">會員建立</th>    
       <th width="13%">幫預約</th>                                         
       <th width="5%"></th>    
     </tr>
@@ -25,6 +30,12 @@
         <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>     
         <td style="vertical-align: middle;"><%= num_of_reservation(u) %></td>
         <td style="vertical-align: middle;"><%= num_to_be_served(u) %></td>
+        <% if u.admin %>
+          <td style="vertical-align: middle;"><%= u.comments.count %></td>
+        <% else %>
+          <td style="vertical-align: middle;"><%= u.messages.count %></td>
+        <% end %>  
+
         <td style="vertical-align: middle;"><%= show_datetime(u.created_at) %></td>  
         <% if u.admin %>
           <td style="vertical-align: middle;"></td>                        
