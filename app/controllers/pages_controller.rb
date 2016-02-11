@@ -2,7 +2,6 @@ class PagesController < ApplicationController
   before_action :require_admin
 
   def reservation_all
-
     if params[:start_date] == nil
       @booking_slots = BookingSlot.where("booking_date >= ? and booking_date <= ?", 
                                          Date.today.beginning_of_month.beginning_of_week, 
@@ -15,8 +14,8 @@ class PagesController < ApplicationController
   end
 
   def reservation_list    
-    @reservations = Reservation.all.unscoped.joins(:booking_slot).order('booking_date DESC, time_slot ASC')
-    @reservations_by_created_at = Reservation.all.unscoped.joins(:booking_slot).order('created_at DESC')    
+    @reservations_by_created_at_count = Reservation.count
+    @reservations_by_created_at = Reservation.unscoped.joins(:booking_slot).order('created_at DESC').page(params[:page]).per(10)     
   end
 
   def reservation_week

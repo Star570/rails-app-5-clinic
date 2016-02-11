@@ -3,12 +3,12 @@ class CategoriesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   
   def index
-    @posts = Post.all.order("created_at DESC")
-    @categories = Category.all.order("created_at ASC")
+    @posts = Post.page(params[:page]).per(10)     
+    @categories = Category.all
   end
 
   def show
-    @posts = Post.all.order("created_at DESC")
+    @posts = Post.all
     @categories = Category.all
   end
 

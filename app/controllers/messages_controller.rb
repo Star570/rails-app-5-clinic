@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_action :require_user, except: [:index, :show]
 
   def index 
-    @messages = Message.all.order("created_at DESC")    
+    @messages = Message.page(params[:page]).per(8)
     @message = Message.new      
   end
 
@@ -18,8 +18,8 @@ class MessagesController < ApplicationController
       flash[:notice] = "您的留言已新增"
       redirect_to messages_path
     else 
-      @messages = Message.all.order("created_at DESC")    
-      render 'message_sidebar'
+      flash[:alert] = "發生錯誤, 請重新留言(標題/內容不可留白)"
+      redirect_to messages_path
     end
   end
 

@@ -4,8 +4,7 @@ class AnnouncementsController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index
-
-    @announcements = Announcement.all.order("created_at DESC")        
+    @announcements = Announcement.page(params[:page]).per(10)     
   end
   
   def show
