@@ -1,3 +1,19 @@
+<script>
+  var url = document.location.toString();
+  if (url.match('#reservation_later')) {
+  
+    $(document).ready(function(){
+      activaTab('reservation_later');        
+      $("html, body").animate({ scrollTop: 110 });; 
+
+    });
+    function activaTab(tab){
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+    };
+  }   
+
+</script>
+
 <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
