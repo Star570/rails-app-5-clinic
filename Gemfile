@@ -22,6 +22,7 @@ gem 'ransack', '1.6.6'
 gem 'redcarpet', '~> 3.2.2'
 gem 'puma'
 gem "kaminari"
+gem 'jquery-turbolinks' #check this article to make table sortable http://goo.gl/xlxiE2
 # gem 'twilio-ruby', '~> 4.1.0'
 
 group :development do
