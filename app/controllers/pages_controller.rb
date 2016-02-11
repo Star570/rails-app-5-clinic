@@ -2,7 +2,16 @@ class PagesController < ApplicationController
   before_action :require_admin
 
   def reservation_all
-    @booking_slots = BookingSlot.all      
+
+    if params[:start_date] == nil
+      @booking_slots = BookingSlot.where("booking_date >= ? and booking_date <= ?", 
+                                         Date.today.beginning_of_month.beginning_of_week, 
+                                         Date.today.end_of_month.end_of_week)            
+    else
+      @booking_slots = BookingSlot.where("booking_date >= ? and booking_date <= ?", 
+                                         Date.parse(params[:start_date]).beginning_of_month.beginning_of_week, 
+                                         Date.parse(params[:start_date]).end_of_month.end_of_week)              
+    end
   end
 
   def reservation_list    
