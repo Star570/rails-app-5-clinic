@@ -33,7 +33,15 @@ class PagesController < ApplicationController
   end
 
   def user_all
-    @users = User.all.order("admin DESC, created_at DESC")
+    @total_user_count = User.count
+    @verified_member_count = User.where("verified == ? and admin == ?", true, false).count
+    @not_verified_member_count = User.where("verified == ? and admin == ?", false, false).count
+    @admin_member_count = User.where("admin == ?", true).count       
+
+    @verified_member = User.where("verified == ? and admin == ?", true, false).page(params[:page]).per(10)    
+    @not_verified_member = User.where("verified == ? and admin == ?", false, false).page(params[:page]).per(10)     
+    @admin_member = User.where("admin == ?", true).page(params[:page]).per(10)      
+
   end
 
   def user_show

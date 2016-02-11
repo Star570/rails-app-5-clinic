@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :be_admin
+  default_scope {order('admin DESC, created_at DESC')}
 
   has_many :posts, dependent: :destroy
   has_many :announcements, dependent: :destroy  
