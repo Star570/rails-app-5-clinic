@@ -12,8 +12,11 @@
           <a href="#booked" data-toggle="tab"><h4>待診人數</h4></a>
         </li>
         <li>
-          <a href="#bookable" aria-controls="tab" role="tab" data-toggle="tab"><h4>保留名額</h4></a>
+          <a href="#bookable" data-toggle="tab"><h4>保留名額</h4></a>
         </li>
+        <li>
+          <a href="#reservation" data-toggle="tab"><h4>總覽(<%= @reservations.count %>)</h4></a>
+        </li>        
       </ul>
 
       <!-- Tab panes -->
@@ -73,8 +76,48 @@
               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
             <% end %>
           <% end %>            
-
         </div>
+          <div class="tab-pane" id="reservation">
+            <div class="container-fluid">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th width="5%"> </th>                    
+                    <th width="13%" >姓名</th>
+                    <th width="18%" >預約時間</th>
+                    <th width="15%" >預約時段</th>
+                    <th width="45%" >系統建立時間</th>       
+                    <th width="5%"></th>                        
+                  </tr>
+                </thead>
+                <tbody>
+                  <% last_date = nil %>
+                  <% @reservations.each do |r| %>
+                  <% if r.booking_slot.booking_date != last_date %>
+                    <% last_date = r.booking_slot.booking_date %>
+                    <tr style="background-color: #AAA"><td></td><td></td><td></td><td></td><td></td></tr>
+                  <% end %>
+                  <tr>
+                    <td>
+                      <%= link_to backstage_user_show_path(user_id: r.user.id) do %>
+                        <span class="glyphicon glyphicon-search", style="top: 3px"></span>
+                      <% end %>
+                    </td>                      
+                    <td><%= r.user.name %></td>
+                    <td><%= r.booking_slot.booking_date %></td>
+                    <td><%= show_time_slot(r.booking_slot.time_slot) %></td>
+                    <td><%= show_datetime(r.created_at) %></td>
+                    <td>
+                      <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
+                        <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+                      <% end %>
+                    </td>                              
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>                  
+          </div>         
       </div>
     </div>
 
