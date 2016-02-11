@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def reservation_all
     @booking_slots = BookingSlot.all      
     @reservations = Reservation.all.unscoped.joins(:booking_slot).order('booking_date DESC, time_slot ASC')
+    @reservations_by_created_at = Reservation.all.unscoped.joins(:booking_slot).order('created_at DESC')    
   end
 
   def reservation_list
@@ -22,7 +23,6 @@ class PagesController < ApplicationController
 
   def user_all
     @users = User.all.order("admin DESC, created_at DESC")
-    @reservations = Reservation.all.unscoped.joins(:booking_slot).order('created_at DESC')
   end
 
   def user_show
