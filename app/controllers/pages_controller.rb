@@ -3,11 +3,14 @@ class PagesController < ApplicationController
 
   def reservation_all
     @booking_slots = BookingSlot.all      
+  end
+
+  def reservation_list    
     @reservations = Reservation.all.unscoped.joins(:booking_slot).order('booking_date DESC, time_slot ASC')
     @reservations_by_created_at = Reservation.all.unscoped.joins(:booking_slot).order('created_at DESC')    
   end
 
-  def reservation_list
+  def reservation_week
     @dayOfWeek  = [ "日", "一", "二", "三", "四", "五", "六" ]
     @date = Date.parse(params[:date])
     @booking_slots = BookingSlot.where("booking_date >=? and booking_date < ?", @date-2, @date+5)
@@ -18,7 +21,6 @@ class PagesController < ApplicationController
 
     @booking_slots_nxt = BookingSlot.where("booking_date >=? and booking_date < ?", @date+5, @date+12)
     @booking_dates_nxt = @booking_slots_nxt.map(&:booking_date).uniq    
-
   end
 
   def user_all
@@ -44,7 +46,7 @@ class PagesController < ApplicationController
     @booking_slot = BookingSlot.find(params[:booking_slot].to_i)   
     if (params[:bookable] == "false") && (@booking_slot.is_booked)
       flash[:alert] = "此時段剛被註冊"    
-      redirect_back_or_to backstage_reservation_list_path(date: Date.today) 
+      redirect_back_or_to backstage_reservation_week_path(date: Date.today) 
     else
       if params[:bookable] == "false"
         @booking_slot.update(bookable: false)

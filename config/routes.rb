@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   get  'backstage/reservation_all',  to: 'pages#reservation_all'
   get  'backstage/reservation_list', to: 'pages#reservation_list'  
+  get  'backstage/reservation_week', to: 'pages#reservation_week'  
   get  'backstage/user_all',         to: 'pages#user_all'  
   get  'backstage/user_show',        to: 'pages#user_show'    
   get  'backstage/add_user',         to: 'pages#add_user'  
