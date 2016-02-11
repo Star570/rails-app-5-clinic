@@ -25,12 +25,12 @@
           <% @calendar_user = nil %>
           <%= month_calendar do |date| %>
             <%= date.strftime("%d") %> <br>
-            <% booking_slots = @booking_slots.where("booking_date = ?", date) %>
+            <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
 
             <% if booking_slots.count > 0 %>
-              <% morning_booked_count = booking_slots.morning.where(is_booked: true).count %>
-              <% afternoon_booked_count = booking_slots.afternoon.where(is_booked: true).count %>
-              <% evenning_booked_count = booking_slots.evenning.where(is_booked: true).count %>                            
+              <% morning_booked_count = booking_slots.select{|b| b.time_slot < 24 and b.is_booked == true}.count %>
+              <% afternoon_booked_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36 and b.is_booked == true}.count %>
+              <% evenning_booked_count = booking_slots.select{|b| b.time_slot >= 36 and b.is_booked == true}.count %>                            
       
               <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_booked_count %><br>
@@ -53,12 +53,12 @@
         <div class="tab-pane" id="bookable">
           <%= month_calendar do |date| %>
             <%= date.strftime("%d") %> <br>
-            <% booking_slots = @booking_slots.where("booking_date = ?", date) %>
+            <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
 
             <% if booking_slots.count > 0 %>                 
-              <% morning_not_bookable_and_not_booked_count = booking_slots.morning.where("bookable = ? and is_booked = ?", false, false).count %>
-              <% afternoon_not_bookable_and_not_booked_count = booking_slots.afternoon.where("bookable = ? and is_booked = ?", false, false).count %>
-              <% evenning_not_bookable_and_not_booked_count = booking_slots.evenning.where("bookable = ? and is_booked = ?", false, false).count %>   
+              <% morning_not_bookable_and_not_booked_count = booking_slots.select{|b| b.time_slot < 24 and b.bookable == false and b.is_booked == false}.count %>
+              <% afternoon_not_bookable_and_not_booked_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36 and b.bookable == false and b.is_booked == false}.count %>
+              <% evenning_not_bookable_and_not_booked_count = booking_slots.select{|b| b.time_slot >= 36 and b.bookable == false and b.is_booked == false}.count %>   
 
               <%= link_to backstage_reservation_list_path(date: date, anchor: "morning") do %>
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= morning_not_bookable_and_not_booked_count %><br>

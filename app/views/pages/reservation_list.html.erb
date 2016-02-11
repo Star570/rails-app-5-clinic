@@ -86,8 +86,8 @@
             <% else %>
               <% background = "" %>
             <% end %>            
-              <td style=<%= background %>>            
-                <% @booking_slots.where("booking_date = ? and time_slot = ?", date, time_slot).each do |b| %>
+              <td style=<%= background %>>     
+                <% @booking_slots.select{|b| (b.booking_date == date) and (b.time_slot == time_slot)}.each do |b| %>
                   <% if b.is_booked %>
                     <%= link_to b.reservations.first.user.name, backstage_user_show_path(user: b.reservations.first.user, anchor: "reservation_calender") %><br>
                   <% elsif b.bookable %>

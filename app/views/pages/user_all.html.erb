@@ -5,22 +5,25 @@
   <div class="service-display">
     <h3>會員總覽(<%= @users.count if @users %>)</h3>
     <br> 
+    <% verified_member = @users.select{|u| u.verified == true and u.admin == false} %>
+    <% not_verified_member = @users.select{|u| u.verified == false and u.admin == false} %>
+    <% admin_member = @users.select{|u| u.admin == true} %>
     <div role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
           <li class="active">
             <a href="#member" data-toggle="tab">
-              <h4>驗證會員(<%= @users.where(verified: true, admin: false).count %>)</h4>
+              <h4>驗證會員(<%= verified_member.count %>)</h4>
             </a>
           </li>
           <li>
             <a href="#not_verified" data-toggle="tab">
-              <h4>未驗證(<%= @users.where(verified: false, admin: false).count %>)</h4>
+              <h4>未驗證(<%= not_verified_member.count %>)</h4>
             </a>
           </li>
           <li>
             <a href="#admin" data-toggle="tab">
-              <h4>管理者(<%= @users.where(admin: true).count %>)</h4>
+              <h4>管理者(<%= admin_member.count %>)</h4>
             </a>
           </li>        
           <li>
@@ -33,13 +36,13 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane active" id="member">
-            <%= render partial: "member_show", locals: {member: @users.where(verified: true, admin: false)}  %>
+            <%= render partial: "member_show", locals: {member: verified_member}  %>
           </div>            
           <div class="tab-pane" id="not_verified">
-            <%= render partial: "member_show", locals: {member: @users.where(verified: false, admin: false)}  %>
+            <%= render partial: "member_show", locals: {member: not_verified_member}  %>
           </div>  
           <div class="tab-pane" id="admin">
-            <%= render partial: "member_show", locals: {member: @users.where(admin: true)}  %>
+            <%= render partial: "member_show", locals: {member: admin_member}  %>
           </div>
           <div class="tab-pane" id="reservation">
             <div class="container-fluid">
