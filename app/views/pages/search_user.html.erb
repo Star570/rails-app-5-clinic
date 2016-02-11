@@ -30,7 +30,7 @@
               <% @users.each do |u| %>
                 <tr>       
                   <td style="vertical-align: middle;">
-                    <%= link_to backstage_user_show_path(user_id: u.id) do %>
+                    <%= link_to backstage_user_show_path(user: u) do %>
                       <span class="glyphicon glyphicon-search", style="top: 3px"></span>
                     <% end %>
                   </td>            

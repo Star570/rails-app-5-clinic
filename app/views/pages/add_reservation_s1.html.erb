@@ -27,6 +27,7 @@
     </div>
 
     <br>
+    <% @calendar_user = @user %>
     <%= month_calendar do |date| %>
       <%= date.strftime("%d") %>              <br>
       <% booking_slots = @booking_slots.where("booking_date = ? and is_booked = ?", date, false) %>

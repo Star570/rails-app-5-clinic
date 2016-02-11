@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
 
         if @reservation.save
           find_booking_slot.update(is_booked: true)
-          @reservation.send_add_reservation_mail(current_user)
+          @reservation.send_add_reservation_mail(@reservation.user)
           flash[:notice] = "已新增預約"
           redirect_to finish_reservations_path(:date => find_booking_slot.booking_date, :slot => find_booking_slot.time_slot)
         else 
@@ -55,7 +55,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id]) 
     find_booking_slot = @reservation.booking_slot
-    @reservation.send_cancel_reservation_mail(current_user)    
+    @reservation.send_cancel_reservation_mail(@reservation.user)    
     @reservation.destroy
     find_booking_slot.update(is_booked: false) 
     flash[:notice] = "已刪除預約"

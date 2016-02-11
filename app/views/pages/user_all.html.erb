@@ -58,7 +58,7 @@
                   <% @reservations.each do |r| %>
                   <tr>
                     <td>
-                      <%= link_to backstage_user_show_path(user_id: r.user.id) do %>
+                      <%= link_to backstage_user_show_path(user: r.user) do %>
                         <span class="glyphicon glyphicon-search", style="top: 3px"></span>
                       <% end %>
                     </td>                      

@@ -89,7 +89,7 @@
               <td style=<%= background %>>            
                 <% @booking_slots.where("booking_date = ? and time_slot = ?", date, time_slot).each do |b| %>
                   <% if b.is_booked %>
-                    <%= link_to b.reservations.first.user.name, backstage_user_show_path(user_id: b.reservations.first.user.id, anchor: "reservation_later") %><br>
+                    <%= link_to b.reservations.first.user.name, backstage_user_show_path(user: b.reservations.first.user, anchor: "reservation_calender") %><br>
                   <% elsif b.bookable %>
                     <div id="slot<%= b.id %>">
                       <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: false), :remote => true do %>

@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       flash[:notice] = "您已修改會員資料"    
       if (logged_in_as_admin? && current_user.id.to_s != params[:id])
-        redirect_to backstage_user_show_path(user_id: params[:id])        
+        redirect_to backstage_user_show_path(user: @user)        
       else
         redirect_to user_path(current_user)
       end

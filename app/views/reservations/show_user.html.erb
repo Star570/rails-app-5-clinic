@@ -1,3 +1,19 @@
+<script>
+  var url = document.location.toString();
+  if (url.match('#reservation_calender')) {
+  
+    $(document).ready(function(){
+      activaTab('reservation_calender');        
+      $("html, body").animate({ scrollTop: 160 });; 
+
+    });
+    function activaTab(tab){
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+    };
+  }   
+
+</script>
+
 <div class="services">
   <div class="service-sidebar">
     <%= render partial: "reservation_sidebar" %>
@@ -7,18 +23,34 @@
     <div role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
+          <li class="active">
+            <a href="#reservation_calender" data-toggle="tab"><h4>預約月曆</h4></a>
+          </li>              
           <li>
             <a href="#reservation_later" data-toggle="tab"><h4>待診療</h4></a>
           </li>        
           <li>
-             <a href="#reservation_all" data-toggle="tab"><h4>預約記錄</h4></a>
+             <a href="#reservation_all" data-toggle="tab"><h4>歷史預約</h4></a>
           </li>       
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="reservation_calender">
+            <% @calendar_user = current_user %>
+            <%= month_calendar do |date| %>
+              <%= date.strftime("%d") %>              <br>
+              <% find_reservations = current_user.reservations.joins(:booking_slot).where("booking_date = ?", date) %>
+              <% if find_reservations.any? %> 
+                <% find_reservations.each do |r| %>
+                  &nbsp&nbsp&nbsp預約
+                  <%= show_time_slot(r.booking_slot.time_slot) %><br>
+                <% end %>
+              <% end %>
+            <% end %>                
+          </div>   
 
-          <div role="tabpanel" class="tab-pane active" id="reservation_later">
+          <div role="tabpanel" class="tab-pane" id="reservation_later">
             <div class="container-fluid">
               <table class="table table-hover">
                 <thead>

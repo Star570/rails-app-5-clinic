@@ -32,7 +32,7 @@
         您已幫[<%= @user.name %>]預約成功&nbsp&nbsp<%= params[:date] %> <%= show_time_slot(params[:slot].to_i) %>
     </h4>   
     <br>
-    <%= link_to "前往查看預約記錄!", backstage_user_show_path(user_id: @user.id), class: "btn btn-primary" %>    
+    <%= link_to "前往查看預約記錄!", backstage_user_show_path(user: @user), class: "btn btn-primary" %>    
       
   </div>
   <div class="clear"> </div>

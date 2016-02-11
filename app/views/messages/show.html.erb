@@ -28,7 +28,7 @@
             <td>匿名</td>
           <% else %>
             <% if logged_in_as_admin? %>
-              <td><%= link_to @message.user.name, backstage_user_show_path(user_id: @message.user.id) %></td>
+              <td><%= link_to @message.user.name, backstage_user_show_path(user: @message.user) %></td>
             <% else %>
               <td><%= @message.user.name %></td>
             <% end %>  

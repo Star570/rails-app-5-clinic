@@ -23,7 +23,7 @@
                 匿名
               <% else %>
                 <% if logged_in_as_admin? %>
-                  <%= link_to m.user.name, backstage_user_show_path(user_id: m.user.id) %>
+                  <%= link_to m.user.name, backstage_user_show_path(user: m.user) %>
                 <% else %>
                   <%= m.user.name %>
                 <% end %>                
