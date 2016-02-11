@@ -35,13 +35,13 @@ class PagesController < ApplicationController
   def user_all
     @total_user_count = User.count
 
-    @admin_member = User.where("admin == ?", true).page(params[:page]).per(10)      
-    @verified_member = User.where("verified == ? and admin == ?", true, false).page(params[:page]).per(10)     
-    @not_verified_member = User.where("verified == ? and admin == ?", false, false).page(params[:page]).per(10)     
+    @admin_member = User.where("admin = ?", true).page(params[:page]).per(10)      
+    @verified_member = User.where("verified = ? and admin = ?", true, false).page(params[:page]).per(10)     
+    @not_verified_member = User.where("verified = ? and admin = ?", false, false).page(params[:page]).per(10)     
 
-    @admin_member_count = User.where("admin == ?", true).count        
-    @verified_member_count = User.where("verified == ? and admin == ?", true, false).count
-    @not_verified_member_count = User.where("verified == ? and admin == ?", false, false).count  
+    @admin_member_count = User.where("admin = ?", true).count        
+    @verified_member_count = User.where("verified = ? and admin = ?", true, false).count
+    @not_verified_member_count = User.where("verified = ? and admin = ?", false, false).count  
 
   end
 
