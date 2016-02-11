@@ -27,7 +27,7 @@
               <% end %>
             </h4>                
           </th>
-          <% if @booking_dates.count < 7 && @date < Date.today %>
+          <% if @booking_dates.count < 7 && @date <= Date.today %>
             <% (7-@booking_dates.count).times do %>
               <th></th>
             <% end %>
@@ -75,7 +75,7 @@
           <% end %>          
           <tr>         
             <td style="vertical-align: middle;"><%= show_time_slot(time_slot) %></td>
-            <% if @booking_dates.count < 7 && @date < Date.today %>
+            <% if @booking_dates.count < 7 && @date <= Date.today %>
               <% (7-@booking_dates.count).times do %>
                 <td></td>
               <% end %>
