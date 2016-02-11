@@ -10,7 +10,7 @@
         <tr>
           <th width="10%" style="vertical-align: middle;">
             <h4>
-              <% if @booking_dates_pre.count > 0 %>
+              <% if @booking_dates_pre_count > 0 %>
                 <%= link_to backstage_reservation_week_path(date: @date-7) do %>
                   <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>    
                 <% end %>          
@@ -18,7 +18,7 @@
                 <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>                  
               <% end %>
 
-              <% if @booking_dates_nxt.count > 0 %>
+              <% if @booking_dates_nxt_count > 0 %>
                 <%= link_to backstage_reservation_week_path(date: @date+7) do %>
                     <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>    
                 <% end %>                
@@ -87,22 +87,22 @@
               <% background = "" %>
             <% end %>            
               <td style=<%= background %>>     
-                <% @booking_slots.select{|b| (b.booking_date == date) and (b.time_slot == time_slot)}.each do |b| %>
-                  <% if b.is_booked %>
-                    <%= link_to b.reservations.first.user.name, backstage_user_show_path(user: b.reservations.first.user, anchor: "reservation_calender") %><br>
-                  <% elsif b.bookable %>
-                    <div id="slot<%= b.id %>">
-                      <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: false), :remote => true do %>
+                <% @booking_slots_hash[date][time_slot].each do |b| %>
+                  <% if b[0] == 1 %>
+                    <div id="slot<%= b[1].id %>">
+                      <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: false), :remote => true do %>
                         <span class="glyphicon glyphicon-ok"></span><br>
                       <% end %>
                     </div>
-                  <% else %>
-                    <div id="slot<%= b.id %>">
-                      <%= link_to backstage_modify_bookable_path(booking_slot:b, bookable: true), :remote => true do %>
+                  <% elsif b[0] == 0 %>                    
+                    <div id="slot<%= b[1].id %>">
+                      <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: true), :remote => true do %>
                         <span class="glyphicon glyphicon-remove"></span><br>
                       <% end %>
                     </div>  
-                  <% end %>                    
+                  <% else %>
+                    <%= link_to b.name, backstage_user_show_path(user: b, anchor: "reservation_calender") %><br>
+                  <% end %>                  
                 <% end %>
               </td>              
             <% end %>
