@@ -21,56 +21,56 @@
         <div class="tab-pane active" id="booked">
           <% @calendar_user = nil %>
           <%= month_calendar do |date| %>
-            <%= date.strftime("%d") %> <br>
+            <%= date.strftime("%d") %><br>
             <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
+            <div style="text-align: center;">              
+              <% if @booking_slots_hash[date] != nil %>                    
 
-            <% if @booking_slots_hash[date] != nil %>                    
+                <%= link_to backstage_reservation_week_path(date: date, anchor: "morning") do %>
+                  上午 <%= "0" if @booking_slots_hash[date][0] < 10 %><%= @booking_slots_hash[date][0] %><br>
+                <% end %>       
 
-              <%= link_to backstage_reservation_week_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= @booking_slots_hash[date][0] %><br>
-              <% end %>       
+                <%= link_to backstage_reservation_week_path(date: date, anchor: "afternoon") do %>
+                  下午 <%= "0" if @booking_slots_hash[date][1] < 10 %><%= @booking_slots_hash[date][1] %><br>
+                <% end %>       
 
-              <%= link_to backstage_reservation_week_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= @booking_slots_hash[date][1] %><br>
-              <% end %>       
-
-              <%= link_to backstage_reservation_week_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= @booking_slots_hash[date][2] %><br>
-              <% end %>               
-              <br>
-           
-            <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
-            <% end %>
-          <% end %>          
-        </div>
-
+                <%= link_to backstage_reservation_week_path(date: date, anchor: "evening") do %>
+                  晚上 <%= "0" if @booking_slots_hash[date][2] < 10 %><%= @booking_slots_hash[date][2] %><br>
+                <% end %>               
+                <br>             
+              <% else %>
+                無名額<br>&nbsp<br>&nbsp
+              <% end %>
+            </div>  
+          <% end %>
+        </div>          
+        
         <div class="tab-pane" id="bookable">
           <%= month_calendar do |date| %>
-            <%= date.strftime("%d") %> <br>
+            <%= date.strftime("%d") %><br>
             <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
+            <div style="text-align: center;"> 
+              <% if @booking_slots_hash[date] != nil %>                 
+     
+                <%= link_to backstage_reservation_week_path(date: date, anchor: "morning") do %>
+                  上午 <%= "0" if @booking_slots_hash[date][3] < 10 %><%= @booking_slots_hash[date][3] %><br>
+                <% end %>       
 
-            <% if @booking_slots_hash[date] != nil %>                 
-   
-              <%= link_to backstage_reservation_week_path(date: date, anchor: "morning") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp上午 <%= @booking_slots_hash[date][3] %><br>
-              <% end %>       
+                <%= link_to backstage_reservation_week_path(date: date, anchor: "afternoon") do %>
+                  下午 <%= "0" if @booking_slots_hash[date][4] < 10 %><%= @booking_slots_hash[date][4] %><br>
+                <% end %>       
 
-              <%= link_to backstage_reservation_week_path(date: date, anchor: "afternoon") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp下午 <%= @booking_slots_hash[date][4] %><br>
-              <% end %>       
-
-              <%= link_to backstage_reservation_week_path(date: date, anchor: "evening") do %>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp晚上 <%= @booking_slots_hash[date][5] %><br>
-              <% end %>               
-              <br>
-           
-            <% else %>
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp無名額<br>&nbsp<br>&nbsp
-            <% end %>
+                <%= link_to backstage_reservation_week_path(date: date, anchor: "evening") do %>
+                  晚上 <%= "0" if @booking_slots_hash[date][5] < 10 %><%= @booking_slots_hash[date][5] %><br>
+                <% end %>               
+                <br>
+             
+              <% else %>
+                無名額<br>&nbsp<br>&nbsp
+              <% end %>
+            </div>  
           <% end %>            
         </div>
-
       </div>
     </div>
 
