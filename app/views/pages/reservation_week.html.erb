@@ -12,18 +12,22 @@
             <h4>
               <% if @booking_dates_pre_count > 0 %>
                 <%= link_to backstage_reservation_week_path(date: @date-7) do %>
-                  <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>    
+                  <!-- <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>  -->
+                  上週
                 <% end %>          
               <% else %>      
-                <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>                  
+                <!-- <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span> -->
+                上週
               <% end %>
 
               <% if @booking_dates_nxt_count > 0 %>
                 <%= link_to backstage_reservation_week_path(date: @date+7) do %>
-                    <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>    
+                    <!-- <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span> --> 
+                    下週
                 <% end %>                
               <% else %>
-                <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>    
+                <!-- <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>   -->  
+                下週
               <% end %>
             </h4>                
           </th>

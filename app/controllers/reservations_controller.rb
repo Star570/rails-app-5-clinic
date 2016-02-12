@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
-  before_action :require_user, except: [:index, :find, :destroy]
-  before_action :require_user_or_admin, only: [:destroy]  
-  before_action :require_admin, only: [:find]
+  before_action :require_user, except: [:edit, :update, :index, :destroy]
+  before_action :require_user_or_admin, only: [:edit, :update, :destroy]  
+  before_action :find_reservation, only: [:edit, :update, :destroy]  
 
   def index
     @booking_slots = BookingSlot.all    
@@ -46,14 +46,25 @@ class ReservationsController < ApplicationController
           render :new
         end          
       else 
-        flash[:alert] = "三天內不可重複預約, 若需預約兩位以上, 預約後請致電"
+        flash[:alert] = "三天內不可重複預約, 若需預約兩位以上, 請致電預約"
         redirect_to reservations_path      
       end
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @reservation.update(reservation_params)
+      flash[:notice] = "您已修改症狀描述"           
+      redirect_to show_user_reservations_path
+    else
+      render :edit
+    end    
+  end
+
   def destroy
-    @reservation = Reservation.find(params[:id]) 
     find_booking_slot = @reservation.booking_slot
     @reservation.send_cancel_reservation_mail(@reservation.user)    
     @reservation.destroy
@@ -71,7 +82,11 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:booking_slot_id)
+    params.require(:reservation).permit(:booking_slot_id, :desc)
   end
+
+  def find_reservation
+    @reservation = Reservation.find(params[:id]) 
+  end  
 
 end

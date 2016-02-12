@@ -44,7 +44,7 @@ class PagesController < ApplicationController
     @dayOfWeek  = [ "日", "一", "二", "三", "四", "五", "六" ]
     @date = Date.parse(params[:date])
 
-    @booking_slots_pre = BookingSlot.where("booking_date >=? and booking_date < ?", @date.beginning_of_week-7, @date.beginning_of_week-14)
+    @booking_slots_pre = BookingSlot.where("booking_date >=? and booking_date < ?", @date.beginning_of_week-7, @date.beginning_of_week-0)
     @booking_dates_pre_count = @booking_slots_pre.map(&:booking_date).uniq.count
 
     @booking_slots_nxt = BookingSlot.where("booking_date >=? and booking_date < ?", @date.beginning_of_week+7, @date.beginning_of_week+14)
@@ -120,25 +120,15 @@ class PagesController < ApplicationController
   end
 
   def create_user
-    find_user_by_email = User.find_by(email: user_params[:email]) unless user_params[:email] == "example@gmail.com"
-    find_user_by_phone = User.find_by(phone: user_params[:phone])    
-    if find_user_by_email
-      flash[:alert] = "此會員郵箱已經註冊過"     
-      redirect_back_or_to root_path
-    elsif find_user_by_phone
-      flash[:alert] = "此會員手機已經註冊過"     
-      redirect_back_or_to root_path     
+    @user = User.new(user_params)
+    @user.admin = false
+    if @user.save
+      flash[:notice] = "新增會員#{@user.name}成功."  
+      @user.generate_pin   
+      redirect_to backstage_user_all_path
     else
-      @user = User.new(user_params)
-      @user.admin = false
-      if @user.save
-        flash[:notice] = "新增會員#{@user.name}成功."  
-        @user.generate_pin   
-        redirect_to backstage_user_all_path
-      else
-        render :add_user
-      end
-    end     
+      render :add_user
+    end        
   end  
 
   def add_reservation_s1 #select date
@@ -195,6 +185,20 @@ class PagesController < ApplicationController
     @user = User.find(params[:user].to_i)
   end  
 
+  def edit_reservation_s2    
+    @reservation = Reservation.find(params[:r])
+  end
+
+  def edit_reservation
+    @reservation = Reservation.find(params[:r])
+    if @reservation.update(reservation_params)
+      flash[:notice] = "您已修改症狀描述"           
+      redirect_to backstage_reservation_list_path
+    else
+      render :edit
+    end        
+  end  
+
   private
 
   def user_params
@@ -202,6 +206,6 @@ class PagesController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:booking_slot_id)
+    params.require(:reservation).permit(:booking_slot_id, :desc)
   end  
 end

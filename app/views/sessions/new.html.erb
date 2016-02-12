@@ -5,13 +5,14 @@
 
     <%= form_tag login_path do |f| %> 
       <div class="form-group"> 
-        <%= label_tag(:email, "電子信箱") %> <br>
-        <%= text_field_tag :email, nil, class: "form-control" %> 
+        <%= label_tag(:email_or_phone, "電子信箱或手機") %> <br>
+        <%= text_field_tag :email_or_phone, nil, class: "form-control" %> 
       </div> 
       <div class="form-group"> 
         <%= label_tag(:password, "密碼") %> <br>
         <%= password_field_tag :password,  nil, class: "form-control" %> 
-      </div>           
+        &nbsp(提示：若忘記密碼請來電)
+      </div>        
       <br>
       <%= submit_tag "確認", class: "btn btn-primary" %> 
     <% end %>         

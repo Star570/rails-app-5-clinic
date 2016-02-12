@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   validates :name,     presence: true, length: {minimum: 2, maximum: 4}
   validates :password, presence: true, on: :create, length: {minimum: 5}
   validates :password_confirmation, presence: true, on: :create, length: {minimum: 5}
-  validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }  
+  validates :email, uniqueness: true, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }  
 
-  validates :phone,    presence: true, numericality: true, length: { minimum: 10, maximum: 10 }   
+  validates :phone, uniqueness: true, presence: true, numericality: true, length: { minimum: 10, maximum: 10 }   
   validates_each :phone do |record, attr, value|
     record.errors.add(attr, '此非手機號碼') if value[0] != "0" || value[1] != "9"
   end

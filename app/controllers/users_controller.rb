@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # rescue_from Twilio::REST::RequestError, with: :phone_number_error
-  before_action :find_user, only: [:edit, :update, :destroy, :enter_pin, :finish_register]
-  before_action :require_user_or_admin, only: [:edit, :update]
+  before_action :find_user, only: [:edit, :update, :destroy, :enter_pin, :finish_register, :change_password, :change_password_verify]
+  before_action :require_user_or_admin, only: [:edit, :update, :change_password, :change_password_verify]
   before_action :require_admin, only: [:destroy]  
 
 
@@ -19,29 +19,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    find_user = User.find_by(email: user_params[:email])
-    if find_user
-      find_user.admin = (user_params[:be_admin] == "1") ? true : false
-      if find_user.update(user_params)
-        find_user.generate_pin   
-        find_user.send_pin  
-        flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{find_user.pin}"
-        redirect_to enter_pin_user_path(find_user)    
-      else
-        render :new
-      end
+    @user = User.new(user_params)
+    @user.admin = (user_params[:be_admin] == "1") ? true : false
+    if @user.save
+      @user.generate_pin   
+      @user.send_pin  
+      flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{@user.pin}"        
+      redirect_to enter_pin_user_path(@user)    
     else
-      @user = User.new(user_params)
-      @user.admin = (user_params[:be_admin] == "1") ? true : false
-      if @user.save
-        @user.generate_pin   
-        @user.send_pin  
-        flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{@user.pin}"        
-        redirect_to enter_pin_user_path(@user)    
-      else
-        render :new
-      end
-    end      
+      render :new
+    end         
   end
 
   def edit    
@@ -53,7 +40,7 @@ class UsersController < ApplicationController
       if (logged_in_as_admin? && current_user.id.to_s != params[:id])
         redirect_to backstage_user_show_path(user: @user)        
       else
-        redirect_to user_path(current_user)
+        redirect_to user_path(@user)
       end
     else
       render :edit
@@ -64,6 +51,28 @@ class UsersController < ApplicationController
     flash[:notice] = "您已刪除#{@user.name}"          
     @user.destroy
     redirect_back_or_to root_path   
+  end
+
+  def change_password
+    
+  end
+
+  def change_password_verify
+    if ((@user.authenticate(params[:old_password]) || current_user.admin) && (params[:password] == params[:password_confirmation]))
+      @user.update(update_user_password)
+      flash[:notice] = "#{@user.name}的密碼已經更新"    
+      if current_user.admin
+        redirect_to backstage_user_show_path(user: @user)
+      else
+        redirect_to user_path(@user) 
+      end
+    elsif (params[:password] != params[:password_confirmation])
+      flash[:alert] = "新密碼兩次輸入不同!"
+      render :change_password
+    else
+      flash[:alert] = "舊密碼輸入錯誤!"
+      render :change_password
+    end
   end
 
   def enter_pin
@@ -91,6 +100,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :be_admin, :pin)
+  end
+
+  def update_user_password
+    params.permit(:password, :password_confirmation)
   end
 
   def find_user
