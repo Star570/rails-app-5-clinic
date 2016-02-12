@@ -38,7 +38,6 @@
           <% morning_count = booking_slots.select{|b| b.time_slot < 24}.count %>
           <% afternoon_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36}.count %>
           <% evenning_count = booking_slots.select{|b| b.time_slot >= 36}.count %>                            
-
           <% if morning_count > 0 %>
             <%= link_to new_reservation_path(:date => date, :slot => "上午") do %>
               上午 <%= "0" if morning_count < 10 %><%= morning_count %><br>
@@ -60,13 +59,11 @@
           <% else %>
               晚上 <%= "0" if evenning_count < 10 %><%= evenning_count %><br>
           <% end %>
-       
         <% else %>
           無名額<br>&nbsp<br>&nbsp
         <% end %>
       </div>
     <% end %>
-      
   </div>
   <div class="clear"> </div>
 </div>
