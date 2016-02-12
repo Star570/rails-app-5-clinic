@@ -144,9 +144,10 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th width="70%" style="text-align:left">留言標題</th>
+                  <th width="65%" style="text-align:left">留言標題</th>
                   <th width="10%">匿名</th>
                   <th width="20%">留言時間</th>
+                  <th width="5%"></th>                  
                 </tr>
               </thead>
               <tbody>
@@ -161,6 +162,13 @@
                     <% end %>
                   </td> 
                   <td><%= show_date(m.created_at) %></td>
+                  <td>
+                    <% if logged_in_as_admin? %>  
+                      <%= link_to message_path(m), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
+                        <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
+                      <% end %>
+                    <% end %>
+                  </td> 
                 </tr>
                 <% end %>
               </tbody>

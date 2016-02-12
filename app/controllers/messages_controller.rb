@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
-  before_action :find_message, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, except: [:index, :show]
+  before_action :find_message, only: [:show, :destroy]
+  before_action :require_user, only: [:create]
+  before_action :require_user_or_admin, only: [:destroy] 
 
   def index 
     @messages = Message.page(params[:page]).per(8)
