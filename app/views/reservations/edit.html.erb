@@ -6,7 +6,7 @@
     <!-- Also have same form in add_reservation_s2.html.erb/edit.html.erb -->
     <br>
     <%= simple_form_for @reservation do |f| %>   
-      <div class="col-xs-6">
+      <div class="col-xs-7">
         <h4><%= current_user.name %>您好！
             <br><br>
             此筆預約日期是&nbsp<%= @reservation.booking_slot.booking_date %>&nbsp<%=show_time_slot(@reservation.booking_slot.time_slot) %>時段
