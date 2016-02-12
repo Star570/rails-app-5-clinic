@@ -44,13 +44,13 @@ class PagesController < ApplicationController
     @dayOfWeek  = [ "日", "一", "二", "三", "四", "五", "六" ]
     @date = Date.parse(params[:date])
 
-    @booking_slots_pre = BookingSlot.where("booking_date >=? and booking_date < ?", @date-9, @date-2)
+    @booking_slots_pre = BookingSlot.where("booking_date >=? and booking_date < ?", @date.beginning_of_week-7, @date.beginning_of_week-14)
     @booking_dates_pre_count = @booking_slots_pre.map(&:booking_date).uniq.count
 
-    @booking_slots_nxt = BookingSlot.where("booking_date >=? and booking_date < ?", @date+5, @date+12)
+    @booking_slots_nxt = BookingSlot.where("booking_date >=? and booking_date < ?", @date.beginning_of_week+7, @date.beginning_of_week+14)
     @booking_dates_nxt_count = @booking_slots_nxt.map(&:booking_date).uniq.count
 
-    @booking_slots = BookingSlot.where("booking_date >=? and booking_date < ?", @date-2, @date+5)
+    @booking_slots = BookingSlot.where("booking_date >=? and booking_date < ?", @date.beginning_of_week, @date.beginning_of_week+7)
     @booking_slots_hash = Hash.new    
     @booking_dates = @booking_slots.map(&:booking_date).uniq    
 

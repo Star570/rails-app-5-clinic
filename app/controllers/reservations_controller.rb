@@ -46,7 +46,7 @@ class ReservationsController < ApplicationController
           render :new
         end          
       else 
-        flash[:alert] = "三天內不可重複預約"
+        flash[:alert] = "三天內不可重複預約, 若需預約兩位以上, 預約後請致電"
         redirect_to reservations_path      
       end
     end
