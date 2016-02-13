@@ -5,14 +5,15 @@
   <div class="service-content">
     <h3>搜尋會員</h3>
     <br>
-    <%= form_tag(backstage_search_user_path, method: :get, class: 'navbar-form navbar-left', style: 'padding-left: 0px') do %>
-      <%= search_field_tag 'search', nil, class: 'form-control', placeholder: '搜尋會員資料'  %>
-      <%= button_tag class: 'btn btn-default', :name => nil do %>
-        <span class="glyphicon glyphicon-search"></span>
+    <div class="row">
+      <%= form_tag(backstage_search_user_path, method: :get, class: 'navbar-form navbar-left') do %>
+        <%= search_field_tag 'search', nil, class: 'form-control', placeholder: '搜尋會員資料'  %>
+        <%= button_tag class: 'btn btn-default', :name => nil do %>
+          <span class="glyphicon glyphicon-search"></span>
+        <% end %>
+        <h5>&nbsp(可填寫姓名或手機或Email的關鍵字)</h5>
       <% end %>
-      <h5>&nbsp(可填寫姓名或手機或Email的關鍵字)</h5>
-    <% end %>
-
+    </div>
     <% if @users %>
       <div class="row">
         <div class="col-xs-9">
@@ -67,7 +68,7 @@
           <h4><%= paginate @users %></h4>
         </div>        
       </div>
-    <% end %>
+    <% end %>    
 
   <div class="clear"> </div>
   </div>
