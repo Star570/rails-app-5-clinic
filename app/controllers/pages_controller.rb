@@ -97,7 +97,7 @@ class PagesController < ApplicationController
   def search_user
     if params[:search]
       search_string = {:name_or_phone_or_email_cont => params[:search]}
-      @users = User.search(search_string).result.order("admin DESC, created_at DESC").page(params[:page]).per(10)     
+      @users = User.search(search_string).result.order("admin DESC, created_at DESC")
     end
   end 
 

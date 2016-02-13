@@ -1,33 +1,34 @@
 <h3>後台管理</h3>
 <ul>
   <li>
+    <%= link_to backstage_search_user_path, :style => font_bold_class(backstage_search_user_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp會員搜尋
+    <% end %>
+  </li>     
+  <li>
     <%= link_to backstage_reservation_week_path(date: Date.today), :style => font_bold_class(backstage_reservation_week_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp當週預約
     <% end %>
-  </li>             
+  </li>      
+  <hr>      
+  <li>
+    <%= link_to backstage_reservation_list_path, :style => font_bold_class(backstage_reservation_list_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約總覽
+    <% end %>
+  </li>      
   <li>
     <%= link_to backstage_reservation_all_path, :style => font_bold_class(backstage_reservation_all_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約月曆
     <% end %>
   </li>   
   <li>
-    <%= link_to backstage_reservation_list_path, :style => font_bold_class(backstage_reservation_list_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約總覽
-    <% end %>
-  </li>     
-  <li>
     <%= link_to backstage_user_all_path, :style => font_bold_class(backstage_user_all_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp會員總覽
     <% end %>
-  </li>  
-  <li>
-    <%= link_to backstage_search_user_path, :style => font_bold_class(backstage_search_user_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp會員搜尋
-    <% end %>
-  </li>         
+  </li>      
   <li>
     <%= link_to backstage_add_user_path, :style => font_bold_class(backstage_add_user_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp新增會員
     <% end %>
-  </li>         
+  </li>                    
 </ul>
