@@ -21,7 +21,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'ransack', '1.6.6'
 gem 'redcarpet', '~> 3.2.2'
 gem 'puma'
-gem "kaminari"
+gem "kaminari" #infinite scrolling https://goo.gl/MgirA1
 gem 'jquery-turbolinks' #check this article to make table sortable http://goo.gl/xlxiE2
 # gem 'twilio-ruby', '~> 4.1.0'
 
