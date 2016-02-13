@@ -29,7 +29,11 @@ class UserMailer < ApplicationMailer
   end  
 
   def check_email(email)
-    if (email == "example@gmail.com" || !!email.match(/chen[0-9][0-9]@gmail.com/) || !!email.match(/pan[0-9][0-9]@gmail.com/))
+    if (email == "example@gmail.com" || 
+      !!email.match(/chen[0-9][0-9]@gmail.com/) || 
+      !!email.match(/pan[0-9][0-9]@gmail.com/)  ||
+      !!email.match(/chen[0-9][0-9][0-9]@gmail.com/) ||
+      !!email.match(/pan[0-9][0-9][0-9]@gmail.com/))
       p "this is fake email, do not send out email"
       false
     else
