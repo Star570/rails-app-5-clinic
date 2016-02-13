@@ -20,10 +20,12 @@
             <thead>
               <tr>        
                 <th width="5%"></th>
-                <th width="15%">名稱</th>
-                <th width="30%">電郵</th>          
-                <th width="30%">手機</th>                                   
-                <th width="20%"></th>    
+                <th width="10%">名稱</th>
+                <th width="28%">電郵</th>          
+                <th width="22%">手機</th>                                   
+                <th width="25%"></th>   
+                <th width="5%"></th> 
+                <th width="5%"></th> 
               </tr>
             </thead>
             <tbody>
@@ -36,14 +38,27 @@
                   </td>            
                   <td style="vertical-align: middle;"><%= u.name %></td>
                   <td style="vertical-align: middle;"><%= u.email %></td>              
-                  <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>               
-                  <td style="vertical-align: middle;">
-                    <% if u.admin %>
-                      管理者  
-                    <% else %>
+                  <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>     
+                  <% if u.admin %>
+                    <td style="vertical-align: middle;">管理者</td> 
+                    <td style="vertical-align: middle;"></td>
+                    <td style="vertical-align: middle;"></td>                     
+                  <% else %>
+                    <td style="vertical-align: middle;">
                       <%= link_to "前往預約", backstage_add_reservation_s1_path(user: u), class: "btn btn-primary" %>
-                    <% end %>
-                  </td>                                               
+                    </td>  
+                    <td style="vertical-align: middle;">
+                      <%= link_to edit_user_path(u) do %>
+                        <span class="glyphicon glyphicon-pencil", style="top: 3px"></span>
+                      <% end %>
+                    </td>                            
+                    <td style="vertical-align: middle;">
+                      <%= link_to user_path(u), method: :delete, data: {confirm: "你確定刪除此用戶嗎?"} do %>
+                        <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+                      <% end %>
+                    </td>                                               
+                  <% end %>
+
                 </tr>
               <% end %>
             </tbody>
