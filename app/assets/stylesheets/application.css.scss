@@ -17,18 +17,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-@media (max-width: 1052px) {
+
   .table-responsive {
-    width: 100%;
-    margin-bottom: 15px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    border: 1px solid #ddd;
     white-space: nowrap;
   }
-}
+
 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, STHeiti, 'Microsoft JhengHei', 微軟正黑體, sans-serif;
