@@ -1,57 +1,59 @@
-<table class="table table-hover table-responsive sortable">
-  <thead>
-    <tr>
-      <th width="5%"></th>            
-      <th width="7%">名稱</th>
-      <th width="17%">電郵</th>          
-      <th width="13%">手機</th>
-      <th width="8%">待診療</th>               
-      <th width="8%">總預約</th>
-      <% if member.any? && member.first.admin %>
-        <th width="8%">回覆數</th>
-      <% else %>
-        <th width="8%">留言數</th>
-      <% end %>            
-      <th width="18%">會員建立</th>    
-      <th width="11%">幫預約</th>                                         
-      <th width="5%"></th>    
-    </tr>
-  </thead>
-  <tbody>
-    <% member.each do |u| %>
+<div class="table-responsive">
+  <table class="table table-hover sortable">
+    <thead>
       <tr>
-        <td style="vertical-align: middle;">
-          <%= link_to backstage_user_show_path(user: u) do %>
-            <span class="glyphicon glyphicon-search", style="top: 3px"></span>
-          <% end %>
-        </td>                          
-        <td style="vertical-align: middle;"><%= u.name %></td>
-        <td style="vertical-align: middle;"><%= u.email %></td>              
-        <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>  
-        <td style="vertical-align: middle;"><%= num_to_be_served(u) %></td>           
-        <td style="vertical-align: middle;"><%= num_of_reservation(u) %></td>
-        <% if u.admin %>
-          <td style="vertical-align: middle;"><%= u.comments.count %></td>
+        <th width="5%"></th>            
+        <th width="7%">名稱</th>
+        <th width="17%">電郵</th>          
+        <th width="13%">手機</th>
+        <th width="8%">待診療</th>               
+        <th width="8%">總預約</th>
+        <% if member.any? && member.first.admin %>
+          <th width="8%">回覆數</th>
         <% else %>
-          <td style="vertical-align: middle;"><%= u.messages.count %></td>
-        <% end %>  
-
-        <td style="vertical-align: middle;"><%= show_datetime(u.created_at) %></td>  
-        <% if u.admin %>
-          <td style="vertical-align: middle;"></td>                        
-          <td style="vertical-align: middle;"></td>
-        <% else %>              
-          <td style="vertical-align: middle;"><%= link_to "前往預約", backstage_add_reservation_s1_path(user: u), class: "btn btn-sm btn-primary" %></td>        
-          <td style="vertical-align: middle;">
-            <%= link_to user_path(u), method: :delete, data: {confirm: "你確定刪除此用戶嗎?"} do %>
-              <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
-            <% end %>
-          </td>    
-        <% end %>                                             
+          <th width="8%">留言數</th>
+        <% end %>            
+        <th width="18%">會員建立</th>    
+        <th width="11%">幫預約</th>                                         
+        <th width="5%"></th>    
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% member.each do |u| %>
+        <tr>
+          <td style="vertical-align: middle;">
+            <%= link_to backstage_user_show_path(user: u) do %>
+              <span class="glyphicon glyphicon-search", style="top: 3px"></span>
+            <% end %>
+          </td>                          
+          <td style="vertical-align: middle;"><%= u.name %></td>
+          <td style="vertical-align: middle;"><%= u.email %></td>              
+          <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>  
+          <td style="vertical-align: middle;"><%= num_to_be_served(u) %></td>           
+          <td style="vertical-align: middle;"><%= num_of_reservation(u) %></td>
+          <% if u.admin %>
+            <td style="vertical-align: middle;"><%= u.comments.count %></td>
+          <% else %>
+            <td style="vertical-align: middle;"><%= u.messages.count %></td>
+          <% end %>  
+
+          <td style="vertical-align: middle;"><%= show_datetime(u.created_at) %></td>  
+          <% if u.admin %>
+            <td style="vertical-align: middle;"></td>                        
+            <td style="vertical-align: middle;"></td>
+          <% else %>              
+            <td style="vertical-align: middle;"><%= link_to "前往預約", backstage_add_reservation_s1_path(user: u), class: "btn btn-sm btn-primary" %></td>        
+            <td style="vertical-align: middle;">
+              <%= link_to user_path(u), method: :delete, data: {confirm: "你確定刪除此用戶嗎?"} do %>
+                <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+              <% end %>
+            </td>    
+          <% end %>                                             
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>  
 <% if member.any? && member.first.verified && !member.first.admin  %>
   <h4><%= paginate member %></h4>
 <% end %>
