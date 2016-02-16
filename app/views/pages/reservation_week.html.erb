@@ -104,7 +104,7 @@
                       <% end %>
                     </div>  
                   <% else %>
-                    <%= link_to b.name, backstage_user_show_path(user: b, anchor: "reservation_calender") %><br>
+                    <%= link_to b.name, backstage_user_show_path(start_date: date, user: b, anchor: "reservation_calender") %><br>
                   <% end %>                  
                 <% end %>
               </td>              
