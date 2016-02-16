@@ -81,9 +81,13 @@
             <% if find_reservations.any? %> 
               <% find_reservations.each do |r| %>
                 <div style="text-align: center;">
-                  <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
-                    預約<%= show_time_slot(r.booking_slot.time_slot) %>
-                  <% end %>                                    
+                  <% if date < Date.today %>
+                    預約<%= show_time_slot(r.booking_slot.time_slot) %><br>
+                  <% else %>
+                    <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
+                      預約<%= show_time_slot(r.booking_slot.time_slot) %>
+                    <% end %>      
+                  <% end %>                              
                 </div>
               <% end %>
             <% end %>
