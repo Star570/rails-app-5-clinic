@@ -42,8 +42,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    find_home_exist = @user.home_post != params["home_post"] && User.find_by(home_post: params["home_post"])
-        
+    find_home_exist = params["home_post"] != "" && @user.home_post != params["home_post"] && User.find_by(home_post: params["home_post"])
+
     @user.home_pre = params["home_pre"]
     @user.home_post = params["home_post"]    
 
