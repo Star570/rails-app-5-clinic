@@ -96,7 +96,7 @@ class PagesController < ApplicationController
 
   def search_user
     if params[:search]
-      search_string = {:name_or_phone_or_email_cont => params[:search]}
+      search_string = {:name_or_phone_or_email_or_home_pre_or_home_post_cont => params[:search]}
       @users = User.search(search_string).result.order("admin DESC, created_at DESC")
     end
   end 
@@ -131,9 +131,17 @@ class PagesController < ApplicationController
   def create_user
     @user = User.new(user_params)
     @user.admin = false
-    if @user.save
+    @user.home_pre = params["home_pre"]
+    @user.home_post = params["home_post"]    
+    find_home_exist = User.find_by(home_post: params["home_post"])
+    if @user.phone == "" && @user.email == "" && @user.home_post == ""
+      flash[:alert] = "Email與手機或市話不可全部空白."        
+      render :add_user      
+    elsif find_home_exist
+      flash[:alert] = "市話已經存在."        
+      render :add_user        
+    elsif @user.save
       flash[:notice] = "新增會員#{@user.name}成功."  
-      @user.generate_pin   
       redirect_to backstage_user_all_path
     else
       render :add_user
@@ -211,7 +219,7 @@ class PagesController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :be_admin, :pin)
+    params.require(:user).permit(:name, :email, :phone, :home_pre, :home_post, :password, :password_confirmation, :verified)
   end
 
   def reservation_params

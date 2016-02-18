@@ -31,11 +31,19 @@
           <%= f.input :name, label:"中文姓名", input_html: { class: "form-control"} %>       
         </div>            
         <div class="form-group">      
-          <%= f.input :email, label:"電子信箱", input_html: { class: "form-control"} %>       
+          <%= f.input :email, label:"電子信箱", required: true, placeholder: 'abc@def.com', input_html: { class: "form-control"} %>       
         </div>          
         <div class="form-group">      
-          <%= f.input :phone, label:"手機號碼", input_html: { class: "form-control"} %>       
+          <%= f.input :phone, label:"手機號碼", placeholder: '0912345678', input_html: { class: "form-control"} %>       
         </div>    
+        <div class="form-group">   
+          <%= label_tag(:home_pre, "會員市話") %> <br>
+          <div class="col-xs-2" style="padding-left:0px">
+          <%= select_tag :home_pre, options_for_select([ "02", "03", "04", "04", "06", "07", "08", "037", "049", "082", "089"], "03"), class: "form-control" %></div>
+
+          <div class="col-xs-10" style="padding:0px"><%= text_field_tag :home_post, nil, label: false, class: "form-control" %></div>
+          <br><br>
+        </div>         
         <div class="form-group">      
           <%= f.input :password, label:"密碼", input_html: { class: "form-control"} %>       
         </div>    

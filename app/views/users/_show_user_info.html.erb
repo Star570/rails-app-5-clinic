@@ -57,6 +57,10 @@
           <br>
           <h4>手機號碼： <%= show_phone(@user.phone ) %> </h4>
           <br>
+          <h4>市話號碼： <%= @user.home_phone %> </h4>
+          <br>    
+          <h4>線上登錄： <%= @user.verified ? "可" : "否" %> </h4>
+          <br>                   
           <h4>
             <%= link_to "修改資料", edit_user_path(@user), class:"btn btn-primary"  %>
             <%= link_to "修改密碼", change_password_user_path(@user), class:"btn btn-primary"  %>            

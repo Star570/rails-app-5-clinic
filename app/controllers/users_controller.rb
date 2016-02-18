@@ -21,7 +21,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.admin = (user_params[:be_admin] == "1") ? true : false
-    if @user.save
+    @user.home_pre = params["home_pre"]
+    @user.home_post = params["home_post"]     
+    find_home_exist = User.find_by(home_post: params["home_post"])
+
+    if find_home_exist
+      flash[:alert] = "市話已經存在."        
+      render :new     
+    elsif @user.save
       @user.generate_pin   
       @user.send_pin  
       flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{@user.pin}"        
@@ -35,7 +42,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    @user.home_pre = params["home_pre"]
+    @user.home_post = params["home_post"]    
+    find_home_exist = User.find_by(home_post: params["home_post"])
+
+    if @user.phone == "" && @user.email == "" && @user.home_post == ""
+      flash[:alert] = "Email與手機或市話不可全部空白."        
+      render :edit         
+    elsif find_home_exist
+      flash[:alert] = "市話已經存在."        
+      render :edit         
+    elsif @user.update(user_params)
       flash[:notice] = "您已修改會員資料"    
       if (logged_in_as_admin?)
         redirect_to backstage_user_show_path(user: @user)        
@@ -99,7 +116,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :be_admin, :pin)
+    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :be_admin, :pin, :verified)
   end
 
   def update_user_password

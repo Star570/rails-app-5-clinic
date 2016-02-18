@@ -5,8 +5,8 @@
 
     <%= form_tag login_path do |f| %> 
       <div class="form-group"> 
-        <%= label_tag(:email_or_phone, "電子信箱或手機") %> <br>
-        <%= text_field_tag :email_or_phone, nil, class: "form-control" %> 
+        <%= label_tag(:email_or_phone, "電子信箱或手機或市話") %> <br>
+        <%= text_field_tag :email_or_phone, nil, placeholder: 'abc@def.com or 0912345678 or 0228825252', class: "form-control" %> 
       </div> 
       <div class="form-group"> 
         <%= label_tag(:password, "密碼") %> <br>

@@ -11,21 +11,22 @@
         <%= button_tag class: 'btn btn-default', :name => nil do %>
           <span class="glyphicon glyphicon-search"></span>
         <% end %>
-        <h5>&nbsp(可填寫姓名或手機或Email的關鍵字)</h5>
+        <h5>&nbsp(可填寫姓名或手機或Email或市話的關鍵字)</h5>
       <% end %>
     </div>
     <% if @users %>
       <div class="row">
-        <div class="col-xs-11 table-responsive">
+        <div class="table-responsive">
           <br>
           <h4>用戶 (<%= @users.count %>)</h4>
           <table class="table table-hover">
             <thead>
               <tr>        
                 <th width="5%"></th>
-                <th width="14%">名稱</th>
-                <th width="32%">電郵</th>          
-                <th width="29%">手機</th>                                   
+                <th width="12%">名稱</th>
+                <th width="27%">電郵</th>          
+                <th width="18%">手機</th>      
+                <th width="18%">市話</th>                                                 
                 <th width="10%"></th>   
                 <th width="5%"></th> 
                 <th width="5%"></th> 
@@ -42,6 +43,7 @@
                   <td style="vertical-align: middle;"><%= u.name %></td>
                   <td style="vertical-align: middle;"><%= u.email %></td>              
                   <td style="vertical-align: middle;"><%= show_phone(u.phone) %></td>     
+                  <td style="vertical-align: middle;"><%= u.home_phone %></td>                       
                   <% if u.admin %>
                     <td style="vertical-align: middle;">管理者</td> 
                     <td style="vertical-align: middle;"></td>

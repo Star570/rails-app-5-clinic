@@ -41,11 +41,11 @@
               <% if logged_in_as_admin? %>  
                   <% if @message.seeable %>
                     <%= link_to modify_seeable_reservations_path(message: @message) do %>
-                      <span class="glyphicon glyphicon-eye-open" style="padding-top: 3px;"></span>
+                      <span class="glyphicon glyphicon-eye-open" style="padding-top: 3px; color: black"></span>
                     <% end %>
                   <% else %>
                     <%= link_to modify_seeable_reservations_path(message: @message) do %>
-                      <span class="glyphicon glyphicon-eye-close" style="padding-top: 3px;"></span>
+                      <span class="glyphicon glyphicon-eye-close" style="padding-top: 3px; color: #ccc"></span>
                     <% end %>              
                   <% end %>
               <% end %>

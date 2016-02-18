@@ -29,8 +29,9 @@
       <%= form_tag users_verify_pin_path do |f| %> 
         <%= hidden_field_tag 'hidden_phone_number', @user.phone %> 
         <div class="form-group"> 
-          <%= text_field_tag :pin %> 
+          <%= text_field_tag :pin,  nil, class: "form-control" %> 
         </div> 
+        <br>
         <%= submit_tag "確認", class: "btn btn-primary" %> 
       <% end %> 
 
