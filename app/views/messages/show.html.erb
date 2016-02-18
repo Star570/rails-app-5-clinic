@@ -15,10 +15,11 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th width="69%" style="text-align:left">問題</th>
+            <th width="68%" style="text-align:left">問題</th>
             <th width="10%">發問人</th>
             <th width="20%">發問時間</th>      
-            <th width="1%"></th>                                      
+            <th width="1%"></th>      
+            <th width="1%"></th>                                               
           </tr>
         </thead>
         <tbody>
@@ -36,6 +37,19 @@
             <% end %>
             
             <td><%= show_date(@message.created_at) %></td>
+            <td>
+              <% if logged_in_as_admin? %>  
+                  <% if @message.seeable %>
+                    <%= link_to modify_seeable_reservations_path(message: @message) do %>
+                      <span class="glyphicon glyphicon-eye-open" style="padding-top: 3px;"></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to modify_seeable_reservations_path(message: @message) do %>
+                      <span class="glyphicon glyphicon-eye-close" style="padding-top: 3px;"></span>
+                    <% end %>              
+                  <% end %>
+              <% end %>
+            </td>             
             <td>
               <% if logged_in_as_admin? %>  
                 <%= link_to message_path(@message), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
