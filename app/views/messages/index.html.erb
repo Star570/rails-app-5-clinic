@@ -9,10 +9,11 @@
       <thead>
         <tr>
           <th width="5"%></th>
-          <th width="63%" style="text-align:left">問題</th>
+          <th width="59%" style="text-align:left">問題</th>
           <th width="12%">發問人</th>
-          <th width="15%">發問時間</th>
-          <th width="10%">已回覆</th>     
+          <th width="8%">已回覆</th>             
+          <th width="15%">發問時間</th>  
+          <th width="1"%></th>          
         </tr>
       </thead>
       <tbody>
@@ -43,14 +44,21 @@
                 <% end %>                
               <% end %>
             </td>
-            <td><%= show_date(m.created_at) %></td>     
             <td>
             <% if m.comments.empty? %>
               否
             <% else %>
               是
             <% end %>
-            </td>                               
+            </td>              
+            <td><%= show_date(m.created_at) %></td>      
+            <td>
+              <% if logged_in_as_admin? %>  
+                <%= link_to message_path(m), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
+                  <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
+                <% end %>
+              <% end %>
+            </td>                             
           </tr>            
         <% end %>     
       </tbody>
