@@ -52,9 +52,14 @@
             <% end %>
             </td>                               
           </tr>            
-        <% end %>
+        <% end %>     
       </tbody>
     </table>
+    <% if @messages.count < 8 %>
+      <% (8-@messages.count).times do %>
+        <br>
+      <% end %>
+    <% end %>       
     <h4><%= paginate @messages %></h4>
 
     <br>
