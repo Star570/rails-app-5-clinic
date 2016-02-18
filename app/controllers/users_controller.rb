@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     @user.home_pre = params["home_pre"]
     @user.home_post = params["home_post"]    
-    find_home_exist = User.find_by(home_post: params["home_post"])
+    find_home_exist = @user.home_post != params["home_post"] && User.find_by(home_post: params["home_post"])
 
     if @user.phone == "" && @user.email == "" && @user.home_post == ""
       flash[:alert] = "Email與手機或市話不可全部空白."        
