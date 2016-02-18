@@ -4,7 +4,11 @@ class MessagesController < ApplicationController
   before_action :require_user_or_admin, only: [:destroy] 
 
   def index 
-    @messages = Message.page(params[:page]).per(8)
+    if logged_in_as_admin?
+      @messages = Message.page(params[:page]).per(8)
+    else
+      @messages = Message.where("seeable = ? or user_id = ?", true, current_user.id).page(params[:page]).per(8)
+    end
     @message = Message.new      
   end
 
