@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212083143) do
+ActiveRecord::Schema.define(version: 20160218073032) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -52,10 +52,11 @@ ActiveRecord::Schema.define(version: 20160212083143) do
   create_table "messages", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
     t.boolean  "anonymous"
+    t.boolean  "seeable",    default: false
   end
 
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"

@@ -7,20 +7,21 @@
   </li>     
   <li>
     <%= link_to backstage_reservation_week_path(date: Date.today), :style => font_bold_class(backstage_reservation_week_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp當週預約
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp當週手療
     <% end %>
   </li>      
   <hr>      
   <li>
     <%= link_to backstage_reservation_list_path, :style => font_bold_class(backstage_reservation_list_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約總覽
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp手療總覽
     <% end %>
   </li>      
   <li>
     <%= link_to backstage_reservation_all_path, :style => font_bold_class(backstage_reservation_all_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp預約月曆
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp手療月曆
     <% end %>
   </li>   
+  <hr>
   <li>
     <%= link_to backstage_user_all_path, :style => font_bold_class(backstage_user_all_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp會員總覽

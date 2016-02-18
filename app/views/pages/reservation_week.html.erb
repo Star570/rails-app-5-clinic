@@ -3,7 +3,7 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
-    <h3>當週預約</h3>
+    <h3>當週手療</h3>
     <br>
     <table class="table table-hover">
       <thead>
@@ -12,20 +12,16 @@
             <h4>
               <% if @booking_dates_pre_count > 0 %>
                 <%= link_to backstage_reservation_week_path(date: @date-7) do %>
-                  <!-- <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span>  -->
                   上週<br>
                 <% end %>          
               <% else %>      
-                <!-- <span class="glyphicon glyphicon-chevron-left" style="top: 3px; font-size: 18px;"></span> -->
                 上週<br>
               <% end %>
               <% if @booking_dates_nxt_count > 0 %>
                 <%= link_to backstage_reservation_week_path(date: @date+7) do %>
-                    <!-- <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span> --> 
                   下週
                 <% end %>                
               <% else %>
-                <!-- <span class="glyphicon glyphicon-chevron-right" style="top: 3px; font-size: 18px;"></span>   -->  
                 下週
               <% end %>
             </h4>                
@@ -36,7 +32,9 @@
             <% end %>
           <% end %>
           <% @booking_dates.each do |date| %>
-            <% if date == Date.parse(params[:date]) %>
+            <% if date == Date.today %>
+              <% background = "background-color:#FFC107" %>          
+            <% elsif date == Date.parse(params[:date]) %>
               <% background = "background-color:#ddd" %>
             <% else %>
               <% background = "" %>
@@ -54,6 +52,43 @@
         </tr>
       </thead>
       <tbody>
+
+        <tr>         
+          <td style="vertical-align: middle;">全選/取消</td>
+          <% if @booking_dates.count < 7 && @date <= Date.today %>
+            <% (7-@booking_dates.count).times do %>
+              <td></td>
+            <% end %>
+          <% end %>               
+          <% @booking_dates.each do |date| %>
+          <% if date == Date.today %>
+            <% background = "background-color:#FFC107" %>          
+          <% elsif date == Date.parse(params[:date]) %>
+            <% background = "background-color:#ddd" %>
+          <% else %>
+            <% background = "" %>
+          <% end %>            
+            <td style=<%= background %>>
+              <% if date < Date.today %>     
+                <span class="glyphicon glyphicon-ok-circle" style="font-size: 19px; top: 2px; color: #bbb"></span>
+                <span class="glyphicon glyphicon-remove-circle" style="font-size: 19px; top: 2px; color: #bbb"></span>
+              <% else %>
+                <%= link_to backstage_modify_bookable_path(booking_slot: "yes", bookable: false, date: date) do %>
+                  <span class="glyphicon glyphicon-ok-circle" style="font-size: 19px; top: 2px"></span>          
+                <% end %>              
+                <%= link_to backstage_modify_bookable_path(booking_slot: "no", bookable: false, date: date) do %>
+                  <span class="glyphicon glyphicon-remove-circle" style="font-size: 19px; top: 2px"></span>
+                <% end %> 
+              <% end %>   
+            </td>              
+          <% end %>
+          <% if @booking_dates.count < 7 && @date > Date.today %>
+            <% (7-@booking_dates.count).times do %>
+              <td></td>
+            <% end %>
+          <% end %>               
+        </tr>
+
         <% BookingSlot.available_slot.each do |time_slot| %>
           <% if time_slot == 20 %> 
             <tr id="morning" style="background-color: grey"> 
@@ -84,7 +119,9 @@
               <% end %>
             <% end %>               
             <% @booking_dates.each do |date| %>
-            <% if date == Date.parse(params[:date]) %>
+            <% if date == Date.today %>
+              <% background = "background-color:#FFC107" %>          
+            <% elsif date == Date.parse(params[:date]) %>
               <% background = "background-color:#ddd" %>
             <% else %>
               <% background = "" %>
@@ -93,14 +130,22 @@
                 <% @booking_slots_hash[date][time_slot].each do |b| %>
                   <% if b[0] == 1 %>
                     <div id="slot<%= b[1].id %>">
-                      <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: false), :remote => true do %>
-                        <span class="glyphicon glyphicon-ok"></span><br>
+                      <% if date < Date.today %>
+                        <span class="glyphicon glyphicon-ok" style="color: #bbb"></span><br>                        
+                      <% else %>
+                        <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: false), :remote => true do %>
+                          <span class="glyphicon glyphicon-ok"></span><br>
+                        <% end %>                        
                       <% end %>
                     </div>
                   <% elsif b[0] == 0 %>                    
                     <div id="slot<%= b[1].id %>">
-                      <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: true), :remote => true do %>
-                        <span class="glyphicon glyphicon-remove"></span><br>
+                      <% if date < Date.today %>
+                        <span class="glyphicon glyphicon-remove" style="color: #bbb"></span><br>    
+                      <% else %>
+                        <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: true), :remote => true do %>
+                          <span class="glyphicon glyphicon-remove"></span><br>
+                        <% end %>                                           
                       <% end %>
                     </div>  
                   <% else %>

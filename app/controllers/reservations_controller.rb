@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
-  before_action :require_user, except: [:edit, :update, :index, :destroy]
+  before_action :require_user, except: [:edit, :update, :index, :destroy, :modify_seeable]
   before_action :require_user_or_admin, only: [:edit, :update, :destroy]  
+  before_action :require_admin, only: [:modify_seeable]    
   before_action :find_reservation, only: [:edit, :update, :destroy]  
 
   def index
@@ -77,6 +78,16 @@ class ReservationsController < ApplicationController
   end
 
   def finish  
+  end
+
+  def modify_seeable
+    @message = Message.find(params[:message])   
+    if @message.seeable 
+      @message.update(seeable: false)
+    else
+      @message.update(seeable: true)
+    end      
+    redirect_back_or_to root_path
   end
 
   private

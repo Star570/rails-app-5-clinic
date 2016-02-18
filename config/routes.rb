@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     collection do
       get :show_user  
       get :finish
+      get :modify_seeable
     end
   end
 

@@ -8,6 +8,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th width="5"%></th>
           <th width="63%" style="text-align:left">問題</th>
           <th width="12%">發問人</th>
           <th width="15%">發問時間</th>
@@ -16,28 +17,43 @@
       </thead>
       <tbody>
         <% @messages.each do |m| %>
-          <tr>
-            <td style="text-align:left"><%= link_to m.title, message_path(m) %></td>
-            <td>
-              <% if m.anonymous && !logged_in_as_admin? %>  
-                匿名
-              <% else %>
+          <% if logged_in_as_admin? || m.seeable || (!m.seeable && m.user == current_user) %>
+            <tr>
+              <td>
                 <% if logged_in_as_admin? %>
-                  <%= link_to m.user.name, backstage_user_show_path(user: m.user) %>
+                  <% if m.seeable %>
+                    <%= link_to modify_seeable_reservations_path(message: m) do %>
+                      <span class="glyphicon glyphicon-eye-open" style="top: 3px;"></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to modify_seeable_reservations_path(message: m) do %>
+                      <span class="glyphicon glyphicon-eye-close" style="top: 3px;"></span>
+                    <% end %>              
+                  <% end %>
+                <% end %>
+              </td>
+              <td style="text-align:left"><%= link_to m.title, message_path(m) %></td>
+              <td>
+                <% if m.anonymous && !logged_in_as_admin? %>  
+                  匿名
                 <% else %>
-                  <%= m.user.name %>
-                <% end %>                
+                  <% if logged_in_as_admin? %>
+                    <%= link_to m.user.name, backstage_user_show_path(user: m.user) %>
+                  <% else %>
+                    <%= m.user.name %>
+                  <% end %>                
+                <% end %>
+              </td>
+              <td><%= show_date(m.created_at) %></td>     
+              <td>
+              <% if m.comments.empty? %>
+                否
+              <% else %>
+                是
               <% end %>
-            </td>
-            <td><%= show_date(m.created_at) %></td>     
-            <td>
-            <% if m.comments.empty? %>
-              否
-            <% else %>
-              是
-            <% end %>
-            </td>                               
-          </tr>
+              </td>                               
+            </tr>            
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -64,6 +80,7 @@
         <%= link_to "登入會員留言", login_path %>
       </h3>           
     <% end %>
+    <br><br>
   </div>
   <div class="clear"> </div>
 </div>
