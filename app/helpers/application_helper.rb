@@ -27,7 +27,7 @@ module ApplicationHelper
   end  
 
   def show_datetime(datetime)
-    datetime.in_time_zone("Taipei").strftime("%Y-%m-%d %H:%m")
+    datetime.in_time_zone("Taipei").strftime("%Y-%m-%d %H:%M")
   end    
 
   def notice_message
