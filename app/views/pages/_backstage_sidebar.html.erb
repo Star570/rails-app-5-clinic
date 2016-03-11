@@ -6,23 +6,6 @@
     <% end %>
   </li>     
   <li>
-    <%= link_to backstage_reservation_week_path(date: Date.today), :style => font_bold_class(backstage_reservation_week_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp當週手療
-    <% end %>
-  </li>      
-  <hr>      
-  <li>
-    <%= link_to backstage_reservation_list_path, :style => font_bold_class(backstage_reservation_list_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp手療總覽
-    <% end %>
-  </li>      
-  <li>
-    <%= link_to backstage_reservation_all_path, :style => font_bold_class(backstage_reservation_all_path) do %>
-      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp手療月曆
-    <% end %>
-  </li>   
-  <hr>
-  <li>
     <%= link_to backstage_user_all_path, :style => font_bold_class(backstage_user_all_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp會員總覽
     <% end %>
@@ -30,6 +13,38 @@
   <li>
     <%= link_to backstage_add_user_path, :style => font_bold_class(backstage_add_user_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp新增會員
+    <% end %>
+  </li>             
+  <hr>      
+  <li>
+    <%= link_to backstage_hand_reservation_week_path(date: Date.today), :style => font_bold_class(backstage_hand_reservation_week_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp當週手療
+    <% end %>
+  </li>    
+  <li>
+    <%= link_to backstage_hand_reservation_list_path, :style => font_bold_class(backstage_hand_reservation_list_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp手療總覽
+    <% end %>
+  </li>      
+  <li>
+    <%= link_to backstage_hand_reservation_month_path, :style => font_bold_class(backstage_hand_reservation_month_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp手療月曆
+    <% end %>
+  </li>   
+  <hr>
+   <li>
+    <%= link_to backstage_body_reservation_week_path(date: Date.today), :style => font_bold_class(backstage_body_reservation_week_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp當週體雕
+    <% end %>
+  </li>    
+  <li>
+    <%= link_to backstage_body_reservation_list_path, :style => font_bold_class(backstage_body_reservation_list_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp體雕總覽
+    <% end %>
+  </li>      
+  <li>
+    <%= link_to backstage_body_reservation_month_path, :style => font_bold_class(backstage_body_reservation_month_path) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>&nbsp&nbsp體雕月曆
     <% end %>
   </li>                    
 </ul>

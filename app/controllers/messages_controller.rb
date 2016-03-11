@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     if logged_in_as_admin?
       @messages = Message.page(params[:page]).per(8)
     else
-      @messages = Message.where("seeable = ? or user_id = ?", true, current_user.id).page(params[:page]).per(8)
+      @messages = Message.where("seeable = ? or user_id = ?", true, current_user && current_user.id).page(params[:page]).per(8)
     end
     @message = Message.new      
   end
@@ -31,9 +31,19 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy
     flash[:notice] = "您已刪除此留言"
-    redirect_to messages_path
+    redirect_back_or_to messages_path
   end
 
+  def modify_seeable
+    @message = Message.find(params[:message])   
+    if @message.seeable 
+      @message.update(seeable: false)
+    else
+      @message.update(seeable: true)
+    end      
+    redirect_back_or_to root_path
+  end
+  
   private
 
   def message_params

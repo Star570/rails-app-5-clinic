@@ -25,9 +25,17 @@ gem "kaminari" #infinite scrolling https://goo.gl/MgirA1
 gem 'jquery-turbolinks' #check this article to make table sortable http://goo.gl/xlxiE2
 # gem 'twilio-ruby', '~> 4.1.0'
 
+# Add Slug 
+# http://georgiowan-note.logdown.com/notes/307467/rails-url-path-without-id-via-friendly-id
+# http://waynechu.logdown.com/posts/205700-rails-web-site-no-longer-displays-only-id
+gem 'friendly_id', '~> 5.1.0'
+gem 'babosa'
+
+
+
 group :development do
+  gem 'sqlite3'
   gem "letter_opener"
-  gem 'sqlite3'  
   gem 'pry'  
 end
 

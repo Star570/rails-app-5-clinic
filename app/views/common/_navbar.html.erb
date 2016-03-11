@@ -14,10 +14,10 @@
       <ul class="nav navbar-nav navbar-left">             
       </ul>      
       <ul class="nav navbar-nav navbar-right">
-        <li> <%= link_to "最新消息", announcements_path, :style => font_bold_class(announcements_path) %> </li>                
-        <li> <%= link_to "專欄文章", categories_path,    :style => font_bold_class(categories_path) %> </li>             
-        <li> <%= link_to "診療預約", reservations_path,  :style => font_bold_class(reservations_path) %> </li>
-        <li> <%= link_to "留言討論", messages_path,      :style => font_bold_class(messages_path) %> </li>                
+        <li> <%= link_to "最新消息", announcements_path, :style => font_bold_class_check_controller(announcements_path) %> </li>                
+        <li> <%= link_to "專欄文章", categories_path,    :style => font_bold_class_check_category_post(categories_path) %> </li>             
+        <li> <%= link_to "留言討論", messages_path,      :style => font_bold_class_check_controller(messages_path) %> </li>                        
+        <li> <%= link_to "診療預約", hand_reservations_path, :style => font_bold_class_check_reservations_controller %> </li>
         <% if logged_in_as_admin? %>
           <li class="dropdown">
             <%= link_to "#" , :class => "dropdown-toggle", :data => {:toggle => "dropdown"}, :style => font_bold_class_check_pages_controller do %>
@@ -42,9 +42,9 @@
               <%= current_user.name %> <b class="caret"></b>
             <% end %>
             <ul class="dropdown-menu">
+              <li><%= link_to "個人資料", user_path(current_user) %></li>                      
+              <li class="divider"></li>                
               <li><%= link_to "登出", logout_path %></li>
-              <li class="divider"></li>  
-              <li><%= link_to "個人資料", user_path(current_user) %></li>        
             </ul>
           </li> 
         <% else %>

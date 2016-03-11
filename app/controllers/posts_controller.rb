@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_admin, except: [:show]
 
   def show
-    @posts = Post.all
+    @posts_count = Post.count
     @categories = Category.all
   end
 
@@ -42,6 +42,16 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "您已刪除專欄"       
     redirect_to categories_path
+  end
+
+  def modify_seeable
+    @post = Post.find(params[:post])   
+    if @post.seeable 
+      @post.update(seeable: false)
+    else
+      @post.update(seeable: true)
+    end      
+    redirect_back_or_to root_path
   end
 
   private

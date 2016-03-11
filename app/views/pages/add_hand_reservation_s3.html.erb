@@ -3,6 +3,8 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
+    <h3>手療代客預約</h3>    
+    <br>       
     <div class="row">
       <div class="bs-wizard" style="border-bottom:0;">
         <div class="step-long bs-wizard-step complete"><!-- complete -->
@@ -31,9 +33,9 @@
         <br><br>
         您已幫[<%= @user.name %>]預約成功&nbsp&nbsp<%= params[:date] %> <%= show_time_slot(params[:slot].to_i) %>
     </h4>   
-    <br>
-    <%= link_to "前往查看預約記錄!", backstage_reservation_list_path, class: "btn btn-primary" %>    
-      
+    <br><br>
+    <%= link_to "前往查看預約記錄!", backstage_hand_reservation_list_path, class: "btn btn-lg btn-primary" %>    
+    <br><br>          
   </div>
   <div class="clear"> </div>
 </div>

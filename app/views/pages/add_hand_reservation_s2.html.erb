@@ -1,0 +1,57 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "backstage_sidebar" %>
+  </div>        
+  <div class="service-display">
+    <h3>手療代客預約</h3>    
+    <br>       
+    <div class="row">
+      <div class="bs-wizard" style="border-bottom:0;">
+        <div class="step-long bs-wizard-step complete"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">預約日期</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+        </div>
+
+        <div class="step-long bs-wizard-step complete"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">[<%= @user.name %>]&nbsp預約時段</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+        </div>
+        
+        <div class="step-long bs-wizard-step active"><!-- complete -->
+          <div class="text-center bs-wizard-stepnum">完成預約</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <span class="bs-wizard-dot"></span>
+          <span class="bs-wizard-dot"></span>
+        </div>
+      </div>
+    </div>
+<!-- Also have same form in reservations/_form.html.erb -->
+    <br>
+    <%= simple_form_for @reservation, url: backstage_add_hand_reservation_s2_path(user: @user) do |f| %>   
+      <div class="col-xs-8" style="font-size: 1.4em">
+        <h4>管理者您好！
+            <br><br>
+            您想要幫[<%= @user.name %>]預約的日期是&nbsp<%= params[:date] %>&nbsp<%= params[:slot] %>時段
+        </h4>      
+        <br>
+        <div class="form-group">   
+          <%= f.input :booking_slot_id, label: '選擇預約時段：', include_blank: false, 
+                       collection: @booking_slots.map{|k,v| v.first},
+                       label_method: lambda { |b| 
+                        "#{show_time_slot(b.time_slot)} 尚餘名額（#{@booking_slots[b.time_slot].count}）" },
+                       value_method: :id, input_html: { class: "form-control"} %>   
+          <br>
+          <%= f.input :desc, label:"症狀描述：", input_html: { class: "form-control"} %>
+          <br>    
+          <%= f.submit "完成預約", disable_with: 'Submitting...', class: "btn btn-primary"%>        
+          <%= link_to "返回前頁", :back, class: "btn btn-default" %>         
+        </div>   
+      </div>          
+    <% end %>
+    <br><br>          
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

@@ -3,14 +3,14 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
-    <h3>手療總覽</h3>
+    <h3>體雕總覽</h3>
     <br>
     <div role="tabpanel">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">     
         <li class="active">
           <a href="#reservation1" data-toggle="tab">
-            <h4>最新預約(<%= @reservations_by_created_at_count %>)</h4>
+            <h4>最新預約（<%= @reservations_by_created_at_count %>）</h4>
           </a>
         </li>            
       </ul>
@@ -20,7 +20,7 @@
         
         <div class="tab-pane active" id="reservation1">
           <div class="container-fluid table-responsive">
-            <table class="table table-hover sortable">
+            <table class="table table-hover sortable table-reservation-list">
               <thead>
                 <tr>
                   <th width="3%"></th>
@@ -47,13 +47,15 @@
                   <td><%= r.desc %></td>                    
                   <td><%= show_datetime(r.created_at) %></td>
                   <td>
-                    <%= link_to backstage_edit_reservation_s2_path(r: r) do %>
+                    <%= link_to backstage_edit_body_reservation_path(r: r) do %>
                       <span class="glyphicon glyphicon-pencil", style="top: 3px"></span>
                     <% end %>
                   </td> 
                   <td>
-                    <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
-                      <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+                    <% if r.booking_slot.booking_date >= Date.today %>
+                      <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
+                        <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+                      <% end %>
                     <% end %>
                   </td>                              
                 </tr>
@@ -62,11 +64,10 @@
             </table>
           </div>                  
         </div>  
-
       </div>
     </div>
-    <h4><%= paginate @reservations_by_created_at %></h4>
-
+    <div class="paginate"><%= paginate @reservations_by_created_at %></div>
+    <br><br>
   </div>
   <div class="clear"> </div>
 </div>

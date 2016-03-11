@@ -1,0 +1,748 @@
+Searching 2399 files for "paginate "
+
+/Users/cy/rails-app/app-5-clinic/app/assets/stylesheets/application.css.scss:
+   18  @import "bootstrap";
+   19  
+   20: div.paginate {
+   21    font-size: 1.4em;
+   22    font-weight: 500;
+   ..
+   24  }
+   25  
+   26: div.paginate span {
+   27    padding-left: 6px;
+   28    padding-right: 6px;  
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/index.html.erb:
+   43        </tbody>
+   44      </table>
+   45:     <h4><%= paginate @announcements %></h4>   
+   46      <br>
+   47    </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/index.html.erb:
+   47        </tbody>
+   48      </table>
+   49:     <h4><%= paginate @posts %></h4>   
+   50    </div>
+   51    <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/show.html.erb:
+   62        </tbody>
+   63      </table>
+   64:     <h4><%= paginate @posts %></h4>   
+   65         
+   66    </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/messages/index.html.erb:
+   83        <% end %>
+   84      <% end %>       
+   85:     <div class="paginate"><%= paginate @messages %></div>
+   86  
+   87      <% if logged_in_as_user? %>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/_member_show.html.erb:
+   84  </div>  
+   85  <% if member.any? && member.first.verified && !member.first.admin && !member.last.black  %>
+   86:   <div class="paginate"><%= paginate member %></div>
+   87  <% end %>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_list.html.erb:
+   68        </div>
+   69      </div>
+   70:     <h4><%= paginate @reservations_by_created_at %></h4>
+   71  
+   72    </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_list.html.erb:
+   68        </div>
+   69      </div>
+   70:     <h4><%= paginate @reservations_by_created_at %></h4>
+   71  
+   72    </div>
+
+9 matches across 8 files
+
+
+Searching 2399 files for "</div>
+  <div class="clear"> </div>"
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/index.html.erb:
+   45      <div class="paginate"><%= paginate @announcements %></div>
+   46      <br><br>
+   47:   </div>
+   48:   <div class="clear"> </div>
+   49  </div>
+   50  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/new.html.erb:
+    3      <h3>發表公告</h3>
+    4       <%= render 'form' %>
+    5:   </div>
+    6:   <div class="clear"> </div>
+    7  </div>
+    8  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/show.html.erb:
+   36      </div>
+   37      <br><br>
+   38:   </div>
+   39:   <div class="clear"> </div>
+   40  </div>
+   41  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/edit.html.erb:
+   27      </h3>                 
+   28         
+   29:   </div>
+   30:   <div class="clear"> </div>
+   31  </div>
+   32  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/index.html.erb:
+   49      <div class="paginate"><%= paginate @posts %></div>
+   50      <br><br>
+   51:   </div>
+   52:   <div class="clear"> </div>
+   53  </div>
+   54  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/show.html.erb:
+   64      <div class="paginate"><%= paginate @posts %></div>
+   65      <br><br>
+   66:   </div>
+   67:   <div class="clear"> </div>
+   68  </div>
+   69  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/messages/index.html.erb:
+  109      <% end %>
+  110      <br><br>
+  111:   </div>
+  112:   <div class="clear"> </div>
+  113  </div>
+  114  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/messages/show.html.erb:
+   94        <br><br>
+   95      <% end %>
+   96:   </div>
+   97:   <div class="clear"> </div>
+   98  </div>
+   99  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_body_reservation_s2.html.erb:
+   52      <% end %>
+   53        
+   54:   </div>
+   55:   <div class="clear"> </div>
+   56  </div>
+   57  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_body_reservation_s3.html.erb:
+   37      <%= link_to "前往查看預約記錄!", backstage_body_reservation_list_path, class: "btn btn-lg btn-primary" %>    
+   38        
+   39:   </div>
+   40:   <div class="clear"> </div>
+   41  </div>
+   42  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_hand_reservation_s2.html.erb:
+   52      <% end %>
+   53        
+   54:   </div>
+   55:   <div class="clear"> </div>
+   56  </div>
+   57  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_hand_reservation_s3.html.erb:
+   37      <%= link_to "前往查看預約記錄!", backstage_hand_reservation_list_path, class: "btn btn-lg btn-primary" %>    
+   38        
+   39:   </div>
+   40:   <div class="clear"> </div>
+   41  </div>
+   42  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_user.html.erb:
+   41        </div>
+   42      </div>
+   43:   </div>
+   44:   <div class="clear"> </div>
+   45  </div>
+   46  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/black.html.erb:
+   39      </table>    
+   40      </div>
+   41:   </div>
+   42:   <div class="clear"> </div>
+   43  </div>
+   44  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_list.html.erb:
+   69      <div class="paginate"><%= paginate @reservations_by_created_at %></div>
+   70      <br><br>
+   71:   </div>
+   72:   <div class="clear"> </div>
+   73  </div>
+   74  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_month.html.erb:
+   67  
+   68  
+   69:   </div>
+   70:   <div class="clear"> </div>
+   71  </div>
+   72  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_week.html.erb:
+  168      </table>
+  169    <br><br>
+  170:   </div>
+  171:   <div class="clear"> </div>
+  172  </div>
+  173  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/edit_body_reservation.html.erb:
+   23      <% end %>
+   24        
+   25:   </div>
+   26:   <div class="clear"> </div>
+   27  </div>
+   28  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/edit_hand_reservation.html.erb:
+   23      <% end %>
+   24        
+   25:   </div>
+   26:   <div class="clear"> </div>
+   27  </div>
+   28  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_list.html.erb:
+   69      <div class="paginate"><%= paginate @reservations_by_created_at %></div>
+   70      <br><br>
+   71:   </div>
+   72:   <div class="clear"> </div>
+   73  </div>
+   74  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_month.html.erb:
+   67  
+   68  
+   69:   </div>
+   70:   <div class="clear"> </div>
+   71  </div>
+   72  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_week.html.erb:
+  168      </table>
+  169    <br><br>
+  170:   </div>
+  171:   <div class="clear"> </div>
+  172  </div>
+  173  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/print_body_reservation.html.erb:
+   55  
+   56  
+   57:   </div>
+   58:   <div class="clear"> </div>
+   59  </div>
+   60  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/print_hand_reservation.html.erb:
+   55  
+   56  
+   57:   </div>
+   58:   <div class="clear"> </div>
+   59  </div>
+   60  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/user_all.html.erb:
+   48      </div>
+   49    <br><br>
+   50:   </div>
+   51:   <div class="clear"> </div>
+   52  </div>
+   53  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/user_show.html.erb:
+    7      <%= render partial: "/users/show_user_info" %>
+    8  
+    9:   </div>
+   10:   <div class="clear"> </div>
+   11  </div>
+   12  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/posts/new.html.erb:
+    3      <h3>發表專欄</h3>
+    4       <%= render 'form' %>
+    5:   </div>
+    6:   <div class="clear"> </div>
+    7  </div>
+    8  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/posts/show.html.erb:
+   39      </div>
+   40      <br><br>
+   41:   </div>
+   42:   <div class="clear"> </div>
+   43  </div>
+   44  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/body.html.erb:
+   74      <% end %>
+   75      <br><br><br> 
+   76:   </div>
+   77:   <div class="clear"> </div>
+   78  </div>
+   79  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/edit.html.erb:
+   21        </div>
+   22      <% end %>       
+   23:   </div>
+   24:   <div class="clear"> </div>
+   25  </div>
+   26  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/finish.html.erb:
+   38        <%= link_to "前往查看預約記錄!", show_user_reservations_path, class: "btn btn-primary" %>        
+   39      <% end %>   
+   40:   </div>
+   41:   <div class="clear"> </div>
+   42  </div>
+   43  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/hand.html.erb:
+   74      <% end %>
+   75      <br><br><br> 
+   76:   </div>
+   77:   <div class="clear"> </div>
+   78  </div>
+   79  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/new_body.html.erb:
+   33        <%= render 'body_form' %>
+   34      <% end %>  
+   35:   </div>
+   36:   <div class="clear"> </div>
+   37  </div>
+   38  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/new_hand.html.erb:
+   33        <%= render 'hand_form' %>
+   34      <% end %>  
+   35:   </div>
+   36:   <div class="clear"> </div>
+   37  </div>
+   38  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/show_user.html.erb:
+   69      </div>
+   70  
+   71:   </div>
+   72:   <div class="clear"> </div>
+   73  </div>
+   74  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/sessions/new.html.erb:
+   19      <br><br><br>
+   20  
+   21:   </div>
+   22:   <div class="clear"> </div>
+   23  </div>
+   24  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/change_password.html.erb:
+   22  
+   23      <br><br><br>
+   24:   </div>
+   25:   <div class="clear"> </div>
+   26  </div>
+   27  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/edit.html.erb:
+   73        <br><br><br>
+   74      </div>
+   75:   </div>
+   76:   <div class="clear"> </div>
+   77  </div>
+   78  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/enter_pin.html.erb:
+   39      </div>
+   40  
+   41:   </div>
+   42:   <div class="clear"> </div>
+   43  </div>
+   44  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/finish_register.html.erb:
+   42  
+   43  
+   44:   </div>
+   45:   <div class="clear"> </div>
+   46  </div>
+   47  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/new.html.erb:
+   61  
+   62  
+   63:   </div>
+   64:   <div class="clear"> </div>
+   65  </div>
+   66  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/show.html.erb:
+    3      <br><br>
+    4      <%= render partial: "/users/show_user_info" %>
+    5:   </div>
+    6:   <div class="clear"> </div>
+    7  </div>
+    8  <div class="clear"> </div>
+
+42 matches across 42 files
+
+
+Searching 2399 files for "</div>
+  <div class="clear"> </div>"
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/index.html.erb:
+   45      <div class="paginate"><%= paginate @announcements %></div>
+   46      <br><br>
+   47:   </div>
+   48:   <div class="clear"> </div>
+   49  </div>
+   50  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/new.html.erb:
+    4      <%= render 'form' %>
+    5      <br><br>   
+    6:   </div>
+    7:   <div class="clear"> </div>
+    8  </div>
+    9  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/announcements/show.html.erb:
+   36      </div>
+   37      <br><br>
+   38:   </div>
+   39:   <div class="clear"> </div>
+   40  </div>
+   41  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/edit.html.erb:
+   27      </h3>                 
+   28         
+   29:   </div>
+   30:   <div class="clear"> </div>
+   31  </div>
+   32  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/index.html.erb:
+   49      <div class="paginate"><%= paginate @posts %></div>
+   50      <br><br>
+   51:   </div>
+   52:   <div class="clear"> </div>
+   53  </div>
+   54  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/categories/show.html.erb:
+   64      <div class="paginate"><%= paginate @posts %></div>
+   65      <br><br>
+   66:   </div>
+   67:   <div class="clear"> </div>
+   68  </div>
+   69  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/messages/index.html.erb:
+  109      <% end %>
+  110      <br><br>
+  111:   </div>
+  112:   <div class="clear"> </div>
+  113  </div>
+  114  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/messages/show.html.erb:
+   94        <br><br>
+   95      <% end %>
+   96:   </div>
+   97:   <div class="clear"> </div>
+   98  </div>
+   99  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_body_reservation_s2.html.erb:
+   52      <% end %>
+   53        
+   54:   </div>
+   55:   <div class="clear"> </div>
+   56  </div>
+   57  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_body_reservation_s3.html.erb:
+   37      <%= link_to "前往查看預約記錄!", backstage_body_reservation_list_path, class: "btn btn-lg btn-primary" %>    
+   38        
+   39:   </div>
+   40:   <div class="clear"> </div>
+   41  </div>
+   42  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_hand_reservation_s2.html.erb:
+   52      <% end %>
+   53        
+   54:   </div>
+   55:   <div class="clear"> </div>
+   56  </div>
+   57  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_hand_reservation_s3.html.erb:
+   37      <%= link_to "前往查看預約記錄!", backstage_hand_reservation_list_path, class: "btn btn-lg btn-primary" %>    
+   38        
+   39:   </div>
+   40:   <div class="clear"> </div>
+   41  </div>
+   42  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/add_user.html.erb:
+   41        </div>
+   42      </div>
+   43:   </div>
+   44:   <div class="clear"> </div>
+   45  </div>
+   46  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/black.html.erb:
+   39      </table>    
+   40      </div>
+   41:   </div>
+   42:   <div class="clear"> </div>
+   43  </div>
+   44  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_list.html.erb:
+   69      <div class="paginate"><%= paginate @reservations_by_created_at %></div>
+   70      <br><br>
+   71:   </div>
+   72:   <div class="clear"> </div>
+   73  </div>
+   74  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_month.html.erb:
+   67  
+   68  
+   69:   </div>
+   70:   <div class="clear"> </div>
+   71  </div>
+   72  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/body_reservation_week.html.erb:
+  168      </table>
+  169    <br><br>
+  170:   </div>
+  171:   <div class="clear"> </div>
+  172  </div>
+  173  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/edit_body_reservation.html.erb:
+   23      <% end %>
+   24        
+   25:   </div>
+   26:   <div class="clear"> </div>
+   27  </div>
+   28  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/edit_hand_reservation.html.erb:
+   23      <% end %>
+   24        
+   25:   </div>
+   26:   <div class="clear"> </div>
+   27  </div>
+   28  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_list.html.erb:
+   69      <div class="paginate"><%= paginate @reservations_by_created_at %></div>
+   70      <br><br>
+   71:   </div>
+   72:   <div class="clear"> </div>
+   73  </div>
+   74  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_month.html.erb:
+   67  
+   68  
+   69:   </div>
+   70:   <div class="clear"> </div>
+   71  </div>
+   72  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/hand_reservation_week.html.erb:
+  168      </table>
+  169    <br><br>
+  170:   </div>
+  171:   <div class="clear"> </div>
+  172  </div>
+  173  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/print_body_reservation.html.erb:
+   55  
+   56  
+   57:   </div>
+   58:   <div class="clear"> </div>
+   59  </div>
+   60  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/print_hand_reservation.html.erb:
+   55  
+   56  
+   57:   </div>
+   58:   <div class="clear"> </div>
+   59  </div>
+   60  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/user_all.html.erb:
+   48      </div>
+   49    <br><br>
+   50:   </div>
+   51:   <div class="clear"> </div>
+   52  </div>
+   53  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/pages/user_show.html.erb:
+    7      <%= render partial: "/users/show_user_info" %>
+    8  
+    9:   </div>
+   10:   <div class="clear"> </div>
+   11  </div>
+   12  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/posts/new.html.erb:
+    3      <h3>發表專欄</h3>
+    4       <%= render 'form' %>
+    5:   </div>
+    6:   <div class="clear"> </div>
+    7  </div>
+    8  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/posts/show.html.erb:
+   39      </div>
+   40      <br><br>
+   41:   </div>
+   42:   <div class="clear"> </div>
+   43  </div>
+   44  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/body.html.erb:
+   74      <% end %>
+   75      <br><br><br> 
+   76:   </div>
+   77:   <div class="clear"> </div>
+   78  </div>
+   79  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/edit.html.erb:
+   21        </div>
+   22      <% end %>       
+   23:   </div>
+   24:   <div class="clear"> </div>
+   25  </div>
+   26  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/finish.html.erb:
+   38        <%= link_to "前往查看預約記錄!", show_user_reservations_path, class: "btn btn-primary" %>        
+   39      <% end %>   
+   40:   </div>
+   41:   <div class="clear"> </div>
+   42  </div>
+   43  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/hand.html.erb:
+   74      <% end %>
+   75      <br><br><br> 
+   76:   </div>
+   77:   <div class="clear"> </div>
+   78  </div>
+   79  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/new_body.html.erb:
+   33        <%= render 'body_form' %>
+   34      <% end %>  
+   35:   </div>
+   36:   <div class="clear"> </div>
+   37  </div>
+   38  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/new_hand.html.erb:
+   33        <%= render 'hand_form' %>
+   34      <% end %>  
+   35:   </div>
+   36:   <div class="clear"> </div>
+   37  </div>
+   38  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/reservations/show_user.html.erb:
+   69      </div>
+   70  
+   71:   </div>
+   72:   <div class="clear"> </div>
+   73  </div>
+   74  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/sessions/new.html.erb:
+   19      <br><br><br>
+   20  
+   21:   </div>
+   22:   <div class="clear"> </div>
+   23  </div>
+   24  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/change_password.html.erb:
+   22  
+   23      <br><br><br>
+   24:   </div>
+   25:   <div class="clear"> </div>
+   26  </div>
+   27  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/edit.html.erb:
+   73        <br><br><br>
+   74      </div>
+   75:   </div>
+   76:   <div class="clear"> </div>
+   77  </div>
+   78  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/enter_pin.html.erb:
+   39      </div>
+   40  
+   41:   </div>
+   42:   <div class="clear"> </div>
+   43  </div>
+   44  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/finish_register.html.erb:
+   42  
+   43  
+   44:   </div>
+   45:   <div class="clear"> </div>
+   46  </div>
+   47  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/new.html.erb:
+   61  
+   62  
+   63:   </div>
+   64:   <div class="clear"> </div>
+   65  </div>
+   66  <div class="clear"> </div>
+
+/Users/cy/rails-app/app-5-clinic/app/views/users/show.html.erb:
+    3      <br><br>
+    4      <%= render partial: "/users/show_user_info" %>
+    5:   </div>
+    6:   <div class="clear"> </div>
+    7  </div>
+    8  <div class="clear"> </div>
+
+42 matches across 42 files

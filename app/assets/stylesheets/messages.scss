@@ -1,3 +1,67 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#table-message thead tr th{
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #222222;
+}
+
+#table-message tbody tr td{
+    border: none;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    vertical-align: inherit;
+}
+
+.table-message-topic-title {
+  text-align: left;
+  padding-left: 0.8em;
+  font-weight: 600;
+  line-height: 2.0em;  
+  font-size: 1.4em;
+  color: #333333;  
+}
+
+
+.table-message-topic-date {
+  text-align: left;
+  padding-left: 1.1em;  
+  line-height: 2.0em;  
+  font-size: 1.1em;
+  color: #848484;  
+}
+
+.table-message-last-time {
+  text-align: center;
+  line-height: 2.0em;  
+  font-size: 1.2em;
+  padding-top: 0.3em;
+  color: #848484;  
+}
+
+.show-message-title {
+  font-weight: bold;
+  font-size: 1.6em;
+  line-height: 2.3em;    
+  color: #333333;    
+}
+
+.show-message-date {
+  font-size: 1.2em;
+  line-height: 1.8em;    
+  color: #848484;    
+}
+
+.show-message-content {
+  font-size: 1.2em;
+  line-height: 1.5em;    
+}
+
+.show-message-comment {
+  font-size: 1.2em;
+  line-height: 1.5em;      
+}
+

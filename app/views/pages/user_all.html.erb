@@ -19,6 +19,11 @@
             </a>
           </li>
           <li>
+            <a href="#black" data-toggle="tab">
+              <h4>黑名單(<%= @black_member_count %>)</h4>
+            </a>
+          </li>          
+          <li>
             <a href="#admin" data-toggle="tab">
               <h4>管理者(<%= @admin_member_count %>)</h4>
             </a>
@@ -28,18 +33,20 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane active" id="member">
-            <%= render partial: "member_show", locals: {member: @verified_member}  %>
+            <%= render partial: "member_show", locals: {member: @verified_member, show_black: false}  %>
           </div>            
           <div class="tab-pane" id="not_verified">
-            <%= render partial: "member_show", locals: {member: @not_verified_member}  %>
+            <%= render partial: "member_show", locals: {member: @not_verified_member, show_black: false}  %>
           </div>  
+          <div class="tab-pane" id="black">
+            <%= render partial: "member_show", locals: {member: @black_member, show_black: true}  %>
+          </div>            
           <div class="tab-pane" id="admin">
-            <%= render partial: "member_show", locals: {member: @admin_member}  %>
+            <%= render partial: "member_show", locals: {member: @admin_member, show_black: false}  %>
           </div>        
         </div>
     </div>
-
-
+  <br><br>
   </div>
   <div class="clear"> </div>
 </div>

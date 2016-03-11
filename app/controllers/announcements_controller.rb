@@ -4,10 +4,21 @@ class AnnouncementsController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index
-    @announcements = Announcement.page(params[:page]).per(10)     
+    if logged_in_as_admin?
+      @announcements = Announcement.page(params[:page]).per(10)  
+      @announcements_count = Announcement.count      
+    else
+      @announcements = Announcement.where("seeable = ?", true).page(params[:page]).per(10)       
+      @announcements_count = Announcement.where("seeable = ?", true).count            
+    end        
   end
   
   def show
+    if logged_in_as_admin?
+      @announcements_count = Announcement.count      
+    else
+      @announcements_count = Announcement.where("seeable = ?", true).count            
+    end            
   end
 
   def new
@@ -41,6 +52,16 @@ class AnnouncementsController < ApplicationController
     @announcement.destroy
     flash[:notice] = "您已刪除公告"           
     redirect_to announcements_path
+  end
+
+  def modify_seeable
+    @announcement = Announcement.find(params[:announcement])   
+    if @announcement.seeable 
+      @announcement.update(seeable: false)
+    else
+      @announcement.update(seeable: true)
+    end      
+    redirect_back_or_to root_path
   end
 
   private

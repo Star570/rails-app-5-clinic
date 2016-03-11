@@ -33,7 +33,19 @@
             <% else %>
               <%= f.input :verified, label:"可線上登錄", as: :boolean %>                                
             <% end %> 
-          </div>              
+          </div>  
+
+          <div class="form-group", style="margin-left: 20px; margin-top: 20px;">      
+            <% if @user.admin %>
+              <%= f.input :black, label:"黑名單", as: :boolean, disabled: true %>      
+            <% else %>
+                <% if @user.black %>
+                  <%= f.input :black, label:"黑名單", as: :boolean %> 
+                <% else %>
+                  <%= f.input :black, label:"黑名單 (至會員總覽設定)", as: :boolean, disabled: true %>                 
+                <% end %>
+            <% end %> 
+          </div>                            
 
         <% else %>
           <div class="form-group">      
@@ -58,7 +70,7 @@
         <br>                 
         <%= f.submit "確認", disable_with: 'Submitting...', class: "btn btn-primary"%>
       <% end %>          
-      <br><br><br>
+      <br><br>
     </div>
   </div>
   <div class="clear"> </div>

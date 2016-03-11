@@ -3,13 +3,25 @@ class CategoriesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   
   def index
-    @posts = Post.page(params[:page]).per(10)     
     @categories = Category.all
+    if logged_in_as_admin?
+      @posts = Post.page(params[:page]).per(10) 
+      @posts_count = Post.count      
+    else
+      @posts = Post.where("seeable = ?", true).page(params[:page]).per(10)       
+      @posts_count = Post.where("seeable = ?", true).count            
+    end    
   end
 
   def show
-    @posts = Post.all
     @categories = Category.all
+    if logged_in_as_admin?
+      @posts = @category.posts.page(params[:page]).per(10) 
+      @posts_count = Post.count      
+    else
+      @posts = @category.posts.where("seeable = ?", true).page(params[:page]).per(10)       
+      @posts_count = Post.where("seeable = ?", true).count         
+    end            
   end
 
   def create
@@ -17,7 +29,8 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to (:back)
     else
-      
+      flash[:alert] = "請填寫正確標題！"      
+      redirect_to (:back)      
     end
   end
 

@@ -4,6 +4,7 @@
     <%= link_to announcements_path, :style => font_bold_class(announcements_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>
       &nbsp&nbsp全部公告
+      (<%= @announcements_count %>)      
     <% end %>
   </li>
 </ul>

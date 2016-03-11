@@ -5,7 +5,7 @@
   <div class="service-content">
     <h3>新增會員</h3>
     <br>
-    <div class="row">
+    <div class="row" style="font-size:1.2em">
       <div class="col-md-8">
         <%= simple_form_for @user, :url => backstage_add_user_path, :method => :post do |f| %>
           <div class="form-group">      
@@ -35,11 +35,11 @@
             <%= f.input :verified, label:"可線上登錄", as: :boolean, input_html: {checked: false} %>       
           </div>               
           <br>                      
-          <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary"%>
+          <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-lg btn-primary"%>
         <% end %>          
-        <br><br><br>
       </div>
     </div>
+    <br><br>        
   </div>
   <div class="clear"> </div>
 </div>

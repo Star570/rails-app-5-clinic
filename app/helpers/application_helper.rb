@@ -63,6 +63,27 @@ module ApplicationHelper
     end
   end
 
+  def font_bold_class_check_controller(link_path)
+    link_controller = Rails.application.routes.recognize_path(link_path)[:controller]  
+    current_controller = params[:controller]
+
+    if (link_controller == current_controller) 
+      "color: black; font-weight: bold"
+    else
+      ""
+    end
+  end  
+
+  def font_bold_class_check_category_post(link_path)
+    current_controller = params[:controller]
+
+    if (current_controller == "categories") || (current_controller == "posts") 
+      "color: black; font-weight: bold"
+    else
+      ""
+    end
+  end  
+
   def font_bold_class_check_pages_controller
     link_controller = "pages"
     current_controller = params[:controller]
@@ -78,4 +99,15 @@ module ApplicationHelper
     end
   end
 
+  def font_bold_class_check_reservations_controller
+    link_controller = "reservations"
+    current_controller = params[:controller]
+    current_action = params[:action]
+
+    if (link_controller == current_controller) 
+      "color: black; font-weight: bold"
+    else
+      ""
+    end
+  end
 end

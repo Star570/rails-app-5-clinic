@@ -1,3 +1,28 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.table-member-show {
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+
+.table-reservation-list {
+  font-size: 1.1em;  
+}
+
+.table-reservation-week {
+  font-size: 1.1em;  
+}
+
+.table-black {
+  font-size: 1.1em;  
+}
+
+.table-member-show .btn-sm {
+  padding: 3px 10px;
+  font-size: 14px;  
+}
+
+.table-print {
+  font-size: 1.1em;
+}

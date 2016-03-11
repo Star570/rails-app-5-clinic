@@ -3,7 +3,7 @@
     <%= render partial: "reservation_sidebar" %>
   </div>            
   <div class="service-display">
-    <!-- Also have same form in add_reservation_s2.html.erb/edit.html.erb -->
+    <h3>修改<%= @reservation.booking_slot.booking_type == 0 ? "手療" : "體雕"%>描述</h3>        
     <br>
     <%= simple_form_for @reservation do |f| %>   
       <div class="col-xs-7">
@@ -19,7 +19,8 @@
           <%= f.submit "完成修改", disable_with: 'Submitting...', class: "btn btn-primary"%>     
         </div>
       </div>
-    <% end %>       
+    <% end %>     
+    <br><br>      
   </div>
   <div class="clear"> </div>
 </div>

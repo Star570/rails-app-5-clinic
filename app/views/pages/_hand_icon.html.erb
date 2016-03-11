@@ -1,0 +1,9 @@
+<% if @booking_slot.bookable %>
+  <%= link_to backstage_modify_hand_bookable_path(booking_slot:@booking_slot, bookable: false), :remote => true do %>
+    <span class="glyphicon glyphicon-ok"></span><br>
+  <% end %>
+<% else %>
+  <%= link_to backstage_modify_hand_bookable_path(booking_slot:@booking_slot, bookable: true), :remote => true do %>
+    <span class="glyphicon glyphicon-remove"></span><br>
+  <% end %>
+<% end %>

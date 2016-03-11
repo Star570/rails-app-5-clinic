@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   attr_accessor :be_admin
   default_scope {order('admin DESC, created_at DESC')}
 
@@ -9,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy        
 
   has_secure_password
+  # 要使用信箱, 手機, 市話都可以登入, 就一定要uniqueness
+
   validates :name,     presence: true, length: {minimum: 2, maximum: 4}
   validates :password, presence: true, on: :create, length: {minimum: 5}
   validates :password_confirmation, presence: true, on: :create, length: {minimum: 5}
@@ -68,5 +73,26 @@ class User < ActiveRecord::Base
       ""
     end
   end
+
+
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize.to_s
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end  
+
+  def resolve_friendly_id_conflict(candidates)
+      same_slug = User.where("slug like '#{name}-%'")
+      max_sequence = 0
+      same_slug.each do |s|
+        if s.slug.split("-").last.to_i > max_sequence
+          max_sequence = s.slug.split("-").last.to_i
+        end
+      end
+      max_sequence += 1
+      candidates.first + friendly_id_config.sequence_separator + max_sequence.to_s
+  end    
 
 end

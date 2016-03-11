@@ -1,17 +1,36 @@
 Rails.application.routes.draw do
   resources :categories
-  resources :posts
-  resources :announcements
-  resources :reservations, except: [:show] do
+
+  resources :posts do
     collection do
-      get :show_user  
-      get :finish
       get :modify_seeable
+    end
+  end
+
+  resources :announcements do
+    collection do
+      get :modify_seeable
+    end
+  end
+
+  resources :reservations, except: [:show, :index, :new, :create] do
+    collection do
+      get  :hand
+      get  :new_hand
+      post :create_hand      
+      get  :body
+      get  :new_body
+      post :create_body        
+      get  :show_user  
+      get  :finish
     end
   end
 
   resources :messages, except: [:edit, :update] do
     resources :comments
+    collection do
+      get :modify_seeable
+    end    
   end
 
   resources :users, only: [:show, :create, :edit, :update, :destroy] do
@@ -21,6 +40,10 @@ Rails.application.routes.draw do
       get :change_password   
       post :change_password_verify            
     end
+    collection do
+      get :black
+      get :set_black
+    end    
   end
   post 'users/verify_pin' => "users#verify_pin"
 
@@ -29,22 +52,36 @@ Rails.application.routes.draw do
   post 'login',    to: 'sessions#create'  
   get  'logout',   to: 'sessions#destroy'
 
-  get   'backstage/reservation_all',  to: 'pages#reservation_all'
-  get   'backstage/reservation_list', to: 'pages#reservation_list'  
-  get   'backstage/reservation_week', to: 'pages#reservation_week'  
-  get   'backstage/user_all',         to: 'pages#user_all'  
-  get   'backstage/user_show',        to: 'pages#user_show'    
-  get   'backstage/add_user',         to: 'pages#add_user'  
-  post  'backstage/add_user',         to: 'pages#create_user'  
-  get   'backstage/search_user',      to: 'pages#search_user'  
-  get   'backstage/modify_bookable',  to: 'pages#modify_bookable'  
+  get   'backstage/hand_reservation_month',  to: 'pages#hand_reservation_month'
+  get   'backstage/hand_reservation_list',   to: 'pages#hand_reservation_list'  
+  get   'backstage/hand_reservation_week',   to: 'pages#hand_reservation_week'  
+  get   'backstage/body_reservation_month',  to: 'pages#body_reservation_month'
+  get   'backstage/body_reservation_list',   to: 'pages#body_reservation_list'  
+  get   'backstage/body_reservation_week',   to: 'pages#body_reservation_week'
+  get   'backstage/user_all',                to: 'pages#user_all'  
+  get   'backstage/user_show',               to: 'pages#user_show'    
+  get   'backstage/add_user',                to: 'pages#add_user'  
+  post  'backstage/add_user',                to: 'pages#create_user'  
+  get   'backstage/search_user',             to: 'pages#search_user'  
+  get   'backstage/modify_hand_bookable',    to: 'pages#modify_hand_bookable'  
+  get   'backstage/modify_body_bookable',    to: 'pages#modify_body_bookable'  
 
-  get   'backstage/add_reservation_s1',  to: 'pages#add_reservation_s1'
-  get   'backstage/add_reservation_s2',  to: 'pages#add_reservation_s2'
-  post  'backstage/add_reservation_s2',  to: 'pages#create_reservation'  
-  get   'backstage/edit_reservation_s2', to: 'pages#edit_reservation_s2'
-  patch 'backstage/edit_reservation_s2', to: 'pages#edit_reservation'    
-  get   'backstage/add_reservation_s3',  to: 'pages#add_reservation_s3'
+  get   'backstage/add_hand_reservation_s1',      to: 'pages#add_hand_reservation_s1'
+  get   'backstage/add_hand_reservation_s2',      to: 'pages#add_hand_reservation_s2'
+  post  'backstage/add_hand_reservation_s2',      to: 'pages#create_hand_reservation'  
+  get   'backstage/add_hand_reservation_s3',      to: 'pages#add_hand_reservation_s3'  
+  get   'backstage/edit_hand_reservation',        to: 'pages#edit_hand_reservation'
+  patch 'backstage/edit_hand_reservation',        to: 'pages#update_hand_reservation'    
 
+  get   'backstage/add_body_reservation_s1',      to: 'pages#add_body_reservation_s1'
+  get   'backstage/add_body_reservation_s2',      to: 'pages#add_body_reservation_s2'
+  post  'backstage/add_body_reservation_s2',      to: 'pages#create_body_reservation'  
+  get   'backstage/add_body_reservation_s3',      to: 'pages#add_body_reservation_s3'  
+  get   'backstage/edit_body_reservation',        to: 'pages#edit_body_reservation'
+  patch 'backstage/edit_body_reservation',        to: 'pages#update_body_reservation'    
+
+  get   'backstage/print_hand_reservation',        to: 'pages#print_hand_reservation'
+  get   'backstage/print_body_reservation',        to: 'pages#print_body_reservation'
+  
   root 'announcements#index'
 end

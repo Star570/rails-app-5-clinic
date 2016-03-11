@@ -4,7 +4,7 @@
     <%= link_to categories_path, :style => font_bold_class(categories_path) do %>
       <span class="glyphicon glyphicon-chevron-right"></span>
       &nbsp&nbsp全部文章
-      (<%= @posts.count %>)
+      (<%= @posts_count %>)
     <% end %>
   </li>
   <% @categories.each do |c| %> 
@@ -12,7 +12,11 @@
       <%= link_to category_path(c), :style => font_bold_class(category_path(c)) do %>
         <span class="glyphicon glyphicon-chevron-right"></span>
         &nbsp&nbsp<%= c.name %>
-        (<%= c.posts.count %>)
+        <% if logged_in_as_admin? %>
+          (<%= c.posts.count %>)
+        <% else %>
+          (<%= c.posts.where("seeable = ?", true).count %>)
+        <% end %>          
       <% end %>
     </li>
   <% end %>

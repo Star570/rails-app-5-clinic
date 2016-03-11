@@ -3,9 +3,19 @@
     <%= render partial: "announcement_sidebar" %>
   </div>            
   <div class="service-content">
+
     <h3>
-      <%= @announcement.title %>
+      <%= link_to @announcement.title, announcement_path(@announcement) %>&nbsp&nbsp
       <% if logged_in_as_admin? %>
+        <% if @announcement.seeable %>
+          <%= link_to modify_seeable_announcements_path(announcement: @announcement) do %>
+            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>
+          <% end %>
+        <% else %>
+          <%= link_to modify_seeable_announcements_path(announcement: @announcement) do %>
+            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>
+          <% end %>              
+        <% end %>      
         <div class="pull-right">   
           <%= link_to edit_announcement_path(@announcement), class:"btn btn-xs btn-primary" do %>   
             <big><span class="glyphicon glyphicon-pencil"></span></big>
@@ -15,16 +25,16 @@
             <big><span class="glyphicon glyphicon-remove"></span></big>
           <% end %>    
         </div>                      
-      <% end %>
+      <% end %>       
     </h3>
-    <h4>
-      <span class="label label-default">
-        <%= show_date(@announcement.created_at) %>
-      </span>
-    </h4>
+    <div class="show-message-date">
+      <%= show_datetime(@announcement.updated_at) %>
+    </div>
     <br>
-    <p class="text-muted"><%= markdown @announcement.body %></p>
-       
+    <div class="show-message-content">    
+      <p class="text-muted"><%= markdown @announcement.body %></p>
+    </div>
+    <br><br>
   </div>
   <div class="clear"> </div>
 </div>

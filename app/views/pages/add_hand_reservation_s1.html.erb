@@ -3,6 +3,8 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
+    <h3>手療代客預約</h3>    
+    <br>         
     <div class="row">
       <div class="bs-wizard" style="border-bottom:0;">
         <div class="step-long bs-wizard-step complete"><!-- complete -->
@@ -39,21 +41,21 @@
           <% afternoon_count = booking_slots.select{|b| b.time_slot >= 24 and b.time_slot < 36}.count %>
           <% evenning_count = booking_slots.select{|b| b.time_slot >= 36}.count %>                                  
           <% if morning_count > 0 %>
-            <%= link_to backstage_add_reservation_s2_path(:date => date, :slot => "上午", :user => params[:user]) do %>
+            <%= link_to backstage_add_hand_reservation_s2_path(:date => date, :slot => "上午", :user => params[:user]) do %>
               上午 <%= "0" if morning_count < 10 %><%= morning_count %><br>
             <% end %>       
           <% else %>
               上午 <%= "0" if morning_count < 10 %><%= morning_count %><br>
           <% end %>
           <% if afternoon_count > 0 %>
-            <%= link_to backstage_add_reservation_s2_path(:date => date, :slot => "下午", :user => params[:user]) do %>
+            <%= link_to backstage_add_hand_reservation_s2_path(:date => date, :slot => "下午", :user => params[:user]) do %>
               下午 <%= "0" if afternoon_count < 10 %><%= afternoon_count %><br>
             <% end %>           
           <% else %>
               下午 <%= "0" if afternoon_count < 10 %><%= afternoon_count %><br>
           <% end %>
           <% if evenning_count > 0 %>
-            <%= link_to backstage_add_reservation_s2_path(:date => date, :slot => "晚上", :user => params[:user]) do %>
+            <%= link_to backstage_add_hand_reservation_s2_path(:date => date, :slot => "晚上", :user => params[:user]) do %>
               晚上 <%= "0" if evenning_count < 10 %><%= evenning_count %>
             <% end %>             
           <% else %>

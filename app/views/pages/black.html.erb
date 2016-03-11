@@ -1,0 +1,46 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "/pages/backstage_sidebar" %>
+  </div>        
+  <div class="service-content">
+    <h3>設定黑名單</h3>
+    <br>
+    <h4><%= @user.name %> 今日之前最後三筆預約記錄</h4>
+    <br>
+    <table class="table table-hover table-black">
+      <thead>
+        <tr>       
+          <th width="20%">預約日期</th>
+          <th width="10%">預約時段</th>          
+          <th width="20%">預計黑名單至</th>          
+          <th width="50%"></th>
+        </tr>
+      </thead>      
+      <tbody>
+        <tr>
+            <td style="vertical-align: middle;">今日</td>
+            <td style="vertical-align: middle;"></td>
+            <td style="vertical-align: middle;"><%= Date.today + 1.month %></td>
+            <td style="vertical-align: middle;">
+              <%= link_to "確認", set_black_users_path(user: @user, black_date: Date.today + 1.month), class: "btn btn-primary pull-right" %>
+            </td>          
+        </tr>
+        <% @reservations.each do |r| %>    
+          <tr>        
+            <td style="vertical-align: middle;"><%= r.booking_slot.booking_date %></td>
+            <td style="vertical-align: middle;"><%= show_time_slot(r.booking_slot.time_slot) %></td>
+            <td style="vertical-align: middle;"><%= r.booking_slot.booking_date + 1.month %></td>
+            <td style="vertical-align: middle;">
+              <%= link_to "確認", set_black_users_path(user: @user, black_date: r.booking_slot.booking_date + 1.month), class: "btn btn-primary pull-right" %>
+            </td>
+          </tr>
+        <% end %>  
+      </tbody>
+    </table>    
+    </div>
+    <br><br>        
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+

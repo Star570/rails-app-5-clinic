@@ -1,0 +1,71 @@
+<div class="services">         
+  <div class="service-sidebar">
+    <%= render partial: "backstage_sidebar" %>
+  </div>        
+  <div class="service-display">
+    <h3>體雕月曆</h3>
+    <br>
+    <div role="tabpanel">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+          <a href="#booked" data-toggle="tab"><h4>待診人數</h4></a>
+        </li>
+        <li>
+          <a href="#bookable" data-toggle="tab"><h4>保留名額</h4></a>
+        </li>          
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="booked">
+          <% @calendar_user = nil %>
+          <%= month_calendar do |date| %>
+            <%= date.strftime("%d") %><br>
+            <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
+            <div style="text-align: center;">              
+              <% if @booking_slots_hash[date] != nil %>                    
+                <%= link_to backstage_body_reservation_week_path(date: date, anchor: "morning") do %>
+                  <% if @booking_slots_hash[date][0] > 0 %>上午 <%= "0" if @booking_slots_hash[date][0] < 10 %><%= @booking_slots_hash[date][0] %><% end %><br>
+                <% end %>       
+                <%= link_to backstage_body_reservation_week_path(date: date, anchor: "afternoon") do %>
+                  <% if @booking_slots_hash[date][1] > 0 %>下午 <%= "0" if @booking_slots_hash[date][1] < 10 %><%= @booking_slots_hash[date][1] %><% end %><br>
+                <% end %>       
+                <%= link_to backstage_body_reservation_week_path(date: date, anchor: "evening") do %>
+                  <% if @booking_slots_hash[date][2] > 0 %>晚上 <%= "0" if @booking_slots_hash[date][2] < 10 %><%= @booking_slots_hash[date][2] %><% end %>
+                <% end %>                         
+              <% else %>
+                無名額<br><br><br>
+              <% end %>
+            </div>  
+          <% end %>
+        </div>          
+        
+        <div class="tab-pane" id="bookable">
+          <%= month_calendar do |date| %>
+            <%= date.strftime("%d") %><br>
+            <% booking_slots = @booking_slots.select{|b| b.booking_date == date} %>
+            <div style="text-align: center;"> 
+              <% if @booking_slots_hash[date] != nil %>                    
+                <%= link_to backstage_body_reservation_week_path(date: date, anchor: "morning") do %>
+                  <% if @booking_slots_hash[date][3] > 0 %>上午 <%= "0" if @booking_slots_hash[date][3] < 10 %><%= @booking_slots_hash[date][3] %><% end %><br>
+                <% end %>       
+                <%= link_to backstage_body_reservation_week_path(date: date, anchor: "afternoon") do %>
+                  <% if @booking_slots_hash[date][4] > 0 %>下午 <%= "0" if @booking_slots_hash[date][4] < 10 %><%= @booking_slots_hash[date][4] %><% end %><br>
+                <% end %>       
+                <%= link_to backstage_body_reservation_week_path(date: date, anchor: "evening") do %>
+                  <% if @booking_slots_hash[date][5] > 0 %>晚上 <%= "0" if @booking_slots_hash[date][5] < 10 %><%= @booking_slots_hash[date][5] %><% end %>
+                <% end %>               
+              <% else %>
+                無名額<br><br><br>
+              <% end %>
+            </div>  
+          <% end %>            
+        </div>
+      </div>
+    </div>
+    <br><br>    
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

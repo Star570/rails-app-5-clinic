@@ -12,19 +12,17 @@
 <hr>        
       
 <%= simple_form_for @post do |f| %>
-  <div class="form-group">   
-    <h4>
-      <%= f.input :category_id, label: '分類：', include_blank: false, 
-                   collection: @categories,
-                   label_method: :name,
-                   value_method: :id %>    
-    </h4>                   
+  <div class="form-group post-form">   
+    <%= f.input :category_id, label: '分類：', include_blank: false, 
+                 collection: @categories,
+                 label_method: :name,
+                 value_method: :id, input_html: { class: "form-control"} %>                    
     <br>    
-    <h4>  
-      <%= f.input :title, label:"標題", input_html: { class: "form-control"} %>       
-    </h4>                         
+  </div>    
+  <div class="form-group post-form">     
+    <%= f.input :title, label:"標題", input_html: { class: "form-control"} %>                              
   </div>            
-  <div class="form-group">  
+  <div class="form-group post-form">  
     <h4>
       <%= f.input :body, label:"內容", input_html: { class: "form-control", rows: "20", width: "80%"} %>
     </h4>      

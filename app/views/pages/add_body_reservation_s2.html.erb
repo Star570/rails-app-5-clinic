@@ -3,6 +3,8 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
+    <h3>體雕代客預約</h3>    
+    <br>       
     <div class="row">
       <div class="bs-wizard" style="border-bottom:0;">
         <div class="step-long bs-wizard-step complete"><!-- complete -->
@@ -27,8 +29,8 @@
     </div>
 <!-- Also have same form in reservations/_form.html.erb -->
     <br>
-    <%= simple_form_for @reservation, url: backstage_add_reservation_s2_path(user: @user) do |f| %>   
-      <div class="col-xs-6">
+    <%= simple_form_for @reservation, url: backstage_add_body_reservation_s2_path(user: @user) do |f| %>   
+      <div class="col-xs-8" style="font-size: 1.4em">
         <h4>管理者您好！
             <br><br>
             您想要幫[<%= @user.name %>]預約的日期是&nbsp<%= params[:date] %>&nbsp<%= params[:slot] %>時段
@@ -39,7 +41,7 @@
                        collection: @booking_slots.map{|k,v| v.first},
                        label_method: lambda { |b| 
                         "#{show_time_slot(b.time_slot)} 尚餘名額（#{@booking_slots[b.time_slot].count}）" },
-                       value_method: :id %>   
+                       value_method: :id, input_html: { class: "form-control"} %>   
           <br>
           <%= f.input :desc, label:"症狀描述：", input_html: { class: "form-control"} %>
           <br>    
@@ -48,7 +50,7 @@
         </div>   
       </div>          
     <% end %>
-      
+    <br><br>      
   </div>
   <div class="clear"> </div>
 </div>

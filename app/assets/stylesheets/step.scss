@@ -3,7 +3,7 @@
 .bs-wizard {padding: 0 0 10px 20px;}
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #d5d5d5; font-size: 16px;  margin-bottom: 5px; padding-left: 20px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #d5d5d5; font-size: 1.2em;  margin-bottom: 5px; padding-left: 20px;}
 .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #0099ff; top: 45px; margin-top: -15px; border-radius: 50%;} 
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #40b9fe; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 

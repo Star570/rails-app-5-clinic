@@ -10,7 +10,9 @@
 
   <%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %>
 
-  <% if start_date.month < Date.today.month + 6 %>
+  <% plus_month = current_user.admin ? 12 : 2 %>
+
+  <% if start_date.month < Date.today.month + plus_month %>
     <%= link_to start_date: date_range.last + 1.day, user: @calendar_user, anchor: "reservation_calender" do %>
       <span class="glyphicon glyphicon-chevron-right", style="top: 3px"></span>
     <% end %>

@@ -3,34 +3,41 @@
     <%= render partial: "reservation_sidebar" %>
   </div>            
   <div class="service-display">
-    <div class="row">
-      <div class="bs-wizard" style="border-bottom:0;">
-        <div class="step-long bs-wizard-step complete">
-          <div class="text-center bs-wizard-stepnum">點選預約日期</div>
-          <div class="progress"><div class="progress-bar"></div></div>
-          <span class="bs-wizard-dot"></span>
+    <h3><%= @reservation.booking_slot.booking_type == 0 ? "手療" : "體雕" %>預約系統</h3>    
+    <br> 
+    <% if current_user.black %>
+      <h4>您至 <%= current_user.black_date %> 前無法預約，請電洽。</h4>
+    <% else %>       
+      <div class="row">
+        <div class="bs-wizard" style="border-bottom:0;">
+          <div class="step-long bs-wizard-step complete">
+            <div class="text-center bs-wizard-stepnum">點選預約日期</div>
+            <div class="progress"><div class="progress-bar"></div></div>
+            <span class="bs-wizard-dot"></span>
+          </div>
+          
+          <div class="step-long bs-wizard-step complete"><!-- complete -->
+            <div class="text-center bs-wizard-stepnum">點選預約時段</div>
+            <div class="progress"><div class="progress-bar"></div></div>
+            <span class="bs-wizard-dot"></span>
+          </div>
+          
+          <div class="step-long bs-wizard-step complete"><!-- complete -->
+            <div class="text-center bs-wizard-stepnum">完成預約</div>
+            <div class="progress"><div class="progress-bar"></div></div>
+            <span class="bs-wizard-dot"></span>
+            <span class="bs-wizard-dot"></span>
+          </div>
         </div>
-        
-        <div class="step-long bs-wizard-step complete"><!-- complete -->
-          <div class="text-center bs-wizard-stepnum">點選預約時段</div>
-          <div class="progress"><div class="progress-bar"></div></div>
-          <span class="bs-wizard-dot"></span>
-        </div>
-        
-        <div class="step-long bs-wizard-step complete"><!-- complete -->
-          <div class="text-center bs-wizard-stepnum">完成預約</div>
-          <div class="progress"><div class="progress-bar"></div></div>
-          <span class="bs-wizard-dot"></span>
-          <span class="bs-wizard-dot"></span>
-        </div>
-      </div>
-    </div>        
-    <h4><%= current_user.name %>您好！
-        <br><br>
-        您已預約成功&nbsp&nbsp<%= params[:date] %> <%= show_time_slot(params[:slot].to_i) %>
-    </h4>   
-    <br>
-    <%= link_to "前往查看預約記錄!", show_user_reservations_path, class: "btn btn-primary" %>          
+      </div>        
+      <h3><%= current_user.name %>您好！
+          <br><br>
+          您已預約成功<%= @reservation.booking_slot.booking_type == 0 ? "手療" : "體雕" %>療程&nbsp&nbsp<%= params[:date] %> <%= show_time_slot(params[:slot].to_i) %>
+      </h3>   
+      <br>
+      <%= link_to "前往查看預約記錄!", show_user_reservations_path, class: "btn btn-primary" %>        
+    <% end %>   
+    <br><br>    
   </div>
   <div class="clear"> </div>
 </div>

@@ -1,20 +1,27 @@
 <div class="table-responsive">
-  <table class="table table-hover sortable">
+  <table class="table table-hover sortable table-member-show">
     <thead>
       <tr>
         <th width="5%"></th>            
         <th width="7%">名稱</th>
         <th width="17%">電郵</th>          
         <th width="13%">手機/市話</th>
-        <th width="8%">待診療</th>               
-        <th width="8%">總預約</th>
+        <th width="7%">待診療</th>               
+        <th width="7%">總預約</th>
         <% if member.any? && member.first.admin %>
-          <th width="8%">回覆數</th>
+          <th width="7%">回覆數</th>
         <% else %>
-          <th width="8%">留言數</th>
+          <th width="7%">留言數</th>
         <% end %>            
-        <th width="18%">會員建立</th>    
-        <th width="11%">幫預約</th>                                         
+        <th width="18%">
+        <% if show_black %>
+          黑名單
+        <% else %>
+          會員建立
+        <% end %>
+        </th>    
+        <th width="11%">幫預約</th>    
+        <th width="3%"></th>                                             
         <th width="5%"></th>    
       </tr>
     </thead>
@@ -37,12 +44,33 @@
             <td style="vertical-align: middle;"><%= u.messages.count %></td>
           <% end %>  
 
-          <td style="vertical-align: middle;"><%= show_datetime(u.created_at) %></td>  
+          <td style="vertical-align: middle;">
+            <% if show_black %>   
+              <%= show_datetime(u.black_date) %>
+            <% else %>         
+              <%= show_datetime(u.created_at) %>
+            <% end %>
+          </td>  
           <% if u.admin %>
+          <td style="vertical-align: middle;"></td>   
             <td style="vertical-align: middle;"></td>                        
             <td style="vertical-align: middle;"></td>
           <% else %>              
-            <td style="vertical-align: middle;"><%= link_to "前往預約", backstage_add_reservation_s1_path(user: u), class: "btn btn-sm btn-primary" %></td>        
+            <td style="vertical-align: middle;">
+              <%= link_to "手療", backstage_add_hand_reservation_s1_path(user: u), class: "btn btn-sm btn-primary" %>
+              <%= link_to "體雕", backstage_add_body_reservation_s1_path(user: u), class: "btn btn-sm btn-primary" %>
+            </td>    
+            <td style="vertical-align: middle;">
+              <% if u.black %>
+                <%= link_to black_users_path(user: u) do %>
+                  <span class="glyphicon glyphicon-thumbs-down" style="top: 3px; color: #ccc"></span>
+                <% end %>
+              <% else %>
+                <%= link_to black_users_path(user: u) do %>
+                  <span class="glyphicon glyphicon-thumbs-up" style="top: 3px; color: #337ab7"></span>
+                <% end %>              
+              <% end %>
+            </td>       
             <td style="vertical-align: middle;">
               <%= link_to user_path(u), method: :delete, data: {confirm: "你確定刪除此用戶嗎?"} do %>
                 <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
@@ -54,6 +82,6 @@
     </tbody>
   </table>
 </div>  
-<% if member.any? && member.first.verified && !member.first.admin  %>
-  <h4><%= paginate member %></h4>
+<% if member.any? && member.first.verified && !member.first.admin && !member.last.black  %>
+  <div class="paginate"><%= paginate member %></div>
 <% end %>

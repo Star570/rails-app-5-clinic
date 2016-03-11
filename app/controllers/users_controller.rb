@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   # rescue_from Twilio::REST::RequestError, with: :phone_number_error
   before_action :find_user, only: [:edit, :update, :destroy, :enter_pin, :finish_register, :change_password, :change_password_verify]
   before_action :require_user_or_admin, only: [:edit, :update, :change_password, :change_password_verify]
-  before_action :require_admin, only: [:destroy]  
+  before_action :require_admin, only: [:black, :set_black, :destroy]  
 
 
   def show
-    if (current_user && current_user.id.to_s == params[:id])
+    if (current_user && current_user.slug == params[:id])
       @user = User.find(params[:id])
     else
       flash[:alert] = "必須是會員本人！"
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user.admin = (user_params[:be_admin] == "1") ? true : false
     @user.home_pre = params["home_pre"]
     @user.home_post = params["home_post"]     
-    find_home_exist = User.find_by(home_post: params["home_post"])
+    find_home_exist = params["home_post"]!= "" && User.find_by(home_post: params["home_post"])
 
     if find_home_exist
       flash[:alert] = "市話已經存在."        
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @user.home_pre = params["home_pre"] if params["home_pre"]
     @user.home_post = params["home_post"] if params["home_post"]  
 
-    if @user.phone == "" && @user.email == "" && @user.home_post == ""
+    if user_params[:email] == "" && user_params[:phone] == "" && @user.home_post == ""
       flash[:alert] = "Email與手機或市話不可全部空白."        
       render :edit         
     elsif find_home_exist
@@ -114,10 +114,29 @@ class UsersController < ApplicationController
     end 
   end  
 
+  def black
+    @user = User.find(params[:user])  
+    @reservations = @user.reservations.be_served.first(3)
+    if @user.black 
+      @user.update(black: false)
+      redirect_back_or_to root_path
+    else
+      render "pages/black"
+    end      
+    
+  end
+  
+  def set_black
+    @user = User.find(params[:user])  
+    @user.update(black: true)
+    @user.update(black_date: Date.parse(params[:black_date]))
+    redirect_to backstage_user_show_path(user: @user)
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :be_admin, :pin, :verified)
+    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :be_admin, :pin, :verified, :black)
   end
 
   def update_user_password

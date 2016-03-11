@@ -10,92 +10,64 @@
      </ul>
   </div>            
   <div class="service-content">
-    <h3>最新留言</h3>
+    <h3>留言內容</h3>
+    <br>
     <% if logged_in_as_admin? || @message.seeable || (!@message.seeable && @message.user == current_user) %>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th width="68%" style="text-align:left">問題</th>
-            <th width="10%">發問人</th>
-            <th width="20%">發問時間</th>      
-            <th width="1%"></th>      
-            <th width="1%"></th>                                               
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align:left"><%= link_to @message.title, message_path(@message) %></td>
-            <% if @message.anonymous && !logged_in_as_admin? %> 
-              <td>匿名</td>
-            <% else %>
-              <% if logged_in_as_admin? %>
-                <td><%= link_to @message.user.name, backstage_user_show_path(user: @message.user) %></td>
-              <% else %>
-                <td><%= @message.user.name %></td>
-              <% end %>  
-
+      <div class="show-message-title">
+        <%= link_to @message.title, message_path(@message) %>
+        <% if logged_in_as_admin? %>
+          <% if @message.seeable %>
+            <%= link_to modify_seeable_messages_path(message: @message) do %>
+              <span class="glyphicon glyphicon-eye-open" style="font-size: 1.1em; top: 0.2em; color: black; padding-left: 1.0em"></span>
             <% end %>
-            
-            <td><%= show_date(@message.created_at) %></td>
-            <td>
-              <% if logged_in_as_admin? %>  
-                  <% if @message.seeable %>
-                    <%= link_to modify_seeable_reservations_path(message: @message) do %>
-                      <span class="glyphicon glyphicon-eye-open" style="padding-top: 3px; color: black"></span>
-                    <% end %>
-                  <% else %>
-                    <%= link_to modify_seeable_reservations_path(message: @message) do %>
-                      <span class="glyphicon glyphicon-eye-close" style="padding-top: 3px; color: #ccc"></span>
-                    <% end %>              
-                  <% end %>
-              <% end %>
-            </td>             
-            <td>
-              <% if logged_in_as_admin? %>  
-                <%= link_to message_path(@message), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
-                  <span class="glyphicon glyphicon-remove", style="padding-top: 3px"></span>
-                <% end %>
-              <% end %>
-            </td>  
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td><%= simple_format @message.body %>  </td>      
-            <td></td>              
-            <td></td>
-            <td></td>
-          </tr>              
-        </tfoot>              
-      </table>
+          <% else %>
+            <%= link_to modify_seeable_messages_path(message: @message) do %>
+              <span class="glyphicon glyphicon-eye-close" style="font-size: 1.1em; top: 0.2em; color: #ccc; padding-left: 1.0em"></span>
+            <% end %>              
+          <% end %>
+          <%= link_to message_path(@message), method: :delete, data: {confirm: "你確定刪除留言嗎?"} do %>
+            <span class="glyphicon glyphicon-remove" style="font-size: 1.1em; top: 0.2em; padding-left: 0.3em"></span>
+          <% end %>          
+        <% end %>        
+      </div>
+      <div class="show-message-date">
+       <% if @message.anonymous && !logged_in_as_admin? %>  
+          匿名，
+        <% else %>
+          <% if logged_in_as_admin? %>
+            <%= link_to @message.user.name, backstage_user_show_path(user: @message.user) %>，
+          <% else %>
+            <%= @message.user.name %>，
+          <% end %>                
+        <% end %>     
+        <%= show_datetime(@message.created_at) %>
+      </div>
+      <br>
+      <div class="show-message-content">
+        <%= simple_format @message.body %> 
+      </div>
 
       <% if @message.comments.empty? %> 
         <% if logged_in_as_admin? %>  
          <br><hr>
           <%= simple_form_for [@message, @message.comments.new] do |f| %>       
-            <div class="form-group">      
+            <div class="form-group" style="font-size: 1.3em">      
               <%= f.input :content, label:"回覆顧客內容：", input_html: { class: "form-control", rows: "20", width: "80%"} %>
             </div>
             <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary" %>
           <% end %>    
-        <% end %>    
+        <% end %> 
+        <br><br>   
       <% else %>    
         <br>     
         <h3>回覆</h3>
 
-        <table class="table table-hover">
-        <thead>
-          <tr>
-            <th width="79%" style="text-align:left">回覆</th>
-            <th width="20%">回覆時間</th>      
-            <th width="1%"></th>                                      
-          </tr>
-        </thead>            
+        <table class="table table-hover show-message-content">         
           <tbody>
             <% @message.comments.each do |c| %>
               <tr>
-                <td style="text-align:left"><%= simple_format (c.content + " <small>by 管理員</small>".html_safe) %> </td>
-                <td><%= show_date(c.created_at) %></td>
+                <td style="text-align:left"><%= simple_format (c.content) %> </td>
+                <td><%= time_ago_in_words(c.created_at) %>前</td>
                 <td>
                   <% if logged_in_as_admin? %>  
                     <span class="pull-right">
@@ -112,7 +84,7 @@
         <% if logged_in_as_admin? %>  
           <br><br>
           <%= simple_form_for [@message, @message.comments.new] do |f| %>       
-            <div class="form-group">      
+            <div class="form-group" style="font-size: 1.3em">      
               <%= f.input :content, label:"補充回覆：", input_html: { class: "form-control", rows: "20", width: "80%"} %>
             </div>
             <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-primary" %>
@@ -120,6 +92,7 @@
         <% end %>
       <% end %>
     <% end %>
+    <br><br>
   </div>
   <div class="clear"> </div>
 </div>

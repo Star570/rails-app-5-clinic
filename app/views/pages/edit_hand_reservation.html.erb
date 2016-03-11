@@ -3,12 +3,13 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
+    <h3>修改手療描述</h3>        
     <br>
-    <%= simple_form_for @reservation, url: backstage_edit_reservation_s2_path(r: @reservation) do |f| %>   
-      <div class="col-xs-7">
+    <%= simple_form_for @reservation, url: backstage_edit_hand_reservation_path(r: @reservation) do |f| %>   
+      <div class="col-xs-7" style="font-size:1.2em">
         <h4>管理者您好！
             <br><br>
-            此筆預約日期是&nbsp<%= @reservation.booking_slot.booking_date %>&nbsp<%=show_time_slot(@reservation.booking_slot.time_slot) %>時段
+            此筆是客人 <%= @reservation.user.name %> 預約 <%= @reservation.booking_slot.booking_date %>&nbsp<%=show_time_slot(@reservation.booking_slot.time_slot) %> 時段
         </h4>      
         <br>
 
@@ -20,7 +21,7 @@
         </div>   
       </div>          
     <% end %>
-      
+    <br><br>          
   </div>
   <div class="clear"> </div>
 </div>

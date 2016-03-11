@@ -1,3 +1,6 @@
+.simple-calendar table thead tr th {text-align:left; font-weight: bold;}
+.simple-calendar table tbody tr td {text-align:left}
+
 .simple-calendar {
   table {
     -webkit-border-horizontal-spacing: 0px;
@@ -8,6 +11,7 @@
     box-sizing: border-box;
     max-width: 100%;
     width: 100%;
+    font-size: 1.1em;
   }
 
   tr {
@@ -47,6 +51,7 @@
 
   .day {
     height: 80px;
+    padding-bottom: 20px;
   }
 
   .wday-0 {}
@@ -61,7 +66,16 @@
     background: #FFFFC0
   }
 
-  .past {}
+  .past {
+    background: #CCC;
+    color: #888;
+  }
+
+  .past div a {
+    color: #AAA;
+    text-decoration: none;
+  }  
+
   .future {}
 
   .start-date {}

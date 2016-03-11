@@ -3,22 +3,24 @@
     <%= render partial: "backstage_sidebar" %>
   </div>        
   <div class="service-display">
-    <h3>當週手療</h3>
+    <h3>當週手療&nbsp&nbsp&nbsp
+      <%= link_to "列印", backstage_print_hand_reservation_path(date: @date), class: "btn btn-default", target: "_blank"  %>
+    </h3>
     <br>
-    <table class="table table-hover">
+    <table class="table table-hover table-reservation-week">
       <thead>
         <tr>
           <th width="10%" style="vertical-align: middle;">
             <h4>
               <% if @booking_dates_pre_count > 0 %>
-                <%= link_to backstage_reservation_week_path(date: @date-7) do %>
+                <%= link_to backstage_hand_reservation_week_path(date: @date-7) do %>
                   上週<br>
                 <% end %>          
               <% else %>      
                 上週<br>
               <% end %>
               <% if @booking_dates_nxt_count > 0 %>
-                <%= link_to backstage_reservation_week_path(date: @date+7) do %>
+                <%= link_to backstage_hand_reservation_week_path(date: @date+7) do %>
                   下週
                 <% end %>                
               <% else %>
@@ -73,10 +75,10 @@
                 <span class="glyphicon glyphicon-ok-circle" style="font-size: 19px; top: 2px; color: #bbb"></span>
                 <span class="glyphicon glyphicon-remove-circle" style="font-size: 19px; top: 2px; color: #bbb"></span>
               <% else %>
-                <%= link_to backstage_modify_bookable_path(booking_slot: "yes", bookable: false, date: date) do %>
+                <%= link_to backstage_modify_hand_bookable_path(booking_slot: "yes", bookable: false, date: date) do %>
                   <span class="glyphicon glyphicon-ok-circle" style="font-size: 19px; top: 2px"></span>          
                 <% end %>              
-                <%= link_to backstage_modify_bookable_path(booking_slot: "no", bookable: false, date: date) do %>
+                <%= link_to backstage_modify_hand_bookable_path(booking_slot: "no", bookable: false, date: date) do %>
                   <span class="glyphicon glyphicon-remove-circle" style="font-size: 19px; top: 2px"></span>
                 <% end %> 
               <% end %>   
@@ -89,7 +91,7 @@
           <% end %>               
         </tr>
 
-        <% BookingSlot.available_slot.each do |time_slot| %>
+        <% BookingSlot.available_hand_slot.each do |time_slot| %>
           <% if time_slot == 20 %> 
             <tr id="morning" style="background-color: grey"> 
               <% 8.times do %>
@@ -133,7 +135,7 @@
                       <% if date < Date.today %>
                         <span class="glyphicon glyphicon-ok" style="color: #bbb"></span><br>                        
                       <% else %>
-                        <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: false), :remote => true do %>
+                        <%= link_to backstage_modify_hand_bookable_path(booking_slot: b[1], bookable: false), :remote => true do %>
                           <span class="glyphicon glyphicon-ok"></span><br>
                         <% end %>                        
                       <% end %>
@@ -143,7 +145,7 @@
                       <% if date < Date.today %>
                         <span class="glyphicon glyphicon-remove" style="color: #bbb"></span><br>    
                       <% else %>
-                        <%= link_to backstage_modify_bookable_path(booking_slot: b[1], bookable: true), :remote => true do %>
+                        <%= link_to backstage_modify_hand_bookable_path(booking_slot: b[1], bookable: true), :remote => true do %>
                           <span class="glyphicon glyphicon-remove"></span><br>
                         <% end %>                                           
                       <% end %>
@@ -164,7 +166,7 @@
 
       </tbody>
     </table>
-
+  <br><br>
   </div>
   <div class="clear"> </div>
 </div>

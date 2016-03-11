@@ -3,29 +3,41 @@
     <%= render partial: "categories/category_sidebar" %>
   </div>            
   <div class="service-content">
+
     <h3>
-      <%= @post.title %>
-      <% if logged_in_as_admin? %>          
+      <%= link_to @post.title, post_path(@post) %>&nbsp&nbsp   
+      <% if logged_in_as_admin? %>        
+        <% if @post.seeable %>
+          <%= link_to modify_seeable_posts_path(post: @post) do %>
+            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>
+          <% end %>
+        <% else %>
+          <%= link_to modify_seeable_posts_path(post: @post) do %>
+            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>
+          <% end %>              
+        <% end %>                   
         <div class="pull-right">   
           <%= link_to edit_post_path(@post), class:"btn btn-xs btn-primary" do %>   
             <big><span class="glyphicon glyphicon-pencil"></span></big>
           <% end %> 
           <%= link_to post_path(@post), 
-              method: :delete, data: {confirm: "你確定刪除文章嗎?"}, class:"btn btn-xs btn-primary" do %>
-            <big><span class="glyphicon glyphicon-remove", style="top: 3px"></span></big>
+              method: :delete, data: {confirm: "你確定刪除此專欄嗎?"}, class:"btn btn-xs btn-primary" do %>
+            <big><span class="glyphicon glyphicon-remove"></span></big>
           <% end %>    
         </div>  
       <% end %>            
     </h3>
-    <h4>
-      <span class="label label-default">
-        <%= show_date(@post.created_at) %>
-        【<%= @post.category.name %>】
-      </span>
-    </h4>
+    <div class="show-message-date">
+      <span class="label label-default" style="font-size:1.0em;">
+          <%= @post.category.name %>
+      </span>           
+      &nbsp&nbsp&nbsp<%= show_datetime(@post.updated_at) %>  
+    </div>
     <br>
-    <p class="text-muted"><%= markdown @post.body %></p>
-       
+    <div class="show-message-content">    
+      <p class="text-muted"><%= markdown @post.body %></p>
+    </div>
+    <br><br>
   </div>
   <div class="clear"> </div>
 </div>

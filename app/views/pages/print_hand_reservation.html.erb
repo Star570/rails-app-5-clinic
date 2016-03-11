@@ -1,0 +1,60 @@
+<div class="services">         
+  <div class="service-wide">
+    <h3>當週手療客人名單</h3>
+    <br>
+    <table class="table table-hover table-print">
+      <thead>
+        <tr>
+          <th width="5%">時段</th>
+          <th width="8%">姓名</th>
+          <th width="16%">Email</th>
+          <th width="16%">手機</th>                  
+          <th width="16%">市話</th>       
+          <th>病情描述</th>
+        </tr>
+      </thead>        
+      <tbody>
+        <% @booking_dates.each do |date| %>
+          <tr style="background-color: #bbb;"><td colspan="6" style="text-align: left; line-height: 0.2em;"><%= show_date(date) %>（星期<%= @dayOfWeek[date.strftime("%w").to_i] %>）</td></tr>
+          <% b_array = @booking_slots.where(:booking_date => date) %>
+          <% if b_array.count == 0 %>
+            <tr><td colspan="6" style="text-align: left">無預約</td></tr>
+          <% else %>
+            <% b_array.each do |b| %>            
+              <tr>
+                <td style="vertical-align: middle;"><%= show_time_slot(b.time_slot) %></td>
+                <td style="vertical-align: middle;"><%= b.reservations.first.user.name %></td>
+                <td style="vertical-align: middle;">
+                 <% if b.reservations.first.user.email && b.reservations.first.user.email != "" %>
+                    <%= b.reservations.first.user.email %>
+                  <% else %>
+                    無Email
+                  <% end %>    
+                </td>              
+                <td style="vertical-align: middle;">
+                  <% if b.reservations.first.user.phone && b.reservations.first.user.phone != "" %>
+                    <%= b.reservations.first.user.phone[0..3] %>-<%= b.reservations.first.user.phone[4..6] %>-<%= b.reservations.first.user.phone[7..9] %>
+                  <% else %>
+                    無手機
+                  <% end %>      
+                </td>                
+                <td style="vertical-align: middle;">
+                  <% if b.reservations.first.user.home_post && b.reservations.first.user.home_post != "" %>
+                    <%= b.reservations.first.user.home_pre %>-<%= b.reservations.first.user.home_post %>                    
+                  <% else %>
+                    無市話
+                  <% end %>
+                </td>      
+                <td><%= b.reservations.first.desc %></td>                                       
+              </tr>
+            <% end %>
+          <% end %> 
+        <% end %> 
+      </tbody>
+    </table>
+    <br><br>    
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+
