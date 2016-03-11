@@ -36,6 +36,14 @@ test:
 #   <<: *default
 #   database: clinic_test
 
+#production:
+#  <<: *default
+#  database: db/production.sqlite3
+
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: cychen
+  password: 
+  database: clinic_production
