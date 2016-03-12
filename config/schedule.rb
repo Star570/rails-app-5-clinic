@@ -6,6 +6,6 @@ def local(time)
   TZInfo::Timezone.get("Asia/Taipei").local_to_utc(Time.parse(time))
 end
 
-every 1.day, :at => local("8:05 pm") do
+every 1.day, :at => local("8:00 am") do
   rake "slot:generate"
 end
