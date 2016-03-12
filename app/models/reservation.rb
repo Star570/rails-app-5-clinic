@@ -3,7 +3,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :booking_slot  
 
   default_scope {joins(:booking_slot).order('booking_date DESC, time_slot ASC')}
-  scope :to_be_served, -> { joins(:booking_slot).where("booking_date >= ?", Date.today) }
+  scope :to_be_served, -> { joins(:booking_slot).where("booking_date > ?", Date.today) }
   scope :be_served, -> { joins(:booking_slot).where("booking_date <= ?", Date.today) }
 
   after_save :update_is_booked

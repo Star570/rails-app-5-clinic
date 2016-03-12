@@ -37,7 +37,7 @@
         <%= date.strftime("%d") %><br>
         <% booking_slots = @booking_slots.select{|b| b.booking_date == date and b.bookable == true and b.is_booked == false } %>
         <div style="text-align: center;"> 
-          <% if date < Date.today %>
+          <% if date <= Date.today %>
             N/A<br><br><br>
           <% elsif booking_slots.count > 0 %>
 

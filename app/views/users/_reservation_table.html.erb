@@ -32,8 +32,10 @@
         <% end %>
       </td>  
       <td>
-        <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
-          <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+        <% if r.booking_slot.booking_date > Date.today %>
+          <%= link_to reservation_path(r), method: :delete, data: {confirm: "你確定刪除預約嗎?"} do %>
+            <span class="glyphicon glyphicon-remove", style="top: 3px"></span>
+          <% end %>          
         <% end %>
       </td>                              
     </tr>
