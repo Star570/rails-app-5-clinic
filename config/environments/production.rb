@@ -77,14 +77,24 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => "cy-app-5-clinic.herokuapp.com" }
+  #config.action_mailer.default_url_options = { :host => "cy-app-5-clinic.herokuapp.com" }
+  config.action_mailer.default_url_options = { :host => ENV['DEFAULT_URL'] }
+
   config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :port           => ENV['MAILGUN_SMTP_PORT'],
+  #   :address        => ENV['MAILGUN_SMTP_SERVER'],
+  #   :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+  #   :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+  #   :domain         => 'cy-app-5-clinic.herokuapp.com/', #eg: 'yourappname.herokuapp.com'
+  #   :authentication => :plain,
+  # }
   config.action_mailer.smtp_settings = {
-    :port           => ENV['MAILGUN_SMTP_PORT'],
-    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :port           => '587',
+    :address        => 'smtp.mailgun.org',
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'cy-app-5-clinic.herokuapp.com/', #eg: 'yourappname.herokuapp.com'
+    :domain         => 'sandbox1a796429e17d4bb5ad90dd00a1fadba2.mailgun.org', #eg: 'yourappname.herokuapp.com'
     :authentication => :plain,
   }
 

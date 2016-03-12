@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
 
   def verify_pin(entered_pin) 
     update(verified: true) if self.pin == entered_pin 
+
   end
 
   def home_phone

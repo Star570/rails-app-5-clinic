@@ -20,17 +20,36 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    find_user = User.find_by(email: user_params[:email], verified: false)
+
     @user.admin = (user_params[:be_admin] == "1") ? true : false
     @user.home_pre = params["home_pre"]
-    @user.home_post = params["home_post"]     
-    find_home_exist = params["home_post"]!= "" && User.find_by(home_post: params["home_post"])
+    @user.home_post = params["home_post"] 
+
+    find_home_exist = params["home_post"] && params["home_post"] != "" && User.find_by(home_post: params["home_post"])
 
     if find_home_exist
       flash[:alert] = "市話已經存在."        
-      render :new     
+      render :new   
+    elsif find_user 
+      find_user.admin = (user_params[:be_admin] == "1") ? true : false
+      find_user.home_pre = params["home_pre"]
+      find_user.home_post = params["home_post"] 
+
+      if find_user.update(user_params)
+        find_user.generate_pin   
+        find_user.send_pin  
+        p "send correct"          
+        flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{find_user.pin}"
+        redirect_to enter_pin_user_path(find_user)    
+      else
+        flash[:alert] = "手機或市話已經存在."       
+        render :new
+      end  
     elsif @user.save
       @user.generate_pin   
-      @user.send_pin  
+      @user.send_pin       
+      p "send correct"    
       flash[:notice] = "提示：已經發送認證碼至您的電子郵箱#{@user.pin}"        
       redirect_to enter_pin_user_path(@user)    
     else
@@ -97,7 +116,7 @@ class UsersController < ApplicationController
   end
 
   def verify_pin
-    @user = User.find_by(phone: params[:hidden_phone_number]) 
+    @user = User.find_by(email: params[:hidden_email]) 
     @user.verify_pin(params[:pin]) 
 
     if @user.verified
