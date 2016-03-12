@@ -35,7 +35,8 @@ class UserMailer < ApplicationMailer
       !!email.match(/chen[0-9][0-9]@gmail.com/) || 
       !!email.match(/pan[0-9][0-9]@gmail.com/)  ||
       !!email.match(/chen[0-9][0-9][0-9]@gmail.com/) ||
-      !!email.match(/pan[0-9][0-9][0-9]@gmail.com/))
+      !!email.match(/pan[0-9][0-9][0-9]@gmail.com/) ||
+      !!email.match(/example[0-9][0-9]@gmail.com/))
       p "this is fake email, do not send out email"
       false
     else
