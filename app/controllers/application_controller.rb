@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   def require_user_or_admin
     if !logged_in_as_admin? && !logged_in_as_user?
-      flash[:alert] = "必須登入會員或管理者！"
+      flash[:alert] = "此功能必須登入會員或管理者！"
       redirect_back_or_to root_path      
     end
   end  
