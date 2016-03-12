@@ -1,8 +1,10 @@
 namespace :slot do
   desc "generate timeslot"
   
-  task :generate => :environment do    
+  task :generate => :environment do  
+    p Time.now  
     p "generate latest hand timeslot"
+
     if BookingSlot.hand.empty?
       BookingSlot.available_hand_slot.each do |t|
         if Date.today.wday == 0

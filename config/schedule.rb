@@ -20,6 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 set :output, 'log/cron.log'
 
-every 1.minutes do
+every 2.minutes do
   rake "slot:generate"
 end
