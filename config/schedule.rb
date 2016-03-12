@@ -18,6 +18,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 3.minutes do
-  rake "slog:generate"
+set :output, 'log/cron.log'
+
+every 1.minutes do
+  rake "slot:generate"
 end
