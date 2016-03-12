@@ -31,6 +31,8 @@ gem 'jquery-turbolinks' #check this article to make table sortable http://goo.gl
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
 
+# Add schedule
+gem 'whenever', :require => false
 
 
 group :development do
