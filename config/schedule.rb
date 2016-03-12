@@ -20,6 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 set :output, 'log/cron.log'
 
-every 2.minutes do
+every 1.day, :at => Time.zone.parse('20:00 pm').utc do
   rake "slot:generate"
 end
