@@ -12,9 +12,9 @@ namespace :slot do
           BookingSlot.create(:time_slot => t, :bookable => false, :booking_type => 0, :booking_date => Date.today - 7)
           BookingSlot.create(:time_slot => t, :bookable => false, :booking_type => 0, :booking_date => Date.today - 7)                    
         else
-          BookingSlot.create(:time_slot => t, :bookable => true,  :booking_type => 0, :booking_date => Date.today)
-          BookingSlot.create(:time_slot => t, :bookable => true,  :booking_type => 0, :booking_date => Date.today)
-          BookingSlot.create(:time_slot => t, :bookable => true,  :booking_type => 0, :booking_date => Date.today)                    
+          BookingSlot.create(:time_slot => t, :bookable => true,  :booking_type => 0, :booking_date => Date.today - 7)
+          BookingSlot.create(:time_slot => t, :bookable => true,  :booking_type => 0, :booking_date => Date.today - 7)
+          BookingSlot.create(:time_slot => t, :bookable => true,  :booking_type => 0, :booking_date => Date.today - 7)                    
         end
       end
     end
