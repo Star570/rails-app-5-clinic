@@ -149,7 +149,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user])  
     @user.update(black: true)
     @user.update(black_date: Date.parse(params[:black_date]))
-    redirect_to backstage_user_show_path(user: @user)
+    redirect_to backstage_user_all_path(user: @user)
   end
 
   private
