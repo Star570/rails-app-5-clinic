@@ -29,9 +29,9 @@
     </h3>
     <div class="show-message-date">
       <span class="label label-default" style="font-size:1.0em;">
-          <%= @post.category.name %>
+          <%= @post.category.name %>&nbsp&nbsp&nbsp
       </span>           
-      &nbsp&nbsp&nbsp<%= show_datetime(@post.updated_at) %>  
+      <%= show_datetime(@post.updated_at) %>  
     </div>
     <br>
     <div class="show-message-content">    
