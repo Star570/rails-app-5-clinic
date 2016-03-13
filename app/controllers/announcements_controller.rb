@@ -40,6 +40,10 @@ class AnnouncementsController < ApplicationController
         announcement_photo.save
       end
 
+      AnnouncementPhoto.select{|x| x.announcement_id == nil}.each do |photo|
+        photo.destroy
+      end      
+
       redirect_to announcements_path
     else 
       render :new

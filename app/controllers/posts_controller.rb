@@ -29,6 +29,10 @@ class PostsController < ApplicationController
         post_photo.save
       end
 
+      PostPhoto.select{|x| x.post_id == nil}.each do |photo|
+        photo.destroy
+      end
+      
       redirect_to categories_path
     else 
       @category = Category.new
