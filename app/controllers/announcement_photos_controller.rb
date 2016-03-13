@@ -10,14 +10,16 @@ class AnnouncementPhotosController < ApplicationController
       
       if @photo.save
         p "photo save成功"
-        p @photo.image.url       
+        p @photo.image.url    
+        Rails.logger.info(@photo.errors.inspect)    
+        p Rails.logger.info(@photo.errors.inspect)                
         success=true     
         render json: { :success=> success, :msg=>msg, :file_path=> @photo.image.url }
       else
         p "photo save失敗"
         p @photo.image.url   
-        Rails.logger.info(@your_object.errors.inspect)    
-        p Rails.logger.info(@your_object.errors.inspect)       
+        Rails.logger.info(@photo.errors.inspect)    
+        p Rails.logger.info(@photo.errors.inspect)       
         success=false
         render json: { :success=> false }
       end
