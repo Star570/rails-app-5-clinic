@@ -12,8 +12,7 @@
 /db/*.sqlite3-journal
 
 # Ignore photos.
-/public/announcement/*
-/public/post/*
+/public/uploads/*
 
 # Ignore all logfiles and tempfiles.
 /log/*
