@@ -45,6 +45,10 @@ Rails.application.routes.draw do
       get :set_black
     end    
   end
+
+  post 'post_photos' => 'post_photos#upload'
+  post 'announcement_photos' => 'announcement_photos#upload'
+
   post 'users/verify_pin' => "users#verify_pin"
 
   get  'register', to: 'users#new'

@@ -12,7 +12,7 @@ class AnnouncementsController < ApplicationController
       @announcements_count = Announcement.where("seeable = ?", true).count            
     end        
   end
-  
+
   def show
     if logged_in_as_admin?
       @announcements_count = Announcement.count      
@@ -29,7 +29,17 @@ class AnnouncementsController < ApplicationController
     @announcement = Announcement.create(announcement_params)
     @announcement.user = current_user
     if @announcement.save
-      flash[:notice] = "您已發佈一篇新公告"           
+      flash[:notice] = "您已發佈一篇新公告"       
+
+      # update photos id 
+      array = @announcement.body.split('announcement/photos/').map{|x| x[0..27]}
+      array.delete_at(0)
+      array.each do |name|
+        announcement_photo = AnnouncementPhoto.find_by(image: name)
+        announcement_photo.announcement_id = @announcement.id
+        announcement_photo.save
+      end
+
       redirect_to announcements_path
     else 
       render :new
@@ -41,7 +51,26 @@ class AnnouncementsController < ApplicationController
 
   def update
     if @announcement.update(announcement_params)
-      flash[:notice] = "您已修改公告"                 
+      flash[:notice] = "您已修改公告"   
+      
+      # update photos id 
+      @announcement.announcement_photos.each do |p|
+        p.announcement_id = nil
+        p.save
+      end
+
+      array = @announcement.body.split('announcement/photos/').map{|x| x[0..27]}
+      array.delete_at(0)
+      array.each do |name|
+        announcement_photo = AnnouncementPhoto.find_by(image: name)
+        announcement_photo.announcement_id = @announcement.id
+        announcement_photo.save
+      end
+
+      AnnouncementPhoto.select{|x| x.announcement_id == nil}.each do |photo|
+        photo.destroy
+      end
+
       redirect_to announcement_path(@announcement)
     else
       render :edit

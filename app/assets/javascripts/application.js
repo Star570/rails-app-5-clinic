@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require simditor
 //  disable turbolinks
 //  require turbolinks
 //= require_tree .

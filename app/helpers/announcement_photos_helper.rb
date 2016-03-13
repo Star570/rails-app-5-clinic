@@ -1,0 +1,2 @@
+module AnnouncementPhotosHelper
+end

@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   belongs_to :user      
   belongs_to :category
   validates :title, :body, presence: true   
+  has_many :post_photos, dependent: :destroy
 
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize.to_s
@@ -24,7 +25,16 @@ class Post < ActiveRecord::Base
         end
       end
       max_sequence += 1
-      candidates.first + friendly_id_config.sequence_separator + max_sequence.to_s
+      if candidates.first
+        candidates.first + friendly_id_config.sequence_separator + max_sequence.to_s
+      else
+        # 只有在title空時會走到這裡, 接著進入controller在save時就會重新render :new, 不會真的存
+        "error_path"
+      end
   end
 
+  def body
+    self[:body].html_safe if self[:body]
+  end
+  
 end

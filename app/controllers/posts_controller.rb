@@ -16,10 +16,23 @@ class PostsController < ApplicationController
   def create
     @post = Post.create(post_params)
     @post.user = current_user    
+
     if @post.save
-      flash[:notice] = "您已發佈一篇新專欄"      
+      flash[:notice] = "您已發佈一篇新專欄"     
+
+      # update photos id 
+      array = @post.body.split('post/photos/').map{|x| x[0..27]}
+      array.delete_at(0)
+      array.each do |name|
+        post_photo = PostPhoto.find_by(image: name)
+        post_photo.post_id = @post.id
+        post_photo.save
+      end
+
       redirect_to categories_path
     else 
+      @category = Category.new
+      @categories = Category.all      
       render :new
     end
   end
@@ -31,9 +44,30 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "您已修改專欄"           
+      flash[:notice] = "您已修改專欄"      
+
+      # update photos id 
+      @post.post_photos.each do |p|
+        p.post_id = nil
+        p.save
+      end
+
+      array = @post.body.split('post/photos/').map{|x| x[0..27]}
+      array.delete_at(0)
+      array.each do |name|
+        post_photo = PostPhoto.find_by(image: name)
+        post_photo.post_id = @post.id
+        post_photo.save
+      end
+
+      PostPhoto.select{|x| x.post_id == nil}.each do |photo|
+        photo.destroy
+      end
+
       redirect_to post_path(@post)
     else
+      @category = Category.new
+      @categories = Category.all                   
       render :edit
     end
   end

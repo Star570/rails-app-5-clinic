@@ -87,11 +87,26 @@
 
 .service-form{
   float:left;
-  width:60%;
+  width:73%;
   padding-left: 38px; 
 }
 
-.service-form h3{
+div.service-form-title  {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: rgba(31, 31, 31, 0.99);
+  border-bottom: 1px solid rgba(192, 192, 192, 0.18);
+  padding: 15px 0px 10px 0px;
+  margin-bottom: 10px;
+}
+
+.service-user{
+  float:left;
+  width:73%;
+  padding-left: 38px; 
+}
+
+.service-user h3{
   font-size: 1.7em;
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);

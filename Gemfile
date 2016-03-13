@@ -31,6 +31,12 @@ gem 'jquery-turbolinks' #check this article to make table sortable http://goo.gl
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
 
+# Add text editor simditor, https://goo.gl/sHdjyH
+# 本地化 https://goo.gl/ndWDYw
+gem 'simditor'
+gem 'carrierwave','0.6.2'
+gem 'mini_magick'
+
 # Add schedule
 gem 'whenever', :require => false
 

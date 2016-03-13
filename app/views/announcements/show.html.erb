@@ -3,26 +3,26 @@
     <%= render partial: "announcement_sidebar" %>
   </div>            
   <div class="service-content">
-
+    <br>
     <h3>
-      <%= link_to @announcement.title, announcement_path(@announcement) %>&nbsp&nbsp
-      <% if logged_in_as_admin? %>
+      <%= link_to @announcement.title, announcement_path(@announcement) %>
+      <% if logged_in_as_admin? %>   
+        <div class="pull-right">  
         <% if @announcement.seeable %>
           <%= link_to modify_seeable_announcements_path(announcement: @announcement) do %>
-            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>
+            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>&nbsp
           <% end %>
         <% else %>
           <%= link_to modify_seeable_announcements_path(announcement: @announcement) do %>
-            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>
+            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>&nbsp
           <% end %>              
-        <% end %>      
-        <div class="pull-right">   
-          <%= link_to edit_announcement_path(@announcement), class:"btn btn-xs btn-primary" do %>   
-            <big><span class="glyphicon glyphicon-pencil"></span></big>
+        <% end %>            
+          <%= link_to edit_announcement_path(@announcement) do %>   
+            <span class="glyphicon glyphicon-pencil" style="font-size: 1.0em; top: 0.2em;"></span>&nbsp
           <% end %>          
           <%= link_to announcement_path(@announcement), 
-              method: :delete, data: {confirm: "你確定刪除公告嗎?"}, class:"btn btn-xs btn-primary" do %>
-            <big><span class="glyphicon glyphicon-remove"></span></big>
+              method: :delete, data: {confirm: "你確定刪除公告嗎?"} do %>
+            <span class="glyphicon glyphicon-remove" style="font-size: 1.0em; top: 0.2em;"></span>
           <% end %>    
         </div>                      
       <% end %>       
@@ -32,7 +32,7 @@
     </div>
     <br>
     <div class="show-message-content">    
-      <p class="text-muted"><%= markdown @announcement.body %></p>
+      <p><%= @announcement.body %></p>
     </div>
     <br><br>
   </div>

@@ -20,12 +20,77 @@
     <br>    
   </div>    
   <div class="form-group post-form">     
-    <%= f.input :title, label:"標題", input_html: { class: "form-control"} %>                              
+    <%= f.input :title, label:"標題", input_html: { class: "form-control"} %>      
+    <br>                        
   </div>            
   <div class="form-group post-form">  
-    <h4>
-      <%= f.input :body, label:"內容", input_html: { class: "form-control", rows: "20", width: "80%"} %>
-    </h4>      
+    <%= f.input :body, label:"內容", input_html: { class: "form-control", rows: "20", width: "80%"} %>    
   </div>
   <%= f.submit "送出", disable_with: 'Submitting...', class: "btn btn-lg btn-primary"%>
 <% end %>
+
+
+<script type="text/javascript">
+Simditor.locale = 'zh_TW';
+Simditor.i18n = {
+  'zh_TW': {
+    'title': '標題',
+    'normalText': '正常字體',    
+    'bold': '粗體',
+    'italic': '斜體',
+    'underline': '底線',
+    'strikethrough': '刪除線',    
+    'color': '顏色',
+    'ol': '有序列表',
+    'ul': '無序列表',    
+    'blockquote': '引用',
+    'table': '插入表格',
+
+
+    'hr': '分隔線',
+    'uploading': 'Ajout',
+    'indent': '向右縮排',
+    'outdent': '向左縮排',
+
+    'alignment': '對齊',
+    'alignCenter': '置中對齊',
+    'alignLeft': '靠左對齊',
+    'alignRight': '靠右對齊',
+
+    'link': '插入連結',    
+    'linkText': '連結文字',
+    'linkUrl': '連結URL',
+    'removeLink': '刪除連結',    
+
+    'image': '相片',
+    'uploadImage': '上傳相片',    
+    'externalImage': '外部相片',    
+    'imageUrl': '相片連結',
+    'imageAlt': '替代文字',    
+    'imageSize': '尺寸',
+    'restoreImageSize': '還原影響尺寸',
+
+    'uploadFailed': '上傳失敗',
+    'uploadError': '上傳錯誤',
+
+    'text': 'Texte',
+    'leaveConfirm': '正在上傳照片, 你確認要離開嗎?'
+
+  }
+};
+
+var editor = new Simditor({
+  textarea: $('#post_body'),
+  toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'link','image', '|','hr','indent','outdent','alignment'],
+  placeholder: '這裡输入公告內容...',
+  pasteImage: true,
+  fileKey: 'file',
+  upload: {
+    url: '/post_photos',
+    params: null,
+    connectionCount: 3,
+    leaveConfirm: '正在上傳照片, 你確認要離開嗎?'
+  }  
+});
+</script>
+

@@ -93,7 +93,12 @@ class User < ActiveRecord::Base
         end
       end
       max_sequence += 1
-      candidates.first + friendly_id_config.sequence_separator + max_sequence.to_s
+      if candidates.first
+        candidates.first + friendly_id_config.sequence_separator + max_sequence.to_s
+      else
+        # 只有在title空時會走到這裡, 接著進入controller在save時就會重新render :new, 不會真的存
+        "error_path"
+      end
   end    
 
 end

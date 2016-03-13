@@ -3,26 +3,26 @@
     <%= render partial: "categories/category_sidebar" %>
   </div>            
   <div class="service-content">
-
+    <br>
     <h3>
-      <%= link_to @post.title, post_path(@post) %>&nbsp&nbsp   
-      <% if logged_in_as_admin? %>        
+      <%= link_to @post.title, post_path(@post) %>
+      <% if logged_in_as_admin? %>                       
+        <div class="pull-right">   
         <% if @post.seeable %>
           <%= link_to modify_seeable_posts_path(post: @post) do %>
-            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>
+            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>&nbsp
           <% end %>
         <% else %>
           <%= link_to modify_seeable_posts_path(post: @post) do %>
-            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>
+            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>&nbsp
           <% end %>              
-        <% end %>                   
-        <div class="pull-right">   
-          <%= link_to edit_post_path(@post), class:"btn btn-xs btn-primary" do %>   
-            <big><span class="glyphicon glyphicon-pencil"></span></big>
+        <% end %>              
+          <%= link_to edit_post_path(@post) do %>   
+            <span class="glyphicon glyphicon-pencil" style="font-size: 1.0em; top: 0.2em;"></span>&nbsp
           <% end %> 
           <%= link_to post_path(@post), 
-              method: :delete, data: {confirm: "你確定刪除此專欄嗎?"}, class:"btn btn-xs btn-primary" do %>
-            <big><span class="glyphicon glyphicon-remove"></span></big>
+              method: :delete, data: {confirm: "你確定刪除此專欄嗎?"} do %>
+            <span class="glyphicon glyphicon-remove" style="font-size: 1.0em; top: 0.2em;"></span>
           <% end %>    
         </div>  
       <% end %>            
@@ -35,7 +35,7 @@
     </div>
     <br>
     <div class="show-message-content">    
-      <p class="text-muted"><%= markdown @post.body %></p>
+      <p><%= @post.body %></p>
     </div>
     <br><br>
   </div>

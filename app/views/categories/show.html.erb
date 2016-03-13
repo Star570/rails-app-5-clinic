@@ -4,17 +4,16 @@
   </div>            
   <div class="service-content">
     <h3>
-      <%= @category.name %> &nbsp&nbsp&nbsp
+      <%= @category.name %> &nbsp
 
-      <% if logged_in_as_admin? %>               
-        <%= link_to edit_category_path(@category), class:"btn btn-xs btn-primary" do %>   
-          <big><span class="glyphicon glyphicon-pencil"></span></big>
-        <% end %>        
-        <%= link_to category_path(@category), 
-            method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"}, 
-            class:"btn btn-xs btn-primary" do %>
-          <big><span class="glyphicon glyphicon-remove"></span></big>
-        <% end %>    
+      <% if logged_in_as_admin? %>                 
+          <%= link_to edit_category_path(@category) do %>   
+            <span class="glyphicon glyphicon-pencil" style="font-size: 0.8em; top: 0.1em;"></span>&nbsp
+          <% end %>        
+          <%= link_to category_path(@category), 
+              method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"} do %>
+            <span class="glyphicon glyphicon-remove" style="font-size: 0.8em; top: 0.1em;"></span>
+          <% end %>           
       <% end %>                 
     </h3>     
                 
