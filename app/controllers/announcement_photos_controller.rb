@@ -7,6 +7,7 @@ class AnnouncementPhotosController < ApplicationController
       success = true
       msg = '上傳成功'
       file_path = ''
+      
       if @photo.save
         p "photo save成功"
         p @photo.image.url          
