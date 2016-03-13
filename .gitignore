@@ -13,6 +13,9 @@
 
 # Ignore photos.
 /public/uploads/*
+/public/uploads/announcement/*
+/public/uploads/post/*
+/public/uploads/tmp/*
 
 # Ignore all logfiles and tempfiles.
 /log/*
