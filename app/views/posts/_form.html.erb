@@ -31,75 +31,10 @@
 
 
 <script type="text/javascript">
-Simditor.locale = 'zh_TW';
-Simditor.i18n = {
-  'zh_TW': {
-    'title': '標題',
-    'normalText': '正常字體',    
-    'bold': '粗體',
-    'italic': '斜體',
-    'underline': '底線',
-    'strikethrough': '刪除線',    
-    'color': '顏色',
-    'ol': '有序列表',
-    'ul': '無序列表',    
-    'blockquote': '引用',
-    'table': '插入表格',
-
-
-    'hr': '分隔線',
-    'uploading': 'Ajout',
-    'indent': '向右縮排',
-    'outdent': '向左縮排',
-
-    'alignment': '對齊',
-    'alignCenter': '置中對齊',
-    'alignLeft': '靠左對齊',
-    'alignRight': '靠右對齊',
-
-    'link': '插入連結',    
-    'linkText': '連結文字',
-    'linkUrl': '連結URL',
-    'removeLink': '刪除連結',    
-
-    'image': '相片',
-    'uploadImage': '上傳相片',    
-    'externalImage': '外部相片',    
-    'imageUrl': '相片連結',
-    'imageAlt': '圖片描述',    
-    'imageSize': '圖片尺寸',
-    'restoreImageSize': '還原圖片尺寸',
-
-    'uploadFailed': '上傳失敗',
-    'uploadError': '上傳錯誤',
-    'uploadImage': '上傳圖片', 
-    'uploadFailed': '上傳失敗', 
-    'uploadError': '上傳出錯', 
-    'uploading': '正在上傳', 
-
-    'text': 'Texte',
-    'leaveConfirm': '正在上傳照片, 你確認要離開嗎?', 
-
-    'code': '插入代碼', 
-    'linkTarget': '打開方式', 
-    'openLinkInCurrentWindow': '當前視窗打開', 
-    'openLinkInNewWindow': '在新視窗打開', 
-    'table': '表格', 
-
-    'fontScale': '字體大小', 
-    'fontScaleXLarge': '超大字體', 
-    'fontScaleLarge': '大號字體', 
-    'fontScaleNormal': '正常大小', 
-    'fontScaleSmall': '小號字體', 
-    'fontScaleXSmall': '超小字體'
-
-  }
-};
-
 var editor = new Simditor({
   textarea: $('#post_body'),
   toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'link','image', '|','hr','indent','outdent','alignment'],
-  placeholder: '這裡输入專欄內容...',
+  placeholder: '這裡輸入專欄內容...',
   pasteImage: true,
   fileKey: 'file',
   upload: {

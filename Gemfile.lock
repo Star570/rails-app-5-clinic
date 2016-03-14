@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/cychen0429/simditor-rails.git
+  revision: 333624b9614e02c981f466d1f51900be2d222350
+  specs:
+    simditor (2.3.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -167,7 +173,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    simditor (2.3.6)
     simple_calendar (2.0.3)
       rails (>= 3.0)
     simple_form (3.1.0)
@@ -227,7 +232,7 @@ DEPENDENCIES
   redcarpet (~> 3.2.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  simditor
+  simditor!
   simple_calendar (~> 2.0)
   simple_form
   sqlite3

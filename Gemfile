@@ -33,7 +33,7 @@ gem 'babosa'
 
 # Add text editor simditor, https://goo.gl/sHdjyH
 # 本地化 https://goo.gl/ndWDYw
-gem 'simditor'
+gem 'simditor', :git => 'https://github.com/cychen0429/simditor-rails.git'
 gem 'carrierwave','0.6.2'
 gem 'mini_magick'
 
