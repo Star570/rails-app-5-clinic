@@ -63,5 +63,14 @@ namespace :slot do
       end
     end
 
+  p "remove unused photo"
+    AnnouncementPhoto.select{|x| x.announcement_id == nil}.each do |photo|
+      photo.destroy
+    end        
+
+    PostPhoto.select{|x| x.post_id == nil}.each do |photo|
+      photo.destroy
+    end    
+
   end
 end
