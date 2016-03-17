@@ -1,0 +1,35 @@
+<div class="services">         
+  <div class="service-form">
+    <br>
+    <%= link_to "新增相簿", new_upload_photo_path, class:"btn btn-lg btn-primary" %>
+    <br><br><br>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>圖片</th>
+          <th>尺寸</th>
+          <th>檔案格式</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @upload_photos.each do |upload_photo| %>
+          <tr>
+            <td>
+              <%= image_tag(upload_photo.file_url(:thumb)) %><br>
+              <%= upload_photo.name %>              
+            </td>
+            <td style="align:center; vertical-align: middle;"><%= upload_photo.size %></td>
+            <td style="align:center; vertical-align: middle;"><%= upload_photo.content_type %></td>
+            <td style="align:center; vertical-align: middle;"><%= link_to '刪除相片', upload_photo, method: :delete, class:"btn btn-default" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

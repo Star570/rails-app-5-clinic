@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require simditor
+//= require jquery-fileupload/basic
 //  disable turbolinks
 //  require turbolinks
 //= require_tree .

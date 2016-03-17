@@ -1,0 +1,49 @@
+<%= simple_form_for @upload_photo do |f| %>
+  <div class="form-group post-form">     
+    <div class="row drop">
+      <div id="dropzone" class="fade well col-md-12" style="height: 150px;">檔案拉至此</div>
+      <div class="col-md-12">
+        <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>選擇檔案...</span>
+            <!-- The file input field used as target for the file upload widget -->
+            <%= f.file_field :file, multiple: true %>
+        </span>
+      </div>
+    </div>
+    <br>
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success;"></div>
+    </div>
+    <br><br>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="10%">預覽</th>
+          <th width="10%">檔名</th>      
+          <th width="80%"></th>
+          <th width="5%"></th>
+        </tr>
+      </thead>
+      <tbody id="preview" >
+        <tr class="media hide">
+          <td>
+            <a id="file_url" href="#"  style="display: block; align: center;">
+              <img id="file_image" class="media-object" data-src="holder.js/64x64" src="" alt="">
+            </a>        
+          </td>
+          <td style="align:center; vertical-align: middle;">
+            <h4 class="media-heading" id="file_name"></h4>
+          </td>
+          <td></td>
+          <td style="align:center; vertical-align: middle;">
+            <a id="file_delete" href="#" class="btn btn-danger delete" role="button">刪除</a>
+          </td>              
+        </tr>
+      </tbody>
+    </table>
+
+  </div>            
+<% end %>
+
+

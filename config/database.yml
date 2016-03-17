@@ -9,32 +9,32 @@ default: &default
  pool: 5
  timeout: 5000
 
-development:
- <<: *default
- database: db/development.sqlite3
+# development:
+#  <<: *default
+#  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
- <<: *default
- database: db/test.sqlite3
+# test:
+#  <<: *default
+#  database: db/test.sqlite3
 
 
-# default: &default
-#   adapter: postgresql
-#   encoding: utf8
-#   pool: 5
-#   username: cy
-#   password:
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: cy
+  password:
 
-# development:  
-#   <<: *default
-#   database: clinic_development
+development:  
+  <<: *default
+  database: clinic_development
 
-# test:  
-#   <<: *default
-#   database: clinic_test
+test:  
+  <<: *default
+  database: clinic_test
 
 #production:
 #  <<: *default

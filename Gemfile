@@ -40,6 +40,10 @@ gem 'mini_magick'
 # Add schedule
 gem 'whenever', :require => false
 
+# Add album
+gem 'jquery-fileupload-rails'
+
+gem 'pg'
 
 group :development do
   gem 'sqlite3'
@@ -49,7 +53,6 @@ end
 
 group :production do
   gem 'therubyracer'  
-  gem 'pg'
   gem 'rails_12factor'
   gem 'newrelic_rpm'
 end
