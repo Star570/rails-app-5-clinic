@@ -2,7 +2,13 @@
   <div class="service-content">
 
     <div class="page-header" style="padding-top: 35px;">
-      <h1><%= link_to "最新消息", announcements_path %></h1>
+      <h1>
+        <%= link_to "最新消息", announcements_path %>
+        <% if logged_in_as_admin? %>
+          <%= link_to "發表公告", new_announcement_path, class: "btn btn-success pull-right", 
+              style: "font-size: 0.5em; padding: 4px 15px; margin-top: 5px; margin-right: 15px;" %>
+        <% end %>  
+      </h1>
     </div>
 
     <table class="table table-hover">
