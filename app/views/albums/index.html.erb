@@ -34,7 +34,8 @@
 
               <figure class="photo-stack">
                 <% if album.upload_photos.count > 0 %>      
-                  <%= link_to image_tag(album.upload_photos.first.file.large.url, class: 'img-thumbnail'), album_path(album) %>
+                  <% get_random_photo = album.upload_photos.order("RANDOM()").first %>
+                  <%= link_to image_tag(get_random_photo.file.large.url, class: 'img-thumbnail'), album_path(album) %>
                 <% else %>
                   <%= link_to image_tag("blank.png"), album_path(album) %>
                 <% end %>
