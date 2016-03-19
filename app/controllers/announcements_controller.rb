@@ -33,9 +33,17 @@ class AnnouncementsController < ApplicationController
 
       # update photos id 
       array = @announcement.body.split('announcement/photos/').map{|x| x[0..27]}
+      p "pring1"
+      p array
       array.delete_at(0)
+      p "pring2"            
+      p array      
       array.each do |name|
+        p "pring3"      
+        p name
         announcement_photo = AnnouncementPhoto.find_by(image: name)
+        p "pring4"      
+        p announcement_photo
         announcement_photo.announcement_id = @announcement.id
         announcement_photo.save
       end
