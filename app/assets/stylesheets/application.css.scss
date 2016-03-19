@@ -20,6 +20,9 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+.page-header {
+    margin-top: 20px
+}
 
 body {
     background: url(http://f.cl.ly/items/2u1z0Y0I1U061j410F08/debut_light.png);
