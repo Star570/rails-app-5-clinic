@@ -20,3 +20,8 @@
 //  disable turbolinks
 //  require turbolinks
 //= require_tree .
+
+
+$(document).on("ready page:change", function() {
+  $('.btn').tooltip();
+});
