@@ -7,9 +7,9 @@
 }
 
 .service-content{
-  float: left;
-  width: 73%;
-  padding-left: 38px;  
+  padding-top: 10px; 
+  margin: 0px auto;
+  width: 70%;
 }
 .service-content ul{
   padding-top:10px;  
@@ -21,6 +21,7 @@
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);
   padding: 15px 0px 10px 0px;
+  margin-top: 0px;  
   margin-bottom: 10px;
   text-transform: uppercase;
 }

@@ -21,16 +21,25 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
 
   # http://goo.gl/8KWUOi  
-  process :resize_to_fill => [800,600]
+  process resize_to_fit: [1350, 10000]
 
-  version :thumb do
-      process :resize_to_fill => [200,200]
-  end  
+  version :large do
+    process :resize_to_fill => [1024, 637]
+  end
 
   version :small do
     process :resize_to_fill => [64, 64]
   end
 
+  def filename
+     "#{secure_token(10)}.#{file.extension}" if original_filename.present?
+  end
+
+  protected
+  def secure_token(length=16)
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(length/2))
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

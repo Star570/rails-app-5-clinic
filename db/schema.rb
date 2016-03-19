@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317073022) do
+ActiveRecord::Schema.define(version: 20160319010043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "title"
+    t.boolean  "seeable",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "slug"
+  end
+
+  add_index "albums", ["slug"], name: "index_albums_on_slug", unique: true, using: :btree
 
   create_table "announcement_photos", force: :cascade do |t|
     t.string   "image"
@@ -134,7 +144,10 @@ ActiveRecord::Schema.define(version: 20160317073022) do
     t.string   "content_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "album_id"
   end
+
+  add_index "upload_photos", ["album_id"], name: "index_upload_photos_on_album_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

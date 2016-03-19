@@ -1,0 +1,72 @@
+<div class="services">         
+  <div class="service-album">
+
+    <%= render partial: 'nav' %>
+      
+    <div class="page-header">
+      <h1><%= @album.title %>
+        <span style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
+          <%= link_to edit_album_path, class: "btn btn-success" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+        </span>   
+        <% if @album.title != "預設相簿" %>        
+          <span style="vertical-align: bottom; display: inline-block;">
+              <%= link_to album_path(@album), method: :delete, data: {confirm: "你確定刪除此相簿嗎?"}, class: "btn btn-success" do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>            
+          </span>  
+        <% end %>   
+        <span class="pull-right" style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
+          <%= simple_form_for @album, :url => redirect_albums_path do |f| %>   
+            <%= f.input :id, :as => :hidden, :input_html => { :value => @album.id } %>             
+            <%= f.submit "上傳相片", disable_with: 'Submitting...', class: "btn btn-success", style: "font-size: 0.5em; padding: 4px 15px; margin-right: 40px;"%>
+          <% end %>   
+        </span>                    
+      </h1>     
+    </div>
+
+    <div class="row">
+      <ul class="photo-stack-grid">
+
+        <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="close">×</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
+
+        <div id="links">
+          <% @photos.each do |photo| %>  
+            <li>
+              <%= link_to image_tag(photo.file.large.url, class: 'img-thumbnail photo-border'), photo.file.url %>
+            </li>       
+          <% end %>
+         </div>    
+      </ul>
+    </div>        
+  <br><br>
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+
+
+<!-- <script src="javascrips/blueimp-gallery.min.js"></script> -->
+
+<script>
+document.getElementById('links').onclick = function (event) {
+    console.log("HELLO");    
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+  
+    blueimp.Gallery(links, options);
+};
+</script>

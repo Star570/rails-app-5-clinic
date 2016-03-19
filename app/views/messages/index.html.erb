@@ -1,9 +1,8 @@
-<div class="services">
-  <div class="service-sidebar">
-    <%= render partial: "message_sidebar" %>
-  </div>            
+<div class="services">          
   <div class="service-content">
-    <h3>最新留言</h3>
+    <div class="page-header">
+      <h1><%= link_to "最新留言", messages_path %></h1>
+    </div>
 
     <table class="table table-hover table-message" id="table-message">
       <thead>
@@ -55,11 +54,11 @@
               <% if logged_in_as_admin? %>
                 <% if m.seeable %>
                   <%= link_to modify_seeable_messages_path(message: m) do %>
-                    <span class="glyphicon glyphicon-eye-open" style="font-size: 1.5em; top: 0.3em; color: black"></span>
+                    <i class="material-icons" style="font-size: 2.1em; top:0.2em; color: black">visibility</i>
                   <% end %>
                 <% else %>
                   <%= link_to modify_seeable_messages_path(message: m) do %>
-                    <span class="glyphicon glyphicon-eye-close" style="font-size: 1.5em; top: 0.3em; color: #ccc"></span>
+                    <i class="material-icons" style="font-size: 2.1em; top:0.2em; color: #ccc">visibility_off</i>
                   <% end %>              
                 <% end %>
               <% end %>

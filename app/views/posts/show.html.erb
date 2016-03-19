@@ -1,20 +1,19 @@
-<div class="services">
-  <div class="service-sidebar">
-    <%= render partial: "categories/category_sidebar" %>
-  </div>            
+<div class="services">   
   <div class="service-content">
-    <br>
+    <div class="page-header">
+      <h1><%= link_to "專欄文章", categories_path %></h1>
+    </div>    
     <h3>
       <%= link_to @post.title, post_path(@post) %>
       <% if logged_in_as_admin? %>                       
         <div class="pull-right">   
         <% if @post.seeable %>
           <%= link_to modify_seeable_posts_path(post: @post) do %>
-            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>&nbsp
+            <i class="material-icons" style="font-size: 1.3em; top: 0.3em; color: black">visibility</i>&nbsp
           <% end %>
         <% else %>
           <%= link_to modify_seeable_posts_path(post: @post) do %>
-            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>&nbsp
+            <i class="material-icons" style="font-size: 1.3em; top: 0.3em; color: #ccc">visibility_off</i>&nbsp
           <% end %>              
         <% end %>              
           <%= link_to edit_post_path(@post) do %>   
@@ -28,7 +27,9 @@
       <% end %>            
     </h3>
     <div class="show-message-date">
-      <span class="label label-default" style="font-size:1.0em;"><%= @post.category.name %></span>           
+      <span class="label label-default" style="font-size:1.0em;">
+        <%= link_to @post.category.name, category_path(@post.category), style: "color: white;" %>
+      </span>           
       &nbsp&nbsp&nbsp<%= show_datetime(@post.updated_at) %>  
     </div>
     <br>

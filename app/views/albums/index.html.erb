@@ -1,0 +1,49 @@
+<div class="services">         
+  <div class="service-album">
+
+    <%= render partial: 'nav' %>
+
+    <div class="page-header" style="padding-left: 20px;">
+      <h1>相簿總覽
+        <span style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
+          <%= link_to edit_all_albums_path, class: "btn btn-success" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+        </span>
+      </h1>
+    </div>
+      
+    <div class="row">
+      <ul class="photo-stack-grid">
+        <% @albums.each do |album| %>
+            <li>
+              <% if logged_in_as_admin? %>
+                <% if album.seeable %>
+                  <%= link_to modify_seeable_albums_path(album: album) do %>
+                    <i class="material-icons md-48" style="color: green">visibility</i>
+                  <% end %>
+                <% else %>
+                  <%= link_to modify_seeable_albums_path(album: album) do %>
+                    <i class="material-icons md-48" style="color: #ccc">visibility_off</i>                    
+                  <% end %>              
+                <% end %>             
+              <% end %>
+
+              <figure class="photo-stack">
+                <% if album.upload_photos.count > 0 %>      
+                  <%= link_to image_tag(album.upload_photos.first.file.large.url, class: 'img-thumbnail'), album_path(album) %>
+                <% else %>
+                  <%= link_to image_tag("blank.png"), album_path(album) %>
+                <% end %>
+              </figure>
+              <span><h4><%= album.title %></h4></span>
+            </li>
+        <% end %>
+      </ul>
+    </div>        
+    <div class="paginate"><%= paginate @albums %></div>
+  <br><br>
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

@@ -9,7 +9,9 @@ namespace :slug do
     p "generate message slug start"
     Message.find_each(&:save)   
     p "generate user slug start"
-    User.find_each(&:save)               
+    User.find_each(&:save)   
+    p "generate album slug start"
+    Album.find_each(&:save)                        
   end
 
 end

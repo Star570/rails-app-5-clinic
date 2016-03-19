@@ -1,21 +1,20 @@
-<div class="services">
-  <div class="service-sidebar">
-    <%= render partial: "category_sidebar" %>
-  </div>            
+<div class="services">       
   <div class="service-content">
-    <h3>
-      <%= @category.name %> &nbsp
 
-      <% if logged_in_as_admin? %>                 
-          <%= link_to edit_category_path(@category) do %>   
-            <span class="glyphicon glyphicon-pencil" style="font-size: 0.8em; top: 0.1em;"></span>&nbsp
-          <% end %>        
-          <%= link_to category_path(@category), 
-              method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"} do %>
-            <span class="glyphicon glyphicon-remove" style="font-size: 0.8em; top: 0.1em;"></span>
-          <% end %>           
-      <% end %>                 
-    </h3>     
+    <div class="page-header">
+      <h1>
+        <%= link_to @category.name, category_path(@category) %> &nbsp
+        <% if logged_in_as_admin? %>                 
+            <%= link_to edit_category_path(@category) do %>   
+              <span class="glyphicon glyphicon-pencil" style="font-size: 0.8em; top: 0.1em;"></span>&nbsp
+            <% end %>        
+            <%= link_to category_path(@category), 
+                method: :delete, data: {confirm: "你確定刪除此分類嗎, 亦會刪除分類下所有文章?"} do %>
+              <span class="glyphicon glyphicon-remove" style="font-size: 0.8em; top: 0.1em;"></span>
+            <% end %>           
+        <% end %>     
+      </h1>
+    </div>               
                 
     <table class="table table-hover" id="table-post">
       <tbody>
@@ -31,18 +30,20 @@
             </td>
 
             <td style="width: 15%; border: none;">
-               <span class="label label-default pull-right" style="font-size: 1.2em;"><%= p.category.name %></span>       
+               <span class="label label-default pull-right" style="font-size: 1.2em;">
+                  <%= link_to p.category.name, category_path(p.category), style: "color: white;" %>
+               </span>       
             </td>
 
             <td style="width: 3%; border: none;">     
               <% if logged_in_as_admin? %>
                 <% if p.seeable %>
                   <%= link_to modify_seeable_posts_path(post: p) do %>
-                    <span class="glyphicon glyphicon-eye-open" style="font-size: 1.5em; top: 0.2em; color: black"></span>
+                    <i class="material-icons" style="font-size: 2.1em; top: 0.1em; color: black">visibility</i>
                   <% end %>
                 <% else %>
                   <%= link_to modify_seeable_posts_path(post: p) do %>
-                    <span class="glyphicon glyphicon-eye-close" style="font-size: 1.5em; top: 0.2em; color: #ccc"></span>
+                    <i class="material-icons" style="font-size: 2.1em; top: 0.1em; color: #ccc">visibility_off</i>
                   <% end %>              
                 <% end %>
               <% end %>                      
@@ -51,7 +52,7 @@
             <td style="width: 3%; border: none;">     
               <% if logged_in_as_admin? %>
                 <%= link_to post_path(p), method: :delete, data: {confirm: "你確定刪除此專欄嗎?"} do %>
-                  <span class="glyphicon glyphicon-remove" style="font-size: 1.5em; top: 0.2em;"></span>
+                  <span class="glyphicon glyphicon-remove" style="font-size: 1.5em; top: 0.12em;"></span>
                 <% end %>                   
               <% end %>                      
             </td>    

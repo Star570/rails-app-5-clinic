@@ -1,9 +1,10 @@
 <div class="services">
-  <div class="service-sidebar">
-    <%= render partial: "announcement_sidebar" %>
-  </div>            
+
   <div class="service-content">
-    <h3>最新消息</h3>
+
+    <div class="page-header">
+      <h1><%= link_to "最新消息", announcements_path %></h1>
+    </div>
 
     <table class="table table-hover">
       <tbody>
@@ -22,11 +23,11 @@
               <% if logged_in_as_admin? %>
                 <% if a.seeable %>
                   <%= link_to modify_seeable_announcements_path(announcement: a) do %>
-                    <span class="glyphicon glyphicon-eye-open" style="font-size: 1.5em; top: 0.2em; color: black"></span>
+                    <i class="material-icons" style="font-size: 2.1em; color: black">visibility</i>
                   <% end %>
                 <% else %>
                   <%= link_to modify_seeable_announcements_path(announcement: a) do %>
-                    <span class="glyphicon glyphicon-eye-close" style="font-size: 1.5em; top: 0.2em; color: #ccc"></span>
+                    <i class="material-icons" style="font-size: 2.1em; color: #ccc">visibility_off</i>
                   <% end %>              
                 <% end %>             
               <% end %>                      

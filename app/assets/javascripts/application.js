@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require blueimp-gallery-all
 //= require simditor
 //= require jquery-fileupload/basic
 //  disable turbolinks

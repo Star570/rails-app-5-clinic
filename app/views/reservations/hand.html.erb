@@ -1,10 +1,9 @@
 <div class="services">
-  <div class="service-sidebar">
-    <%= render partial: "reservation_sidebar" %>
-  </div>            
-  <div class="service-display">
-    <h3>手療預約系統</h3>    
-    <br> 
+  <%= render partial: "reservation_nav" %>          
+  <div class="service-content">
+    <div class="page-header">
+      <h1><%= link_to "手療預約系統", hand_reservations_path %></h1>
+    </div>    
     <% if current_user.black %>
       <h4>您至 <%= current_user.black_date %> 前無法預約，請電洽。</h4>
     <% else %>

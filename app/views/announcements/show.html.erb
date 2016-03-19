@@ -1,20 +1,19 @@
-<div class="services">
-  <div class="service-sidebar">
-    <%= render partial: "announcement_sidebar" %>
-  </div>            
+<div class="services">       
   <div class="service-content">
-    <br>
+    <div class="page-header">
+      <h1><%= link_to "最新消息", announcements_path %></h1>
+    </div>    
     <h3>
       <%= link_to @announcement.title, announcement_path(@announcement) %>
       <% if logged_in_as_admin? %>   
         <div class="pull-right">  
         <% if @announcement.seeable %>
           <%= link_to modify_seeable_announcements_path(announcement: @announcement) do %>
-            <span class="glyphicon glyphicon-eye-open" style="font-size: 1.0em; top: 0.2em; color: black"></span>&nbsp
+            <i class="material-icons" style="font-size: 1.3em; top: 0.3em; color: black">visibility</i>&nbsp
           <% end %>
         <% else %>
           <%= link_to modify_seeable_announcements_path(announcement: @announcement) do %>
-            <span class="glyphicon glyphicon-eye-close" style="font-size: 1.0em; top: 0.2em; color: #ccc"></span>&nbsp
+            <i class="material-icons" style="font-size: 1.3em; top: 0.3em; color: #ccc">visibility_off</i>&nbsp
           <% end %>              
         <% end %>            
           <%= link_to edit_announcement_path(@announcement) do %>   

@@ -1,0 +1,24 @@
+<div class="row photo-nav">
+  <div class="col-md-12" style="text-align: center;">
+    <ul class="list-inline photo-ul">
+      <li><%= link_to hand_reservations_path do %>
+          <i class="material-icons md-48">touch_app</i>
+        <% end %>
+      </li>
+      <li>
+        <h1>
+          <%= link_to body_reservations_path do %>
+            <i class="material-icons md-48">accessibility</i>
+          <% end %>
+        </h1>
+      </li>    
+      <li>
+        <h1>
+          <%= link_to show_user_reservations_path do %>
+            <i class="material-icons md-48">search</i>
+          <% end %>
+        </h1>
+      </li>               
+    </ul> 
+  </div>
+</div>  

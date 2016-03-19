@@ -3,24 +3,18 @@ class CategoriesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   
   def index
-    @categories = Category.all
     if logged_in_as_admin?
       @posts = Post.page(params[:page]).per(10) 
-      @posts_count = Post.count      
     else
-      @posts = Post.where("seeable = ?", true).page(params[:page]).per(10)       
-      @posts_count = Post.where("seeable = ?", true).count            
+      @posts = Post.where("seeable = ?", true).page(params[:page]).per(10)               
     end    
   end
 
   def show
-    @categories = Category.all
     if logged_in_as_admin?
       @posts = @category.posts.page(params[:page]).per(10) 
-      @posts_count = Post.count      
     else
-      @posts = @category.posts.where("seeable = ?", true).page(params[:page]).per(10)       
-      @posts_count = Post.where("seeable = ?", true).count         
+      @posts = @category.posts.where("seeable = ?", true).page(params[:page]).per(10)              
     end            
   end
 

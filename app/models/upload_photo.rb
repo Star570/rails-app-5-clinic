@@ -1,5 +1,5 @@
 class UploadPhoto < ActiveRecord::Base
-
+    belongs_to :album
     mount_uploader :file, PhotoUploader
 
     include Rails.application.routes.url_helpers

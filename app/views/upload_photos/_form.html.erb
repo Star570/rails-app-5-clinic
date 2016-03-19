@@ -1,49 +1,135 @@
-<%= simple_form_for @upload_photo do |f| %>
-  <div class="form-group post-form">     
-    <div class="row drop">
-      <div id="dropzone" class="fade well col-md-12" style="height: 150px;">檔案拉至此</div>
-      <div class="col-md-12">
-        <span class="btn btn-success fileinput-button">
-            <i class="glyphicon glyphicon-plus"></i>
-            <span>選擇檔案...</span>
-            <!-- The file input field used as target for the file upload widget -->
-            <%= f.file_field :file, multiple: true %>
-        </span>
-      </div>
+<div class="row">  
+  <div class="drop">
+    <div id="dropzone" class="fade well col-xs-12" style="height: 100px;">檔案拉至此</div>
+    <div class="col-xs-12">
+      <%= simple_form_for @upload_photo do |f| %>      
+      <span class="btn btn-lg btn-success fileinput-button">
+          <span><%= Album.find(params[:album_id]).title %>&nbsp&nbsp&nbsp&nbsp</span>
+          <i class="glyphicon glyphicon-plus"></i>
+          <span>新增相片...</span>
+          <!-- The file input field used as target for the file upload widget -->
+          <%= f.input :album_id, :as => :hidden, :input_html => { :value => params[:album_id] }  %>     
+          <%= f.file_field :file, multiple: true %>
+      </span>
+      <span class="btn btn-lg btn-success fileinput-button pull-right" id="finish_button">
+          <%= link_to "完成", album_path(Album.find(params[:album_id])), style: "color: white;" %>
+      </span> 
+      <% end %>         
     </div>
-    <br>
-    <div id="progress" class="progress">
-        <div class="progress-bar progress-bar-success;"></div>
-    </div>
-    <br><br>
-    <table class="table table-hover">
+  </div>
+</div>    
+<br><br><br>
+
+<div class="row">  
+  <div class="col-xs-12">
+    <table class="table table-hover" id="table-upload">
       <thead>
         <tr>
           <th width="10%">預覽</th>
-          <th width="10%">檔名</th>      
-          <th width="80%"></th>
-          <th width="5%"></th>
+          <th width="25%">檔名</th>   
+          <th width="10%">大小</th>                         
+          <th width="45%">進度條</th>
+          <th width="10%"></th>
         </tr>
-      </thead>
+      </thead>    
       <tbody id="preview" >
         <tr class="media hide">
           <td>
-            <a id="file_url" href="#"  style="display: block; align: center;">
-              <img id="file_image" class="media-object" data-src="holder.js/64x64" src="" alt="">
-            </a>        
+            <img id="file_image" src="" alt="">       
           </td>
-          <td style="align:center; vertical-align: middle;">
-            <h4 class="media-heading" id="file_name"></h4>
+          <td>
+            <h5 id="file_name"></h5>
+          </td>  
+          <td>
+            <h5 id="file_size"></h5>
+          </td>             
+          <td>
+            <div id="progress" class="progress hide" style="margin: 0 50px;">
+                <div class="progress-bar progress-bar-success;">100%</div>
+            </div>            
           </td>
-          <td></td>
-          <td style="align:center; vertical-align: middle;">
-            <a id="file_delete" href="#" class="btn btn-danger delete" role="button">刪除</a>
+          <td>
+            <a id="file_delete" href="#" class="btn btn-danger delete hide" role="button">刪除</a>
           </td>              
-        </tr>
+        </tr>        
       </tbody>
     </table>
+    <table class="table table-hover" id="table-upload"> 
+      <thead>
+        <tr>
+          <th width="10%"></th>
+          <th width="25%"></th>   
+          <th width="10%"></th>                         
+          <th width="45%"></th>
+          <th width="10%"></th>
+        </tr>
+      </thead>            
+      <tbody id="preview" >
+        <% @album.upload_photos.each do |photo| %>
+          <tr>
+            <td>
+              <%= image_tag(photo.file.small.url) %>
+            </td>
+            <td>
+              <h5><%= @album.upload_photos.first.name %></h5>
+            </td>
+            <td>
+              <h5><%= number_with_precision(@album.upload_photos.first.size.to_f/1000000, :precision => 2) %>MB</h5>
+            </td>
+            <td>
+              <div id="progress" class="progress" style="margin: 0 50px;">
+                  <div class="progress-bar progress-bar-success;" style="width: 100%;">100%</div>
+              </div>                          
+            </td>
+            <td> 
+              <%= link_to "刪除", upload_photo_path(photo), method: :delete, class: "btn btn-danger delete" %>    
+            </td>
+          </tr>
+        <% end %>          
+      </tbody>
+    </table>      
+  </div>  
+</div>     
 
-  </div>            
-<% end %>
 
+<script type="text/javascript" charset="utf-8">
+  var counter_add = 0;
+  var counter_done = 0;    
+  $('#upload_photo_file').on('fileuploadadd', function (e, data) 
+  {
+      //console.log('Hello Add');
+      //console.log(data.files);
+      $.each(data.files, function (index, file) 
+      {
+            var node = $('#preview > .hide').clone();
+            node.attr('class', 'media ' + 'CY' + counter_add);
+            node.find('#file_name').text(file.name);
+            node.appendTo('#preview');
+
+            counter_add = counter_add + 1;
+      });
+      
+   });
+
+  $('#upload_photo_file').on('fileuploaddone', function (e, data) 
+  {
+      //console.log('Hello Done');
+      $.each(data.result.files, function (index, file) 
+      {
+          list = $('#preview > ' + '.CY' + counter_done);
+          list.find('#file_image').attr('src', file.small_url);
+          var file_size = Math.round(file.size*100/1000000) / 100
+          list.find('#file_size').text(file_size + "MB");       
+          list.find('#file_delete').attr('class', 'btn btn-danger delete')
+          list.find('#file_delete').attr('data-method', file.delete_type).attr('href', file.delete_url)
+          list.find('#file_delete').attr('data-remote', true)          
+          list.find('#progress').attr('class', 'progress');
+          counter_done = counter_done + 1;
+      });
+      if (counter_add == counter_done) {
+         $('#finish_button').attr('class', 'btn btn-lg btn-success fileinput-button pull-right');
+      }
+   });    
+
+</script>
 

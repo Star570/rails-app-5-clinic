@@ -41,9 +41,12 @@ gem 'mini_magick'
 gem 'whenever', :require => false
 
 # Add album
+#gem 'jquery-fileupload-rails', :git => 'https://github.com/cychen0429/jquery-fileupload-rails.git'
 gem 'jquery-fileupload-rails'
-
+gem 'blueimp-gallery'
+# gem 'Bootstrap-Image-Gallery-rails'
 gem 'pg'
+gem 'material_icons' #https://goo.gl/0X8D81
 
 group :development do
   gem 'sqlite3'

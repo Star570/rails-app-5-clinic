@@ -1,0 +1,99 @@
+// Place all the styles related to the Albums controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.service-album {
+  padding-right: 75px;
+  padding-left: 55px;
+}
+
+.photo-nav {
+  margin-bottom: 30px;
+}
+
+.photo-nav div ul li {
+  padding-left: 10px;
+  padding-right: 10px;  
+}
+
+// Place all the styles related to the albums controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+
+.photo-stack-grid {
+    list-style: none;
+    margin: 0;
+    padding: 50px 0px 0px 20px;
+    text-align: center;
+}
+
+.photo-stack-grid:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.photo-stack-grid li {
+    width: 31%;
+    float: left;
+    margin: 0 2% 4.0em 0;
+}
+
+
+.photo-stack-grid a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font: 600 0.8em/1.3 "Open Sans", sans-serif;
+}
+
+
+.photo-stack {
+    position: relative;
+    margin: 0 4% 2em;
+    display: block;
+}
+
+.photo-stack:before,
+.photo-stack:after,
+.photo-stack img {
+    display: block;
+    background: #ccc;
+    border: 5px solid #fff;
+    border-radius: 3px;
+    padding: 1px;
+}
+
+.photo-stack:before,
+.photo-stack:after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #969289;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+    transform: rotate(6deg);
+}
+
+.photo-stack:after {
+    transform: rotate(10deg);
+    z-index: -1;
+}
+
+.photo-stack img {
+    transform: rotate(0deg);
+    width: 100%;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2), 0 14px 18px -12px rgba(0, 0, 0, 0.9);
+}
+
+img.photo-border {
+    border: solid 10px #fff;
+}
+

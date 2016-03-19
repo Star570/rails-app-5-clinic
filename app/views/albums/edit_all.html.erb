@@ -1,0 +1,38 @@
+<div class="services">         
+  <div class="service-album">
+
+    <%= render partial: 'nav' %>
+
+    <div class="page-header">
+      <h1>刪除相簿
+          <%= link_to "完成", albums_path, class: "btn btn-success pull-right", style: "font-size: 0.5em; padding: 4px 15px; margin-right: 40px;" %>
+      </h1>
+    </div>
+
+    <div class="row">
+      <ul class="photo-stack-grid">
+        <% @albums.each do |album| %> 
+            <li>
+              <%= link_to album_path(album), method: :delete, data: {confirm: "你確定刪除此相簿嗎?"} do %>    
+                <span class="glyphicon glyphicon-remove" style="font-size: 3.0em;"></span> 
+              <% end %>  
+              <figure class="photo-stack">   
+                <% if album.upload_photos.count > 0 %>         
+                  <%= link_to album_path(album) do %>               
+                    <%= image_tag(album.upload_photos.first.file.url, class: 'img-thumbnail') %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag("blank.png") %>
+                <% end %>                  
+              </figure>
+              <span><h4><%= album.title %></h4></span>
+            </li>     
+        <% end %>
+      </ul>
+    </div>        
+
+  <br><br>
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>

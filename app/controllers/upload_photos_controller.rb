@@ -7,13 +7,14 @@ class UploadPhotosController < ApplicationController
 
   def new
     @upload_photo = UploadPhoto.new
+    @album = Album.find(params[:album_id])
   end
 
   def create
-
     params[:upload_photo][:file].each do |file|
       @upload_photo = UploadPhoto.new
       @upload_photo.file = file
+      @upload_photo.album_id = params[:upload_photo][:album_id]      
     end    
     
     respond_to do |format|
@@ -28,13 +29,18 @@ class UploadPhotosController < ApplicationController
   end
 
   def destroy
-    @upload_photo.destroy
-    redirect_to upload_photos_path  
+    if @upload_photo
+      @upload_photo.destroy
+    end
+    respond_to do |format|    
+      format.html { redirect_to :back } 
+      format.js   { render json: {files: [@upload_photo.to_jq_upload]}, status: :created, location: @upload }        
+    end        
   end
 
   private
   
   def find_upload_photo
-    @upload_photo = UploadPhoto.find(params[:id])
+    @upload_photo = UploadPhoto.find_by_id(params[:id])
   end  
 end

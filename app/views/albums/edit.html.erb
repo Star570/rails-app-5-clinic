@@ -1,0 +1,42 @@
+<div class="services">         
+  <div class="service-album">
+
+    <%= render partial: 'nav' %>
+      
+    <div class="page-header">  
+      <h1>
+        <% if @album.title == "預設相簿" %>
+          <h1><%= @album.title %>
+          <%= link_to "完成", album_path(@album), class: "btn btn-success pull-right", style: "font-size: 0.5em; padding: 4px 15px; margin-right: 40px;" %>
+          </h1>
+        <% else %>
+          <%= simple_form_for @album do |f| %>
+            <%= text_field_tag 'title', Album.find(params[:id]).title, style: "font-size: 0.6em; border-radius: 4px; border: 2px solid #ccc; margin-left: 10px; padding: 5px 10px;" %>             
+            <%= f.submit "完成", disable_with: 'Submitting...', class: "btn btn-success", style: "font-size: 0.5em; padding: 4px 15px; margin-top: 3px; margin-left:20px;"%>
+          <% end %>
+        <% end %>
+      </h1>
+    </div>
+
+    <div class="row">
+      <ul class="photo-stack-grid">
+
+        <div id="links">
+          <% @photos.each do |photo| %>  
+            <li>
+              <%= link_to upload_photo_path(photo), method: :delete do %>    
+                <span class="glyphicon glyphicon-remove" style="font-size: 3.0em;"></span> 
+              <% end %>  
+              <%= link_to image_tag(photo.file.url, class: 'img-thumbnail photo-border'), photo.file.url %>
+            </li>       
+          <% end %>
+         </div>    
+      </ul>
+    </div>        
+
+  <br><br>
+  </div>
+  <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+

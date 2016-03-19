@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   resources :categories
-  resources :upload_photos, except: [:edit, :update]
+  resources :upload_photos, except: [:edit, :update] 
+  resources :albums, except: [:new]  do
+    collection do 
+      get :select
+      get :edit_all
+      post :redirect
+      patch :redirect
+      get :modify_seeable      
+    end
+  end
 
   resources :posts do
     collection do
@@ -88,5 +97,5 @@ Rails.application.routes.draw do
   get   'backstage/print_hand_reservation',        to: 'pages#print_hand_reservation'
   get   'backstage/print_body_reservation',        to: 'pages#print_body_reservation'
   
-  root 'upload_photos#index'
+  root 'albums#index'
 end

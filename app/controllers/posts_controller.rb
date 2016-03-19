@@ -3,8 +3,6 @@ class PostsController < ApplicationController
   before_action :require_admin, except: [:show]
 
   def show
-    @posts_count = Post.count
-    @categories = Category.all
   end
 
   def new

@@ -22,3 +22,26 @@
         background-color: #FFF380;
     }
 }
+
+#table-upload thead tr th{
+  font-size: 1.2em;
+  color: #222222;
+}
+
+#table-upload tbody tr td{
+    border: none;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    vertical-align: middle;
+}
+
+#table-upload tbody tr{
+    height: 6.0em;
+}
+
+.btn.nohover:hover {
+    /* here copy default .btn class styles */
+    cursor:default !important;
+    background-color: #5cb85c;
+    /* or something like that */
+}

@@ -12,12 +12,23 @@
  *
  *= require simditor
  *= require jquery.fileupload-ui
+ *= require blueimp-gallery
+ *= require material_icons
  *= require_tree .
  *= require_self
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+    background: url(http://f.cl.ly/items/2u1z0Y0I1U061j410F08/debut_light.png);
+}
+
+i.material-icons {
+  display: inline-block;
+  position: relative;
+}
 
 div.paginate {
   font-size: 1.4em;
