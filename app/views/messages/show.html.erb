@@ -1,6 +1,6 @@
 <div class="services">    
   <div class="service-content">
-    <div class="page-header">
+    <div class="page-header" style="padding-top: 35px;">
       <h1><%= link_to "最新留言", messages_path %></h1>
     </div>    
     <% if logged_in_as_admin? || @message.seeable || (!@message.seeable && @message.user == current_user) %>

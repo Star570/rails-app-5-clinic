@@ -19,8 +19,10 @@ class PostsController < ApplicationController
       flash[:notice] = "您已發佈一篇新專欄"     
 
       # update photos id 
-      array = @post.body.split('post/photos/').map{|x| x[0..27]}
+      array = @post.body.split('post/photos/')
       array.delete_at(0)
+      array = array.map{|x| x[0..x.index("\"")-1]}
+
       array.each do |name|
         post_photo = PostPhoto.find_by(image: name)
         post_photo.post_id = @post.id
@@ -54,8 +56,10 @@ class PostsController < ApplicationController
         p.save
       end
 
-      array = @post.body.split('post/photos/').map{|x| x[0..27]}
+      array = @post.body.split('post/photos/')
       array.delete_at(0)
+      array = array.map{|x| x[0..x.index("\"")-1]}
+      
       array.each do |name|
         post_photo = PostPhoto.find_by(image: name)
         post_photo.post_id = @post.id

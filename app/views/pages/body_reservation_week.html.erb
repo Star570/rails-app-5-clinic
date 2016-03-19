@@ -71,7 +71,7 @@
             <% background = "" %>
           <% end %>            
             <td style=<%= background %>>
-              <% if date < Date.today %>     
+              <% if date <= Date.today %>     
                 <span class="glyphicon glyphicon-ok-circle" style="font-size: 19px; top: 2px; color: #bbb"></span>
                 <span class="glyphicon glyphicon-remove-circle" style="font-size: 19px; top: 2px; color: #bbb"></span>
               <% else %>
@@ -132,7 +132,7 @@
                 <% @booking_slots_hash[date][time_slot].each do |b| %>
                   <% if b[0] == 1 %>
                     <div id="slot<%= b[1].id %>">
-                      <% if date < Date.today %>
+                      <% if (date < Date.today) || (date == Date.today && Time.now > Time.parse(show_time_slot(b[1].time_slot))) %>
                         <span class="glyphicon glyphicon-ok" style="color: #bbb"></span><br>                        
                       <% else %>
                         <%= link_to backstage_modify_body_bookable_path(booking_slot: b[1], bookable: false), :remote => true do %>
@@ -142,7 +142,7 @@
                     </div>
                   <% elsif b[0] == 0 %>                    
                     <div id="slot<%= b[1].id %>">
-                      <% if date < Date.today %>
+                      <% if (date < Date.today) || (date == Date.today && Time.now > Time.parse(show_time_slot(b[1].time_slot))) %>
                         <span class="glyphicon glyphicon-remove" style="color: #bbb"></span><br>    
                       <% else %>
                         <%= link_to backstage_modify_body_bookable_path(booking_slot: b[1], bookable: true), :remote => true do %>

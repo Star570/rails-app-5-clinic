@@ -1,6 +1,6 @@
 <div class="services">       
   <div class="service-content">
-    <div class="page-header">
+    <div class="page-header" style="padding-top: 35px;">
       <h1><%= link_to "最新消息", announcements_path %></h1>
     </div>    
     <h3>
@@ -26,7 +26,7 @@
         </div>                      
       <% end %>       
     </h3>
-    <div class="show-message-date">
+    <div class="show-message-date" style="padding-top: 10px;">
       <%= show_datetime(@announcement.updated_at) %>
     </div>
     <br>

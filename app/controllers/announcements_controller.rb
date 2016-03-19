@@ -31,19 +31,13 @@ class AnnouncementsController < ApplicationController
     if @announcement.save
       flash[:notice] = "您已發佈一篇新公告"       
 
-      # update photos id 
-      array = @announcement.body.split('announcement/photos/').map{|x| x[0..27]}
-      p "pring1"
-      p array
+      # update photos id       
+      array = @announcement.body.split('announcement/photos/')
       array.delete_at(0)
-      p "pring2"            
-      p array      
+      array = array.map{|x| x[0..x.index("\"")-1]}
+
       array.each do |name|
-        p "pring3"      
-        p name
         announcement_photo = AnnouncementPhoto.find_by(image: name)
-        p "pring4"      
-        p announcement_photo
         announcement_photo.announcement_id = @announcement.id
         announcement_photo.save
       end
@@ -71,8 +65,10 @@ class AnnouncementsController < ApplicationController
         p.save
       end
 
-      array = @announcement.body.split('announcement/photos/').map{|x| x[0..27]}
+      array = @announcement.body.split('announcement/photos/')
       array.delete_at(0)
+      array = array.map{|x| x[0..x.index("\"")-1]}
+      
       array.each do |name|
         announcement_photo = AnnouncementPhoto.find_by(image: name)
         announcement_photo.announcement_id = @announcement.id
