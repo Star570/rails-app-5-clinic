@@ -3,26 +3,29 @@
 
     <%= render partial: 'nav' %>
       
-    <div class="page-header">
+    <div class="page-header" style="padding-left: 20px;">
       <h1><%= @album.title %>
-        <span style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
-          <%= link_to edit_album_path, class: "btn btn-success" do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-        </span>   
-        <% if @album.title != "預設相簿" %>        
-          <span style="vertical-align: bottom; display: inline-block;">
-              <%= link_to album_path(@album), method: :delete, data: {confirm: "你確定刪除此相簿嗎?"}, class: "btn btn-success" do %>
-                <span class="glyphicon glyphicon-remove"></span>
-              <% end %>            
-          </span>  
-        <% end %>   
-        <span class="pull-right" style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
-          <%= simple_form_for @album, :url => redirect_albums_path do |f| %>   
-            <%= f.input :id, :as => :hidden, :input_html => { :value => @album.id } %>             
-            <%= f.submit "上傳相片", disable_with: 'Submitting...', class: "btn btn-success", style: "font-size: 0.5em; padding: 4px 15px; margin-right: 40px;"%>
+
+        <% if logged_in_as_admin? %>
+          <span style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
+            <%= link_to edit_album_path, class: "btn btn-success" do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+          </span>   
+          <% if @album.title != "預設相簿" %>        
+            <span style="vertical-align: bottom; display: inline-block;">
+                <%= link_to album_path(@album), method: :delete, data: {confirm: "你確定刪除此相簿嗎?"}, class: "btn btn-success" do %>
+                  <span class="glyphicon glyphicon-remove"></span>
+                <% end %>            
+            </span>  
           <% end %>   
-        </span>                    
+          <span class="pull-right" style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
+            <%= simple_form_for @album, :url => redirect_albums_path do |f| %>   
+              <%= f.input :id, :as => :hidden, :input_html => { :value => @album.id } %>             
+              <%= f.submit "上傳相片", disable_with: 'Submitting...', class: "btn btn-success", style: "font-size: 0.5em; padding: 4px 15px; margin-right: 40px;"%>
+            <% end %>   
+          </span>       
+        <% end %>             
       </h1>     
     </div>
 

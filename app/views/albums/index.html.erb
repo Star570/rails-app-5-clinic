@@ -4,12 +4,15 @@
     <%= render partial: 'nav' %>
 
     <div class="page-header" style="padding-left: 20px;">
-      <h1>相簿總覽
-        <span style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
-          <%= link_to edit_all_albums_path, class: "btn btn-success" do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-        </span>
+      <h1>
+        相簿總覽
+        <% if logged_in_as_admin? %>
+          <span style="vertical-align: bottom; display: inline-block; padding-left: 10px;">
+            <%= link_to edit_all_albums_path, class: "btn btn-success" do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+          </span>
+        <% end %>
       </h1>
     </div>
       

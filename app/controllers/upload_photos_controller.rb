@@ -1,5 +1,6 @@
 class UploadPhotosController < ApplicationController
   before_action :find_upload_photo, only: [:destroy]
+  before_action :require_admin
 
   def index
     @upload_photos = UploadPhoto.all    
