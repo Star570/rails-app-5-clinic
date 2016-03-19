@@ -1,8 +1,11 @@
 <div class="services">   
   <div class="service-content">
+    <%= render partial: '/categories/nav' %>
+
     <div class="page-header">
       <h1><%= link_to "專欄文章", categories_path %></h1>
     </div>    
+    
     <h3>
       <%= link_to @post.title, post_path(@post) %>
       <% if logged_in_as_admin? %>                       

@@ -1,13 +1,16 @@
 <div class="services">     
   <div class="service-content">
+    <%= render partial: '/categories/nav' %>
+
     <div class="page-header">
       <h1><%= link_to "專欄文章", categories_path %></h1>
     </div>    
+    
     <table class="table table-hover" id="table-post">
       <tbody>
         <% @posts.each do |p| %>    
           <tr>
-            <td style="width: 79%; border: none;">
+            <td style="width: 75%; border: none;">
               <div class="table-post-title">
                 <%= link_to p.title, post_path(p) %>
               </div>
@@ -22,7 +25,7 @@
                </span>       
             </td>
 
-            <td style="width: 3%; border: none;">     
+            <td style="width: 5%; border: none;">     
               <% if logged_in_as_admin? %>
                 <% if p.seeable %>
                   <%= link_to modify_seeable_posts_path(post: p) do %>
@@ -35,7 +38,7 @@
                 <% end %>
               <% end %>                      
             </td>    
-            <td style="width: 3%; border: none;">     
+            <td style="width: 5%; border: none;">     
               <% if logged_in_as_admin? %>
                 <%= link_to post_path(p), method: :delete, data: {confirm: "你確定刪除此專欄嗎?"} do %>
                   <span class="glyphicon glyphicon-remove" style="font-size: 1.5em; top: 0.12em;"></span>

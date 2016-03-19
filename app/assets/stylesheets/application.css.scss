@@ -20,12 +20,14 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-.page-header {
-    margin-top: 20px
-}
 
 body {
-    background: url(http://f.cl.ly/items/2u1z0Y0I1U061j410F08/debut_light.png);
+  background: url(http://f.cl.ly/items/2u1z0Y0I1U061j410F08/debut_light.png);
+  font-family: 'Helvetica Neue', Helvetica, Arial, STHeiti, 'Microsoft JhengHei', 微軟正黑體, sans-serif;    
+}
+
+.page-header {
+  margin-top: 20px
 }
 
 i.material-icons {
@@ -52,10 +54,6 @@ div.paginate span {
   font-size: inherit;
 }
 
-body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, STHeiti, 'Microsoft JhengHei', 微軟正黑體, sans-serif;
-}
-
 .alert {
   margin-top: 10px;
   margin-left: 40px;
@@ -65,7 +63,6 @@ body {
 
 thead tr th {text-align:center}
 tbody tr td {text-align:center; vertical-align: middle;}
-table tbody tr td {vertical-align: middle;}
 
 #banner {
   background-color: #666;

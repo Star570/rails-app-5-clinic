@@ -1,6 +1,18 @@
 <div class="services">         
-  <div class="service-user">
+  <div class="service-content">
     <div class="container">
+      <div> 
+        <% if @user && @user.verified %>
+          <div class="page-header">
+            <h1>恭喜你完成註冊!</h1>
+          </div>             
+        <% else %>
+          <div class="page-header">
+            <h1>認證碼輸入錯誤, 請重新註冊!</h1>
+          </div>            
+        <% end %>     
+      </div>
+
       <div class="row bs-wizard" style="border-bottom:0;">
         <div class="col-xs-2 bs-wizard-step complete">
           <div class="text-center bs-wizard-stepnum">輸入資料</div>
@@ -28,15 +40,12 @@
     </div>
 
     <div> 
+      <br><br>
       <% if @user && @user.verified %>
-        <h3>恭喜你完成註冊!</h3>
-        <br>
-        <%= link_to "返回首頁!", root_path, class: "btn btn-primary" %>  
+        <%= link_to "返回首頁!", root_path, class: "btn btn-lg btn-primary" %>  
       <% else %>
-        <h3>認證碼輸入錯誤, 請重新註冊!</h3>
-        <br><br><br>            
-        <%= link_to "返回註冊!", register_path, class: "btn btn-primary" %>
-      <% end %>     
+        <%= link_to "返回註冊!", register_path, class: "btn btn-lg btn-primary" %>  
+      <% end %>
     </div>
     <br><br>
   </div>

@@ -3,8 +3,8 @@
     <h3>
       <%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
         <%= f.input :name, label:"修改分類名稱：" do %> 
-          <%= f.input_field :name %>
-          <%= f.submit "Submit", disable_with: 'Submitting...', class: "btn btn-primary"%>
+          <%= f.input_field :name, style: "font-size: 0.9em; border-radius: 4px; border: 1px solid #ccc; margin-left: 10px; padding: 5px 10px;" %>
+          <%= f.submit "完成", disable_with: 'Submitting...', class: "btn btn-primary", style: "font-size: 0.8em; padding: 4px 15px; margin-top: -3px; margin-left:20px;"%>
         <% end %>
       <% end %>   
     </h3>                 

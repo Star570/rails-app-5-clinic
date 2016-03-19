@@ -9,47 +9,7 @@
 .service-content{
   padding-top: 10px; 
   margin: 0px auto;
-  width: 70%;
-}
-.service-content ul{
-  padding-top:10px;  
-  padding-bottom:5px;
-}
-
-.service-content h3{
-  font-size: 1.7em;
-  font-weight: bold;
-  color: rgba(31, 31, 31, 0.99);
-  padding: 15px 0px 10px 0px;
-  margin-top: 0px;  
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.service-content h4{
-  font-size: 1.4em;  
-  padding-top:10px;  
-  padding-bottom:5px;
-}
-
-.service-content ul li{
-  display: block;
-}
-
-.service-content ul li p{
-  float:right;
-  width: 100%;
-  display: block;
-  font-size: 1.1em;
-  color: #777;
-  padding: 2px 0px 5px 0px;
-  line-height: 1.7em;
-}
-
-.service-content ul li p a{
-  font-size: 1.2em;
-  color: #007DAD;
-  display: block;
+  width: 75%;
 }
 
 .service-sidebar{
@@ -64,6 +24,14 @@
   padding: 15px 0px 10px 0px;
   margin-bottom: 10px;
 }
+.service-sidebar ul{
+  padding-left: 0px;
+}
+.service-sidebar ul li {
+  padding: 9px 10px 8px 18px;
+  list-style-type:none;
+}
+
 .service-sidebar ul li a{
   display: block;
   font-size: 1.4em;
@@ -76,52 +44,13 @@
 .service-sidebar ul li a:hover{
   color: #777;
 }
-.service-sidebar ul{
-  padding-left: 0px;
-}
-.service-sidebar ul li {
-  padding: 9px 10px 8px 18px;
-  list-style-type:none;
-}
-.service-sidebar ul li:hover{
-}
 
-.service-form{
-  float:left;
-  width:73%;
-  padding-left: 38px; 
-}
-
-div.service-form-title  {
-  font-size: 1.7em;
-  font-weight: bold;
-  color: rgba(31, 31, 31, 0.99);
-  border-bottom: 1px solid rgba(192, 192, 192, 0.18);
-  padding: 15px 0px 10px 0px;
-  margin-bottom: 10px;
-}
-
-.service-user{
-  float:left;
-  width:73%;
-  padding-left: 38px; 
-}
-
-.service-user h3{
-  font-size: 1.7em;
-  font-weight: bold;
-  color: rgba(31, 31, 31, 0.99);
-  border-bottom: 1px solid rgba(192, 192, 192, 0.18);
-  padding: 15px 0px 10px 0px;
-  margin-bottom: 10px;
-}
-
-.service-display{
+.service-backstage{
   float:left;
   width:70%;
   padding-left: 40px; 
 }
-.service-display h3{
+.service-backstage h3{
   font-size: 1.7em;
   font-weight: bold;
   color: rgba(31, 31, 31, 0.99);
@@ -130,7 +59,7 @@ div.service-form-title  {
   margin-bottom: 10px;
 }
 
-.service-wide {
+.service-print {
   float:left;
   width: 100%;  
   padding-left: 40px; 
