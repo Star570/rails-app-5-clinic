@@ -21,7 +21,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
 
   # http://goo.gl/8KWUOi  
-  process resize_to_fit: [1350, 10000]
+  process resize_to_limit: [1350, nil]
 
   version :large do
     process :resize_to_fill => [1024, 637]
