@@ -2,8 +2,12 @@
   <div class="service-album">
     <%= render partial: 'nav' %>
 
+    <div class="page-header" style="padding-left: 20px;">  
+      <h1>選擇相簿</h1>
+    </div>
+    <br>
     <div class="row">
-      <div class="col-xs-5">    
+      <div class="col-xs-5" style="padding-left: 30px;">    
         <%= simple_form_for @album, { :class => 'form-inline' } do |f| %>
           <div class="form-group post-form">           
             <%= f.input :title, label:"新增相簿：" do %> 
@@ -23,7 +27,7 @@
 
     <br><br> 
     <div class="row">
-      <div class="col-xs-5">    
+      <div class="col-xs-5" style="padding-left: 30px;">    
         <%= simple_form_for @album, :url => redirect_albums_path do |f| %>
           <div class="col-xs-12">
             <div class="form-group post-form">   

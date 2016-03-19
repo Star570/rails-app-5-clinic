@@ -30,12 +30,15 @@ class CategoriesController < ApplicationController
 
   def edit
     @categories = Category.all  
+    @posts = @category.posts.page(params[:page]).per(10) 
   end
 
   def update
     if @category.update(category_params)
       redirect_to category_path(@category)
     else
+      @categories = Category.all  
+      @posts = @category.posts.page(params[:page]).per(10)       
       render :edit
     end
   end  

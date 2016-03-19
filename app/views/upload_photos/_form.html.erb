@@ -12,7 +12,7 @@
           <%= f.input :album_id, :as => :hidden, :input_html => { :value => params[:album_id] }  %>     
           <%= f.file_field :file, multiple: true %>
       </span>
-      <span class="btn btn-lg btn-success fileinput-button pull-right" id="finish_button">
+      <span class="btn btn-lg btn-success fileinput-button pull-right" id="finish_button" style="margin-right: 25px;">
           <%= link_to "完成", album_path(Album.find(params[:album_id])), style: "color: white;" %>
       </span> 
       <% end %>         

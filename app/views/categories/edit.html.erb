@@ -1,14 +1,65 @@
-<div class="services">    
+<div class="services">       
   <div class="service-content">
-    <h3>
-      <%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
-        <%= f.input :name, label:"修改分類名稱：" do %> 
-          <%= f.input_field :name, style: "font-size: 0.9em; border-radius: 4px; border: 1px solid #ccc; margin-left: 10px; padding: 5px 10px;" %>
-          <%= f.submit "完成", disable_with: 'Submitting...', class: "btn btn-primary", style: "font-size: 0.8em; padding: 4px 15px; margin-top: -3px; margin-left:20px;"%>
-        <% end %>
-      <% end %>   
-    </h3>                 
-    <br><br>       
+    <%= render partial: '/categories/nav' %>    
+
+    <div class="page-header">
+      <h1>
+        <%= simple_form_for @category, { :class => 'form-inline' } do |f| %>
+          <%= f.input :name, label: false do %> 
+            <%= f.input_field :name, style: "font-size: 0.8em; border-radius: 4px; border: 1px solid #ccc; margin-left: 10px; padding: 5px 10px;" %>
+            <%= f.submit "完成", disable_with: 'Submitting...', class: "btn btn-primary", style: "font-size: 0.6em; padding: 4px 15px; margin-top: -4px; margin-left:20px;"%>
+          <% end %>
+        <% end %>   
+      </h1>        
+    </div>               
+                
+    <table class="table table-hover" id="table-post">
+      <tbody>
+        <% @posts.each do |p| %>    
+          <tr>
+            <td style="width: 75%; border: none;">
+              <div class="table-post-title">
+                <%= link_to p.title, post_path(p) %>
+              </div>
+              <div class="table-post-date">       
+                <%= time_ago_in_words(p.updated_at) %>前
+              </div>                                   
+            </td>
+
+            <td style="width: 15%; border: none;">
+               <span class="label label-default pull-right" style="font-size: 1.2em;">
+                  <%= link_to p.category.name, category_path(p.category), style: "color: white;" %>
+               </span>       
+            </td>
+
+            <td style="width: 5%; border: none;">     
+              <% if logged_in_as_admin? %>
+                <% if p.seeable %>
+                  <%= link_to modify_seeable_posts_path(post: p) do %>
+                    <i class="material-icons" style="font-size: 2.1em; top: 0.1em; color: black">visibility</i>
+                  <% end %>
+                <% else %>
+                  <%= link_to modify_seeable_posts_path(post: p) do %>
+                    <i class="material-icons" style="font-size: 2.1em; top: 0.1em; color: #ccc">visibility_off</i>
+                  <% end %>              
+                <% end %>
+              <% end %>                      
+            </td>  
+
+            <td style="width: 5%; border: none;">     
+              <% if logged_in_as_admin? %>
+                <%= link_to post_path(p), method: :delete, data: {confirm: "你確定刪除此專欄嗎?"} do %>
+                  <span class="glyphicon glyphicon-remove" style="font-size: 1.5em; top: 0.12em;"></span>
+                <% end %>                   
+              <% end %>                      
+            </td>    
+
+          </tr>
+        <% end %>  
+      </tbody>
+    </table>
+    <div class="paginate"><%= paginate @posts %></div>
+    <br><br>
   </div>
   <div class="clear"> </div>
 </div>
